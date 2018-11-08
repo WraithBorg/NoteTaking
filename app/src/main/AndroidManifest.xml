@@ -16,6 +16,7 @@
         <activity android:name=".admin.DisplayMessageActivity" />
         <activity android:name=".demo.TheTimerActivity" />
         <activity android:name=".demo.FunctionDisplayActivity" />
+        <activity android:name=".demo.KeySaveActivity" />
     </application>
 
 </manifest>

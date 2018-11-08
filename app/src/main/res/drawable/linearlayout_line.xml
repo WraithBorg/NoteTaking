@@ -3,9 +3,5 @@
     <!--背景颜色-->
     <solid android:color="@color/app_blue" />
     <!--分别设置左上，右上，左下，右下-->
-    <corners
-        android:bottomLeftRadius="15px"
-        android:bottomRightRadius="15px"
-        android:topLeftRadius="15px"
-        android:topRightRadius="15px" />
+    <corners android:radius="15px" />
 </shape>

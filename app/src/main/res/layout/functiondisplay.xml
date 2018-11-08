@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="horizontal"
     android:padding="20dp">
-    <Button
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/linearlayout_line">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:onClick="showTimer"
+            android:text="@string/timer"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/linearlayout_line"
+        android:layout_marginLeft="20dp">
+    <TextView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:text="@string/timer"
-        android:textSize="22sp"
+        android:onClick="keySave"
+        android:text="读写数据"
         android:textColor="@color/white"
-        android:onClick="showTimer"
-        android:background="@drawable/linearlayout_line"
-        />
+        android:textSize="22sp"
+        android:gravity="center"/>
+    </LinearLayout>
 </LinearLayout>
