@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -96,5 +97,72 @@ public class StoreTheDataActivity extends Activity {
         EditText etRead = (EditText) findViewById(R.id.etRead_id);
         etRead.setText(content);
     }
+    /**
+     * 检查外部存储器的读写是否有效
+     */
+    public boolean isExternalStorageWritable(){
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)){
+            return true;
+        }
+        return false;
+    }
+    /**
+     * 检查外部存储器是否可读
+     */
+    public boolean isExterrnalStorageReadable(){
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)
+                || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
+            return true;
+        }
+        return false;
+    }
+    /**
+     * 获取目录用于用户公共图片目录
+     * 如果要保存文件到外部存储器，使用 getExternalStoragePublicDirectory() 方法得到一个代表外部存储器正确目录的文件
+     * 这个方法有个参数要指定保存的文件类型 如:DIRECTORY_PICTURES，DIRECTORY_MUSIC
+     */
+    public File getAlbumStorageDir(String albunName){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), albunName);
+        if (!file.mkdirs()){
+            Log.e("LOGTAG", "Directory not created");
+        }
+        return file;
+    }
+
+    /**
+     * 获取app私用图片目录
+     * 注意：getExternalFilesDir() 是一个当app卸载的时候就被删除的目录
+     * 如果不想随app写在删除，则用getExternalStoragePublicDirectory()
+     * 当写卸载app时，android系统会删除以下文件：
+     * 1：所有保存在内部存储器上的文件
+     * 2：所有保存在外部存储器上，用getExternalFilesDir() 保存的文件
+     * 当然，应该删除所有getCacheDir()创建的缓存文件
+     */
+    public File getAlbumStorageDir(Context context,String albunName){
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), albunName);
+        if (!file.mkdirs()){
+            Log.e("LOGTAG", "Directory not created");
+        }
+        return file;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
