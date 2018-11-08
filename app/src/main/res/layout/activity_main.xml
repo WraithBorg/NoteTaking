@@ -23,42 +23,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="流水账本"
+                android:text="@string/waterBooks"
                 android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@+id/main_menu_icon_id"
-                android:text="提醒铃铛"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/main_menu_icon_id"
+                android:background="@mipmap/lingdang"
+                android:contentDescription="@string/todo" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/main_menu_icon_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="20dp"
-                android:text="菜单键"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="20dp"
+                android:background="@mipmap/syscaidan"
+                android:contentDescription="@string/todo" />
         </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="本月支出"
+            android:text="@string/monthSpending"
             android:textColor="@color/white"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,19 +62,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="999.999"
+                android:text="@string/sample_number"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="6dp"
-                android:gravity="center"
-                android:text="小眼睛按钮"
-                android:textColor="@color/white"
-                android:textSize="8dp" />
+                android:layout_marginStart="10dp"
+                android:background="@mipmap/yanjing"
+                android:contentDescription="@string/todo" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,25 +84,25 @@
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:text="预算"
+                android:text="@string/budget"
                 android:textColor="@color/app_white"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:text="点此设置>"
+                android:text="@string/ClickHereToSet"
                 android:textColor="@color/app_white"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="本月收入300"
+                android:text="@string/monthIncome"
                 android:textColor="@color/app_white"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -127,25 +119,27 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="记一笔"
             android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/rememberOne"
             android:textColor="@color/app_white"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="饼状统计图"
-            android:textColor="@color/app_white"
-            android:textSize="14dp" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@mipmap/tongji"
+            android:contentDescription="@string/todo" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp">
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

@@ -3,4 +3,15 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="waterBooks">流水账本</string>
+    <string name="todo">TODO</string>
+    <string name="sample_number">999.999</string>
+    <string name="monthIncome">本月收入300</string>
+    <string name="monthSpending">本月支出</string>
+    <string name="budget">预算</string>
+    <string name="rememberOne">记一笔</string>
+    <string name="ClickHereToSet"><![CDATA[点此设置>]]></string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
 </resources>
