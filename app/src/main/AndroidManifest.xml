@@ -14,8 +14,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".admin.DisplayMessageActivity" />
-        <activity android:name=".demo.TheTimer" />
-        <activity android:name=".demo.FunctionDisplay" />
+        <activity android:name=".demo.TheTimerActivity" />
+        <activity android:name=".demo.FunctionDisplayActivity" />
     </application>
 
 </manifest>

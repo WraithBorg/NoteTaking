@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zxu.R;
-import com.zxu.demo.FunctionDisplay;
+import com.zxu.demo.FunctionDisplayActivity;
 
 
 public class MainActivity extends Activity {
@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     }
 
     void noteOneMessage() {
-        Intent intent = new Intent(this, FunctionDisplay.class);
+        Intent intent = new Intent(this, FunctionDisplayActivity.class);
         startActivity(intent);
 
     }

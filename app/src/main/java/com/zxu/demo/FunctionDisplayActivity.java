@@ -11,7 +11,7 @@ import com.zxu.R;
 /**
  * Demo显示入口
  */
-public class FunctionDisplay extends Activity {
+public class FunctionDisplayActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +19,7 @@ public class FunctionDisplay extends Activity {
     }
 
     void showTimer(View view) {
-        Intent intent = new Intent(this, TheTimer.class);
+        Intent intent = new Intent(this, TheTimerActivity.class);
         startActivity(intent);
     }
 }

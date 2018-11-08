@@ -13,7 +13,7 @@ import com.zxu.R;
 /**
  * 计时器Demo
  */
-public class TheTimer extends Activity {
+public class TheTimerActivity extends Activity {
     private TextView counter;
     private Button start;
     private Button stop;
