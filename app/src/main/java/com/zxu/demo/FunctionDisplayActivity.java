@@ -26,4 +26,9 @@ public class FunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, KeySaveActivity.class);
         startActivity(intent);
     }
+
+    void storeTheData(View view){
+        Intent intent = new Intent(this, StoreTheDataActivity.class);
+        startActivity(intent);
+    }
 }
