@@ -11,4 +11,7 @@
     <string name="budget">预算</string>
     <string name="rememberOne">记一笔</string>
     <string name="ClickHereToSet"><![CDATA[点此设置>]]></string>
+    <string name="start_button">开始</string>
+    <string name="stop_button">停止</string>
+    <string name="timer">计时器</string>
 </resources>
