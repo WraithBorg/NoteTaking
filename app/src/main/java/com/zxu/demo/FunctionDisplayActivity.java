@@ -31,4 +31,8 @@ public class FunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, StoreTheDataActivity.class);
         startActivity(intent);
     }
+    void databaseDemo(View view){
+        Intent intent = new Intent(this, PersonActivity.class);
+        startActivity(intent);
+    }
 }
