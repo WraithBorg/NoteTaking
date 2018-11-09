@@ -18,11 +18,12 @@
         </activity>
         <activity android:name=".admin.DisplayMessageActivity" />
         <activity android:name=".demo.TheTimerActivity" />
-        <activity android:name=".demo.FunctionDisplayActivity" />
+        <activity android:name=".demo.AFunctionDisplayActivity" />
         <activity android:name=".demo.KeySaveActivity" />
         <activity android:name=".demo.StoreTheDataActivity" />
         <activity android:name=".demo.PersonActivity" />
         <activity android:name=".ui.person.PersonEditActivity" />
+        <activity android:name=".demo.LoginActivity" />
     </application>
 
 </manifest>

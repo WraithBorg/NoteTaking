@@ -30,7 +30,7 @@ public class StoreTheDataActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.keysave);
+        setContentView(R.layout.demo_keysave);
 
     }
 

@@ -10,7 +10,7 @@ import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.zxu.R;
-import com.zxu.demo.FunctionDisplayActivity;
+import com.zxu.demo.AFunctionDisplayActivity;
 
 
 public class MainActivity extends Activity {
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
     }
 
     void noteOneMessage() {
-        Intent intent = new Intent(this, FunctionDisplayActivity.class);
+        Intent intent = new Intent(this, AFunctionDisplayActivity.class);
         startActivity(intent);
 
     }
