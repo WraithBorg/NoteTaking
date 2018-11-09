@@ -22,6 +22,7 @@
         <activity android:name=".demo.KeySaveActivity" />
         <activity android:name=".demo.StoreTheDataActivity" />
         <activity android:name=".demo.PersonActivity" />
+        <activity android:name=".ui.person.PersonEditActivity" />
     </application>
 
 </manifest>

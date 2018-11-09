@@ -7,7 +7,7 @@ import com.zxu.helpers.SQLiteHelper;
 public class GaiaApplication extends Application {
     private SQLiteHelper helper;
 
-    public SQLiteHelper getHelper() {
+    public SQLiteHelper getSQLiteHelper() {
         if (helper == null){
             helper = new SQLiteHelper(this);
         }
@@ -17,7 +17,7 @@ public class GaiaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        getHelper().create();
+        getSQLiteHelper().create();
 
     }
 }
