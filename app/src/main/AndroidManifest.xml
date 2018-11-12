@@ -27,6 +27,8 @@
         <activity android:name=".ui.person.PersonEditActivity" />
         <activity android:name=".demo.LoginActivity" />
         <activity android:name=".ipinfo.IpInfoActivity" />
+        <activity android:name=".demo.MainViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

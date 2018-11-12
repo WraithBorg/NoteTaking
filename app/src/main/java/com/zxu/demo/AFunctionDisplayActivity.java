@@ -27,32 +27,47 @@ public class AFunctionDisplayActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_afunctiondisplay);
+        setContentView(R.layout.demo_aafunctiondisplay);
     }
 
+    /**
+     * 多线程，计时器
+     * @param view 视图
+     */
     void showTimer(View view) {
         Intent intent = new Intent(this, TheTimerActivity.class);
         startActivity(intent);
     }
-
+    /**
+     * 保存数据
+     * @param view 视图
+     */
     void keySave(View view) {
         Intent intent = new Intent(this, KeySaveActivity.class);
         startActivity(intent);
     }
-
+    /**
+     * 保存数据
+     * @param view 视图
+     */
     void storeTheData(View view) {
         Intent intent = new Intent(this, StoreTheDataActivity.class);
         startActivity(intent);
     }
-
+    /**
+     * 保存数据到数据库
+     * @param view 视图
+     */
     void databaseDemo(View view) {
         Intent intent = new Intent(this, PersonActivity.class);
         startActivity(intent);
     }
-
+    /**
+     * 登陆跳转到主界面
+     * @param view 视图
+     */
     void login(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
-//        startActivity(intent);
         startActivityForResult(intent, Constant.LoginRequestCode);
     }
 
@@ -68,7 +83,10 @@ public class AFunctionDisplayActivity extends Activity {
             tv.setText(str);
         }
     }
-
+    /**
+     * 网络请求
+     * @param view 视图
+     */
     void OkHttpTest(View view) {
         Request.Builder requestBuilder = new Request.Builder().url("http://ip.taobao.com/ipSearch.html?ipAddr=220.115.231.8");
         requestBuilder.method("GET", null);
@@ -84,12 +102,24 @@ public class AFunctionDisplayActivity extends Activity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String str = response.body().string();
-                Log.e("TAG",str);
+                Log.e("TAG", str);
             }
         });
     }
+    /**
+     * 展示mvp框架
+     * @param view 视图
+     */
     void showMVP(View view) {
         Intent intent = new Intent(this, IpInfoActivity.class);
+        startActivity(intent);
+    }
+    /**
+     * 主界面 侧滑菜单
+     * @param view 视图
+     */
+    void showMainViewActivity(View view) {
+        Intent intent = new Intent(this, MainViewActivity.class);
         startActivity(intent);
     }
 }
