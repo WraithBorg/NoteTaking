@@ -4,11 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.util.Constant;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Demo显示入口
@@ -57,7 +66,28 @@ public class AFunctionDisplayActivity extends Activity {
             TextView tv = (TextView) findViewById(R.id.tvLogin_id);
             tv.setText(str);
         }
+    }
+
+    void OkHttpTest(View view) {
+        Request.Builder requestBuilder = new Request.Builder().url("http://ip.taobao.com/ipSearch.html?ipAddr=220.115.231.8");
+        requestBuilder.method("GET", null);
+        Request request = requestBuilder.build();
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        Call mcall = mOkHttpClient.newCall(request);
+        mcall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                Log.e("TAG",str);
+            }
+        });
 
 
     }
+
 }
