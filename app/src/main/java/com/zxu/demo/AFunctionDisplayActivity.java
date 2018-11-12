@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
 
 import java.io.IOException;
@@ -86,8 +87,9 @@ public class AFunctionDisplayActivity extends Activity {
                 Log.e("TAG",str);
             }
         });
-
-
     }
-
+    void showMVP(View view) {
+        Intent intent = new Intent(this, IpInfoActivity.class);
+        startActivity(intent);
+    }
 }

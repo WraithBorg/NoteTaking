@@ -1,4 +1,4 @@
-package com.zxu.entity;
+package com.zxu.model;
 
 public class IpInfo {
     private int code;

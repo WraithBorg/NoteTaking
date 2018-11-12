@@ -26,6 +26,7 @@
         <activity android:name=".demo.PersonActivity" />
         <activity android:name=".ui.person.PersonEditActivity" />
         <activity android:name=".demo.LoginActivity" />
+        <activity android:name=".ipinfo.IpInfoActivity" />
     </application>
 
 </manifest>

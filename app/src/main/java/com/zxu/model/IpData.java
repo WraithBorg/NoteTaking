@@ -1,8 +1,9 @@
-package com.zxu.entity;
+package com.zxu.model;
 
 public class IpData {
     private String country;
     private String city;
+    private String area;
 
     /********** setter and getter *********/
     public String getCountry() {
@@ -19,5 +20,13 @@ public class IpData {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

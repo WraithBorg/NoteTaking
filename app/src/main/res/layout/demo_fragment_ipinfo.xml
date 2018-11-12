@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_country"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="1"
+        android:textColor="@color/app_black"
+        android:textSize="30dp"
+        android:background="@color/app_blue"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/tv_area"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="1"
+        android:textColor="@color/app_black"
+        android:textSize="30dp"
+        android:background="@color/app_blue"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/tv_city"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="1"
+        android:textColor="@color/app_black"
+        android:textSize="30dp"
+        android:background="@color/app_blue"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/bt_ipinfo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="1"
+        android:textColor="@color/app_black"
+        android:textSize="30dp"
+        android:background="@color/app_blue"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
