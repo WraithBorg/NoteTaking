@@ -1,4 +1,4 @@
-package com.zxu.index;
+package com.zxu.index.accounts;
 
 import com.zxu.model.JC_AccountBook;
 
@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * 利用借口 通过Model层 获取保存数据，通过view更新界面
  */
-public class IndexPagePresenter implements IndexPageContract.Presenter {
+public class AccountBooksPresenter implements AccountBooksContract.Presenter {
 
-    private IndexPageContract.View cView;
+    private AccountBooksContract.View cView;
 
-    public IndexPagePresenter(IndexPageContract.View cView) {
+    public AccountBooksPresenter(AccountBooksContract.View cView) {
         this.cView = cView;
     }
 

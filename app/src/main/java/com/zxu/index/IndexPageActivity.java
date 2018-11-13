@@ -10,13 +10,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.zxu.R;
+import com.zxu.index.accounts.AccountBooksFragment;
+import com.zxu.index.accounts.AccountBooksPresenter;
 import com.zxu.util.ActivityUtils;
 
 /**
  * 索引页,activity 不是view层，是view model presenter三层的纽带
  */
 public class IndexPageActivity extends Activity {
-    private IndexPagePresenter indexPagePresenter;
+    private AccountBooksPresenter accountBooksPresenter;
 
     LinearLayout slipMenuView;
     DrawerLayout mDrawerLayout; // DrawerLayout组件
@@ -26,9 +28,9 @@ public class IndexPageActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.indexpage_main);
-        IndexPageFragment indexPageFragment = (IndexPageFragment) getFragmentManager().findFragmentById(R.id.accountsFrame_id);
+        AccountBooksFragment indexPageFragment = (AccountBooksFragment) getFragmentManager().findFragmentById(R.id.accountsFrame_id);
         if (indexPageFragment == null) {
-            indexPageFragment = IndexPageFragment.newInstance();
+            indexPageFragment = AccountBooksFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getFragmentManager(), indexPageFragment, R.id.accountsFrame_id);
         }
 
@@ -41,8 +43,8 @@ public class IndexPageActivity extends Activity {
         slipMenuView = (LinearLayout) findViewById(R.id.indexpage_slipmenu_id);
         mDrawerLayout.closeDrawer(slipMenuView);
         //
-        indexPagePresenter = new IndexPagePresenter(indexPageFragment);
-        indexPageFragment.setPresenter(indexPagePresenter);
+        accountBooksPresenter = new AccountBooksPresenter(indexPageFragment);
+        indexPageFragment.setPresenter(accountBooksPresenter);
         indexPageFragment.transWidget(slipMenuView,mDrawerLayout);
     }
 

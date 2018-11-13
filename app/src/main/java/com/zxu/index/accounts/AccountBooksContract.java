@@ -1,4 +1,4 @@
-package com.zxu.index;
+package com.zxu.index.accounts;
 
 import com.zxu.application.BaseView;
 import com.zxu.model.JC_AccountBook;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 契约接口
  */
-public interface IndexPageContract {
+public interface AccountBooksContract {
     /**
      * 获取数据
      */

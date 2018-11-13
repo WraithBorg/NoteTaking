@@ -42,7 +42,7 @@
 
         <fragment
             android:id="@+id/accountsFrame_id"
-            android:name="com.zxu.index.IndexPageFragment"
+            android:name="com.zxu.index.accounts.AccountBooksFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

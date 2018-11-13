@@ -1,4 +1,4 @@
-package com.zxu.index;
+package com.zxu.index.accounts;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 实现view接口，接收indexPagePresenter回调 并 更新界面
  */
-public class IndexPageFragment extends Fragment implements IndexPageContract.View {
+public class AccountBooksFragment extends Fragment implements AccountBooksContract.View {
     private TextView tv_accountName;
     private Button bt_getAccount;
     private ListView lv_accounts;
@@ -33,10 +33,10 @@ public class IndexPageFragment extends Fragment implements IndexPageContract.Vie
 
     private AccountBooksAdapter accountBooksAdapter;
 
-    private IndexPageContract.Presenter mPresenter;
+    private AccountBooksContract.Presenter mPresenter;
 
-    public static IndexPageFragment newInstance() {
-        return new IndexPageFragment();
+    public static AccountBooksFragment newInstance() {
+        return new AccountBooksFragment();
     }
 
     @Nullable
@@ -67,7 +67,7 @@ public class IndexPageFragment extends Fragment implements IndexPageContract.Vie
     }
 
     @Override
-    public void setPresenter(IndexPageContract.Presenter presenter) {
+    public void setPresenter(AccountBooksContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
