@@ -68,6 +68,8 @@ public class CeHuaMainActivity extends Activity {
             Fragment contentFragment = new ContentFragment();
             contentFragment.setArguments(bd);
 
+
+
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.content_frame, contentFragment).commit();

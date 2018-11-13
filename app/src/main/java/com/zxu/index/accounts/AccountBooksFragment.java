@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.adapter.AccountBooksAdapter;
+import com.zxu.index.IndexPageActivity;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
 
@@ -27,9 +28,10 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     private TextView tv_accountName;
     private Button bt_getAccount;
     private ListView lv_accounts;
-
-    DrawerLayout mDrawerLayout;// DrawerLayout组件
-    LinearLayout slipMenuView;
+    // 外部传递对象
+    LinearLayout mainContent;   // 主页面内容
+    DrawerLayout mDrawerLayout; // DrawerLayout组件
+    LinearLayout slipMenuView;  // 滑动菜单view
 
     private AccountBooksAdapter accountBooksAdapter;
 
@@ -113,12 +115,21 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
             // 关闭侧滑菜单
             lv_accounts.setItemChecked(position,true);//高亮选中item
             mDrawerLayout.closeDrawer(slipMenuView);
-
+            LinearLayout lv_topcard = (LinearLayout) mainContent.findViewById(R.id.indexpage_topcard_id);
+            lv_topcard.setBackgroundColor(getResources().getColor(R.color.app_red));
         }
     }
 
-    public void transWidget(LinearLayout slipMenuView,DrawerLayout mDrawerLayout){
+    /**
+     * 传递额外对象
+     * @param slipMenuView 滑动菜单view
+     * @param mDrawerLayout 滑动菜单组件
+     * @param mainContent
+     */
+    public void transWidget(LinearLayout slipMenuView, DrawerLayout mDrawerLayout,
+                            LinearLayout mainContent){
         this.mDrawerLayout = mDrawerLayout;
         this.slipMenuView = slipMenuView;
+        this.mainContent = mainContent;
     }
 }

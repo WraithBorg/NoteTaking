@@ -45,7 +45,9 @@ public class IndexPageActivity extends Activity {
         //
         accountBooksPresenter = new AccountBooksPresenter(indexPageFragment);
         indexPageFragment.setPresenter(accountBooksPresenter);
-        indexPageFragment.transWidget(slipMenuView,mDrawerLayout);
+        // 传递对象给Fragment
+        LinearLayout mainContent = (LinearLayout)findViewById(R.id.indexpage_content_id);
+        indexPageFragment.transWidget(slipMenuView,mDrawerLayout,mainContent);
     }
 
     /**
