@@ -29,6 +29,7 @@
         <activity android:name=".demo.MainViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".demo.CeHuaMainActivity" />
+        <activity android:name=".index.IndexPageActivity" />
     </application>
 
 </manifest>
