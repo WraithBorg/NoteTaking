@@ -32,38 +32,47 @@ public class AFunctionDisplayActivity extends Activity {
 
     /**
      * 多线程，计时器
+     *
      * @param view 视图
      */
     void showTimer(View view) {
         Intent intent = new Intent(this, TheTimerActivity.class);
         startActivity(intent);
     }
+
     /**
      * 保存数据
+     *
      * @param view 视图
      */
     void keySave(View view) {
         Intent intent = new Intent(this, KeySaveActivity.class);
         startActivity(intent);
     }
+
     /**
      * 保存数据
+     *
      * @param view 视图
      */
     void storeTheData(View view) {
         Intent intent = new Intent(this, StoreTheDataActivity.class);
         startActivity(intent);
     }
+
     /**
      * 保存数据到数据库
+     *
      * @param view 视图
      */
     void databaseDemo(View view) {
         Intent intent = new Intent(this, PersonActivity.class);
         startActivity(intent);
     }
+
     /**
      * 登陆跳转到主界面
+     *
      * @param view 视图
      */
     void login(View view) {
@@ -83,8 +92,10 @@ public class AFunctionDisplayActivity extends Activity {
             tv.setText(str);
         }
     }
+
     /**
      * 网络请求
+     *
      * @param view 视图
      */
     void OkHttpTest(View view) {
@@ -106,20 +117,34 @@ public class AFunctionDisplayActivity extends Activity {
             }
         });
     }
+
     /**
      * 展示mvp框架
+     *
      * @param view 视图
      */
     void showMVP(View view) {
         Intent intent = new Intent(this, IpInfoActivity.class);
         startActivity(intent);
     }
+
     /**
      * 主界面 侧滑菜单
+     *
      * @param view 视图
      */
     void showMainViewActivity(View view) {
         Intent intent = new Intent(this, MainViewActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 主界面 侧滑菜单2
+     *
+     * @param view 视图
+     */
+    void showMainViewActivity2(View view) {
+        Intent intent = new Intent(this, CeHuaMainActivity.class);
         startActivity(intent);
     }
 }
