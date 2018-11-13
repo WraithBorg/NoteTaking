@@ -47,20 +47,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             tools:layout="@layout/indexpage_accountbooks" />
-        <!--
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/app_red" />
-
-        <ListView android:id="@+id/left_drawer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="@color/white"
-            android:dividerHeight="8dp"
-            android:background="@color/white"
-            android:scrollbars="none"/>-->
     </LinearLayout>
 
 
