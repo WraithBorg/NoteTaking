@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.zxu.R;
 import com.zxu.util.ActivityUtils;
@@ -17,6 +18,7 @@ import com.zxu.util.ActivityUtils;
 public class IndexPageActivity extends Activity {
     private IndexPagePresenter indexPagePresenter;
 
+    LinearLayout slipMenuView;
     DrawerLayout mDrawerLayout; // DrawerLayout组件
     ActionBarDrawerToggle mDrawerToggle; //侧滑菜单状态监听器
 
@@ -29,14 +31,19 @@ public class IndexPageActivity extends Activity {
             indexPageFragment = IndexPageFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getFragmentManager(), indexPageFragment, R.id.accountsFrame_id);
         }
-        indexPagePresenter = new IndexPagePresenter(indexPageFragment);
-        indexPageFragment.setPresenter(indexPagePresenter);
+
         //
         mDrawerLayout = (DrawerLayout) findViewById(R.id.indexpage_drawer_id);
         mDrawerToggle = new IndexPageActivity.DrawerMenuToggle(
                 this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
+        //
+        slipMenuView = (LinearLayout) findViewById(R.id.indexpage_slipmenu_id);
+        mDrawerLayout.closeDrawer(slipMenuView);
+        //
+        indexPagePresenter = new IndexPagePresenter(indexPageFragment);
+        indexPageFragment.setPresenter(indexPagePresenter);
+        indexPageFragment.transWidget(slipMenuView,mDrawerLayout);
     }
 
     /**
@@ -80,7 +87,12 @@ public class IndexPageActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-       // TODO 按下返回功能键的时候，不是直接对Activity进行弹栈，而是先将菜单视图关闭
+       // 按下返回功能键的时候，不是直接对Activity进行弹栈，而是先将菜单视图关闭
+        boolean drawerState = mDrawerLayout.isDrawerOpen(slipMenuView);
+        if (drawerState) {
+            mDrawerLayout.closeDrawers();
+            return;
+        }
         super.onBackPressed();
     }
 }

@@ -14,6 +14,7 @@ public interface IndexPageContract {
      */
     interface Presenter {
         void getAccountBooks(String userId);
+
     }
 
     /**
@@ -33,6 +34,7 @@ public interface IndexPageContract {
          * @return 判断Fragment是否添加到Activity中
          */
         boolean isActive();
+
     }
 
 }
