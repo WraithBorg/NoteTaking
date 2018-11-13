@@ -26,12 +26,8 @@ public class IndexPagePresenter implements IndexPageContract.Presenter {
         // 1: 获取数据,传给Presenter
         // 2: 通过view进行交互
         List<JC_AccountBook> list = new ArrayList<>();
-        JC_AccountBook b1 = new JC_AccountBook();
-        b1.setId("1");
-        b1.setName("Abc");
-        JC_AccountBook b2 = new JC_AccountBook();
-        b2.setId("2");
-        b2.setName("Zxc");
+        JC_AccountBook b1 = new JC_AccountBook("1","Abc");
+        JC_AccountBook b2 = new JC_AccountBook("2","Zxc");
         list.add(b1);
         list.add(b2);
 

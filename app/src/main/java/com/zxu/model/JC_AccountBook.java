@@ -40,4 +40,12 @@ public class JC_AccountBook {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public JC_AccountBook() {
+    }
+
+    public JC_AccountBook(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

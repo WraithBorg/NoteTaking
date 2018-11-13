@@ -132,7 +132,7 @@ public class CeHuaMainActivity extends Activity {
      */
     @Override
     public void onBackPressed() {
-        boolean drawerState = mDrawerLayout.isDrawerOpen(menuDrawer);
+        boolean drawerState = mDrawerLayout.isDrawerOpen(menuDrawer);// TODO slipMenuView
         if (drawerState) {
             mDrawerLayout.closeDrawers();
             return;

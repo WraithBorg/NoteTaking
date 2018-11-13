@@ -18,7 +18,7 @@ public class ContentFragment extends Fragment {
 
         Bundle bd = getArguments( ) ;
 
-        View view = inflater.inflate(R.layout.fragment_content, null) ;
+        View view = inflater.inflate(R.layout.demo_fragment_content, null) ;
         ( (TextView) view ).setText(bd.getString(SELECTED_ITEM)) ;
         return view ;
     }

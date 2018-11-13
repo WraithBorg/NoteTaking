@@ -53,7 +53,7 @@ public class CeHuaDrawerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.menudrawer_item, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.demo_menudrawer_item, parent, false);
             TextView titleView = (TextView) view.findViewById(R.id.menu_drawer_title_id);
             titleView.setText(getItem(position).getMenuTitle());
 //            titleView.setCompoundDrawablesWithIntrinsicBounds(getItem(position).menuIcon, 0, 0, 0);//设置图标

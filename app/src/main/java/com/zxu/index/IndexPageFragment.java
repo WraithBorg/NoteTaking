@@ -3,14 +3,20 @@ package com.zxu.index;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.adapter.AccountBooksAdapter;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.util.UtilTools;
 
 import java.util.List;
 
@@ -19,9 +25,10 @@ import java.util.List;
  */
 public class IndexPageFragment extends Fragment implements IndexPageContract.View {
     private TextView tv_accountName;
-    private Button bt_editAccount;
-    private Button bt_addAccount;
     private Button bt_getAccount;
+    private ListView lv_accounts;
+
+    private AccountBooksAdapter accountBooksAdapter;
 
     private IndexPageContract.Presenter mPresenter;
 
@@ -34,9 +41,14 @@ public class IndexPageFragment extends Fragment implements IndexPageContract.Vie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
-        View root = inflater.inflate(R.layout.indexpage_accounts, container, false);
+        View root = inflater.inflate(R.layout.indexpage_accountbooks, container, false);
         tv_accountName = (TextView) root.findViewById(R.id.account_name_id);
         bt_getAccount = (Button) root.findViewById(R.id.account_refresh_id);
+        // 账本list
+        lv_accounts = (ListView) root.findViewById(R.id.indexpage_accountbooks_id);
+        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(),null);//TODO
+        lv_accounts.setAdapter(accountBooksAdapter);
+        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
         return root;
     }
 
@@ -87,5 +99,13 @@ public class IndexPageFragment extends Fragment implements IndexPageContract.Vie
         return isAdded();
     }
 
-
+    /**
+     * 侧滑菜单 账本list
+     */
+    private class AcBooksItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            UtilTools.showToast(getActivity().getApplicationContext(),"点击"+position,1505);
+        }
+    }
 }

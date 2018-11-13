@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:background="@color/app_green"
      >
+    <ListView android:id="@+id/indexpage_accountbooks_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:divider="@color/white"
+        android:dividerHeight="8dp"
+        android:background="@color/white"
+        android:scrollbars="none"/>
+
     <TextView
         android:id="@+id/account_name_id"
         android:layout_width="100dp"
@@ -16,5 +25,6 @@
         android:layout_height="60dp"
         android:text="刷新"
         android:layout_gravity="center"/>
+
 
 </LinearLayout>
