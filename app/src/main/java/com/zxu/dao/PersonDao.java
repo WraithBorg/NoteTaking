@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.zxu.application.GaiaApplication;
 import com.zxu.entity.Person;
 import com.zxu.helpers.ResultHelper;
+import com.zxu.helpers.SQLiteHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +62,12 @@ public class PersonDao {
     /**
      * 获取用户
      *
-     * @param database
+     * @param application
      * @return
      */
-    public static List<Person> getAll(SQLiteDatabase database) {
+    public static List<Person> getAll(GaiaApplication application) {
+        SQLiteHelper helper = application.getSQLiteHelper();
+        SQLiteDatabase database = helper.open();
         List<Person> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("select * from persons", null);
         cursor.moveToFirst();
@@ -73,61 +77,68 @@ public class PersonDao {
             cursor.moveToNext();
         }
         cursor.close();
+        helper.close();
         return list;
     }
 
     /**
      * 修改员工
      *
-     * @param database
+     * @param application
      * @param person
      * @return
      */
-    public static ResultHelper editPerson(SQLiteDatabase database, Person person) {
+    public static ResultHelper editPerson(GaiaApplication application, Person person) {
+        SQLiteHelper helper = application.getSQLiteHelper();
+        SQLiteDatabase database = helper.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put("_id", person.get_id());
         values.put("name", person.getName());
         values.put("info", person.getInfo());
         int updates;
-        ResultHelper helper = new ResultHelper(false, "修改失败");
+        ResultHelper res = new ResultHelper(false, "修改失败");
         try {
             updates = database.update("persons", values, "_id=?", new String[]{String.valueOf(person.get_id())});
             if (updates > 0) {
-                helper = new ResultHelper(true, "修改成功");
-                return helper;
+                res = new ResultHelper(true, "修改成功");
+                return res;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return helper;
+        return res;
     }
 
     /**
      * 新增用户
      *
-     * @param database
+     * @param application
      * @param p
      * @return
      */
-    public static ResultHelper addPerson(SQLiteDatabase database, Person p) {
-        ResultHelper helper = new ResultHelper(true, "新增成功");
+    public static ResultHelper addPerson(GaiaApplication application, Person p) {
+        SQLiteHelper helper = application.getSQLiteHelper();
+        SQLiteDatabase database = helper.getWritableDatabase();
+
+        ResultHelper res = new ResultHelper(true, "新增成功");
         try {
             String sql = "insert into persons (name,info) values ('" + p.getName() + "','" + p.getInfo() + "')";
             database.execSQL(sql);
-            return helper;
+            return res;
         } catch (Exception e) {
             e.printStackTrace();
-            helper = new ResultHelper(false, "新增失败");
+            res = new ResultHelper(false, "新增失败");
         }
-        return helper;
+        return res;
     }
 
     /**
      * 批量新增用户，事物
      */
-    public void addPersons(SQLiteDatabase database, List<Person> persons) {
-//        SQLiteHelper helper = ((GaiaApplication) getApplication()).getSQLiteHelper();
-//        SQLiteDatabase database = helper.getWritableDatabase();
+    public void addPersons(GaiaApplication application, List<Person> persons) {
+        SQLiteHelper helper = application.getSQLiteHelper();
+        SQLiteDatabase database = helper.getWritableDatabase();
         database.beginTransaction();
         try {
             for (Person person : persons) {

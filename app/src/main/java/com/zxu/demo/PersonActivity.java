@@ -35,10 +35,9 @@ public class PersonActivity extends Activity {
     }
 
     private void listPerson() {
-        SQLiteHelper helper = ((GaiaApplication) getApplication()).getSQLiteHelper();
-        SQLiteDatabase database = helper.open();
-        List<Person> persons = PersonDao.getAll(database);
-        helper.close();
+
+        List<Person> persons = PersonDao.getAll((GaiaApplication) getApplication());
+
 
         for (Person person : persons) {
             Map<String, String> map = new HashMap<>();

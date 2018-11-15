@@ -51,12 +51,10 @@ public class PersonEditActivity extends Activity {
      * @param view
      */
     public void add(View view) {
-        SQLiteHelper helper = ((GaiaApplication) getApplication()).getSQLiteHelper();
-        SQLiteDatabase database = helper.getWritableDatabase();
         Person p = new Person();
         p.setName(etName.getText().toString());
         p.setInfo(etInfo.getText().toString());
-        ResultHelper res = PersonDao.addPerson(database, p);
+        ResultHelper res = PersonDao.addPerson((GaiaApplication) getApplication(), p);
         UtilTools.showToast(getApplicationContext(), res.getMessage(), Constant.MSGWATITIME);
     }
 
@@ -68,13 +66,12 @@ public class PersonEditActivity extends Activity {
     public void update(View view) {
         String name = etName.getText().toString();
         String info = etInfo.getText().toString();
-        SQLiteHelper helper = ((GaiaApplication) getApplication()).getSQLiteHelper();
-        SQLiteDatabase database = helper.getWritableDatabase();
         Person p = new Person();
         p.set_id(_id);
         p.setName(name);
         p.setInfo(info);
-        ResultHelper res = PersonDao.editPerson(database, p);
+        GaiaApplication application = (GaiaApplication) getApplication();
+        ResultHelper res = PersonDao.editPerson(application, p);
         UtilTools.showToast(getApplicationContext(), res.getMessage(), Constant.MSGWATITIME);
     }
 }
