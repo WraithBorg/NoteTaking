@@ -12,6 +12,7 @@ import android.widget.SimpleAdapter;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
+import com.zxu.dao.PersonDao;
 import com.zxu.entity.Person;
 import com.zxu.helpers.SQLiteHelper;
 import com.zxu.ui.person.PersonEditActivity;
@@ -36,7 +37,7 @@ public class PersonActivity extends Activity {
     private void listPerson() {
         SQLiteHelper helper = ((GaiaApplication) getApplication()).getSQLiteHelper();
         SQLiteDatabase database = helper.open();
-        List<Person> persons = Person.getAll(database);
+        List<Person> persons = PersonDao.getAll(database);
         helper.close();
 
         for (Person person : persons) {

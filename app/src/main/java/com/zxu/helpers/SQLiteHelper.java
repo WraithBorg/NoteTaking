@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.zxu.dao.PersonDao;
 import com.zxu.entity.Person;
 
 /**
@@ -14,14 +15,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "persondata.db";
     private static final int DATABASE_VERSION = 1;
-    public SQLiteHelper(Context context){
+
+    public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        Person.create(database);
+        PersonDao.createTable(database);
     }
 
     @Override
@@ -31,13 +33,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        Person.drop(database);
+        PersonDao.dropTable(database);
         onCreate(database);
     }
-    public SQLiteDatabase open(){
+
+    public SQLiteDatabase open() {
         return getWritableDatabase();
     }
-    public void create(){
+
+    public void create() {
         open();
     }
 }
