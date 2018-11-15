@@ -11,28 +11,31 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.adapter.AccountBooksAdapter;
-import com.zxu.index.IndexPageActivity;
+import com.zxu.application.GaiaApplication;
+import com.zxu.dao.AccountBookDao;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 实现view接口，接收indexPagePresenter回调 并 更新界面
  */
 public class AccountBooksFragment extends Fragment implements AccountBooksContract.View {
-    private TextView tv_accountName;
+    //    private TextView tv_accountName;
     private Button bt_getAccount;
+    private Button bt_addAccount;
+    private Button bt_editAccount;
     private ListView lv_accounts;
     // 外部传递对象
     LinearLayout mainContent;   // 主页面内容
     DrawerLayout mDrawerLayout; // DrawerLayout组件
     LinearLayout slipMenuView;  // 滑动菜单view
-
+    //
     private AccountBooksAdapter accountBooksAdapter;
 
     private AccountBooksContract.Presenter mPresenter;
@@ -44,16 +47,33 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-//        return super.onCreateView(inflater, container, savedInstanceState);
-
+        // 初始化组件
         View root = inflater.inflate(R.layout.indexpage_accountbooks, container, false);
-        tv_accountName = (TextView) root.findViewById(R.id.account_name_id);
-        bt_getAccount = (Button) root.findViewById(R.id.account_refresh_id);
+        bt_getAccount = (Button) root.findViewById(R.id.accountbook_refresh_id);
+        bt_addAccount = (Button) root.findViewById(R.id.accountbook_add_id);
+        bt_editAccount = (Button) root.findViewById(R.id.accountbook_edit_id);
         // 账本list
         lv_accounts = (ListView) root.findViewById(R.id.indexpage_accountbooks_id);
-        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(),null);//TODO
-        lv_accounts.setAdapter(accountBooksAdapter);
-        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
+//        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), accountBooks);//TODO
+//        lv_accounts.setAdapter(accountBooksAdapter);
+//        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
+        // 初始化事件
+        bt_addAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO MVP?
+                JC_AccountBook b = new JC_AccountBook();
+                b.setId(UUID.randomUUID().toString());
+                b.setName("账本a-" + v.getId());
+                AccountBookDao.addAccountBook((GaiaApplication) getActivity().getApplication(), b);
+            }
+        });
+        bt_editAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return root;
     }
 
@@ -63,7 +83,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
         bt_getAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getAccountBooks("");
+                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(),"");
             }
         });
     }
@@ -75,13 +95,9 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
 
     @Override
     public void setAccountBooks(List<JC_AccountBook> list) {
-        if (list != null) {
-            for (int i = 0; i < list.size(); i++) {
-                JC_AccountBook book = list.get(i);
-                tv_accountName.setText(book.getName());
-
-            }
-        }
+        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list);//TODO
+        lv_accounts.setAdapter(accountBooksAdapter);
+        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
     }
 
     @Override
@@ -111,9 +127,9 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     private class AcBooksItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            UtilTools.showToast(getActivity().getApplicationContext(),"点击"+position,1505);
+            UtilTools.showToast(getActivity().getApplicationContext(), "点击" + position, 1505);
             // 关闭侧滑菜单
-            lv_accounts.setItemChecked(position,true);//高亮选中item
+            lv_accounts.setItemChecked(position, true);//高亮选中item
             mDrawerLayout.closeDrawer(slipMenuView);
             LinearLayout lv_topcard = (LinearLayout) mainContent.findViewById(R.id.indexpage_topcard_id);
             lv_topcard.setBackgroundColor(getResources().getColor(R.color.app_red));
@@ -122,12 +138,13 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
 
     /**
      * 传递额外对象
-     * @param slipMenuView 滑动菜单view
+     *
+     * @param slipMenuView  滑动菜单view
      * @param mDrawerLayout 滑动菜单组件
      * @param mainContent
      */
     public void transWidget(LinearLayout slipMenuView, DrawerLayout mDrawerLayout,
-                            LinearLayout mainContent){
+                            LinearLayout mainContent) {
         this.mDrawerLayout = mDrawerLayout;
         this.slipMenuView = slipMenuView;
         this.mainContent = mainContent;

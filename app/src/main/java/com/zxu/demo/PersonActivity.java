@@ -2,7 +2,6 @@ package com.zxu.demo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.PersonDao;
 import com.zxu.entity.Person;
-import com.zxu.helpers.SQLiteHelper;
 import com.zxu.ui.person.PersonEditActivity;
 
 import java.util.ArrayList;

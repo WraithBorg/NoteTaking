@@ -22,13 +22,6 @@ public class AccountBooksAdapter extends BaseAdapter {
 
     public AccountBooksAdapter(Context context, List<JC_AccountBook> accountBooks) {
         this.context = context;
-        if (accountBooks == null) {
-            accountBooks = new ArrayList<>();
-            JC_AccountBook b1 = new JC_AccountBook("1", "Abc");
-            JC_AccountBook b2 = new JC_AccountBook("2", "Zxc");
-            accountBooks.add(b1);
-            accountBooks.add(b2);
-        }
         this.accountBooks = accountBooks;
     }
 

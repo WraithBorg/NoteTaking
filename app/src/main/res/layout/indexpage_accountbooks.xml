@@ -1,30 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_green"
-     >
-    <ListView android:id="@+id/indexpage_accountbooks_id"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/indexpage_accountbooks_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
         android:choiceMode="singleChoice"
         android:divider="@color/white"
         android:dividerHeight="8dp"
-        android:background="@color/white"
-        android:scrollbars="none"/>
+        android:scrollbars="none" />
 
-    <TextView
-        android:id="@+id/account_name_id"
-        android:layout_width="100dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/app_blue"
-        android:layout_gravity="center"/>
-    <Button
-        android:id="@+id/account_refresh_id"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:text="刷新"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/accountbook_add_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/app_blue"
+            android:gravity="center"
+            android:text="新增"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/accountbook_edit_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/app_red"
+            android:gravity="center"
+            android:text="编辑"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/accountbook_refresh_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/app_blue"
+            android:gravity="center"
+            android:text="刷新"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

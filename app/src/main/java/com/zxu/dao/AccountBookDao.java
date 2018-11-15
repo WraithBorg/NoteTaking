@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.zxu.annotation.DatabaseTable;
 import com.zxu.application.GaiaApplication;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.helpers.SQLiteHelper;
 import com.zxu.model.JC_AccountBook;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +20,19 @@ public class AccountBookDao {
      *
      * @param database
      */
+    private static String tableName;
+    // 静态代码块优先执行
+    static {
+        Annotation annotation = JC_AccountBook.class.getAnnotation(DatabaseTable.class);
+        tableName = ((DatabaseTable) annotation).tableName();
+
+    }
+
+    public AccountBookDao() {
+    }
+
     public static void createTable(SQLiteDatabase database) {
-        String createTable = "create table if not exists jc_accountbook (" +
+        String createTable = "create table if not exists " + tableName + " (" +
                 " id text primary key ," +
                 " name text not null ," +
                 " imgurl text not null ," +
@@ -33,7 +46,7 @@ public class AccountBookDao {
      * @param database
      */
     public static void dropTable(SQLiteDatabase database) {
-        String dropTable = "drop table if exists jc_accountbook";
+        String dropTable = "drop table if exists " + tableName;
         database.execSQL(dropTable);
     }
 
@@ -44,10 +57,10 @@ public class AccountBookDao {
      * @return
      */
     private static JC_AccountBook cursorToPerson(Cursor cursor) {
-        String id = cursor.getString(cursor.getColumnIndex("_id"));
+        String id = cursor.getString(cursor.getColumnIndex("id"));
         String name = cursor.getString(cursor.getColumnIndex("name"));
-        String imgUrl = cursor.getString(cursor.getColumnIndex("imgUrl"));
-        String userId = cursor.getString(cursor.getColumnIndex("userId"));
+        String imgUrl = cursor.getString(cursor.getColumnIndex("imgurl"));
+        String userId = cursor.getString(cursor.getColumnIndex("userid"));
 
         JC_AccountBook accountBook = new JC_AccountBook();
         accountBook.setId(id);
@@ -71,7 +84,7 @@ public class AccountBookDao {
 
         ResultHelper res = new ResultHelper(true, "新增成功");
         try {
-            String sql = "insert into jc_accountbook (id,name,imgurl,userId) values (" +
+            String sql = "insert into " + tableName + " (id,name,imgurl,userId) values (" +
                     "'" + p.getId() + "'," +
                     "'" + p.getName() + "'," +
                     "'" + p.getImgUrl() + "'," +
@@ -104,7 +117,7 @@ public class AccountBookDao {
         int updates;
         ResultHelper res = new ResultHelper(false, "修改失败");
         try {
-            updates = database.update("jc_accountbook", values, "_id=?", new String[]{String.valueOf(p.getId())});
+            updates = database.update(tableName, values, "_id=?", new String[]{String.valueOf(p.getId())});
             if (updates > 0) {
                 res = new ResultHelper(true, "修改成功");
                 return res;
@@ -114,6 +127,7 @@ public class AccountBookDao {
         }
         return res;
     }
+
     /**
      * 获取账本
      *
@@ -124,7 +138,7 @@ public class AccountBookDao {
         SQLiteHelper helper = application.getSQLiteHelper();
         SQLiteDatabase database = helper.open();
         List<JC_AccountBook> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select * from jc_accountbook", null);
+        Cursor cursor = database.rawQuery("select * from " + tableName, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             JC_AccountBook p = cursorToPerson(cursor);

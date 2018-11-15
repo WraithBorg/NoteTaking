@@ -1,8 +1,11 @@
 package com.zxu.model;
 
+import com.zxu.annotation.DatabaseTable;
+
 /**
  * 账本
  */
+@DatabaseTable(tableName = "jc_accountbook")
 public class JC_AccountBook {
     private String id;
     private String name;
