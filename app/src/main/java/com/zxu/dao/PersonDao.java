@@ -4,11 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.zxu.application.GaiaApplication;
 import com.zxu.entity.Person;
 import com.zxu.helpers.ResultHelper;
-import com.zxu.helpers.SQLiteHelper;
-import com.zxu.util.UtilTools;
 
 import java.util.ArrayList;
 import java.util.List;
