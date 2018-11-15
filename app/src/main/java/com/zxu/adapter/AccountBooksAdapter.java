@@ -42,12 +42,9 @@ public class AccountBooksAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.indexpage_accountbooks_item, parent, false);
-            TextView bookNameView = (TextView) view.findViewById(R.id.indexpage_accountbooks_name_id);
-            bookNameView.setText(getItem(position).getName());
-        }
+        View view = LayoutInflater.from(context).inflate(R.layout.indexpage_accountbooks_item, parent, false);
+        TextView bookNameView = (TextView) view.findViewById(R.id.indexpage_accountbooks_name_id);
+        bookNameView.setText(getItem(position).getName());
         return view;
     }
 }

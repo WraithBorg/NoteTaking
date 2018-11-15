@@ -15,7 +15,6 @@ import android.widget.ListView;
 import com.zxu.R;
 import com.zxu.adapter.AccountBooksAdapter;
 import com.zxu.application.GaiaApplication;
-import com.zxu.dao.AccountBookDao;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
 
@@ -26,7 +25,6 @@ import java.util.UUID;
  * 实现view接口，接收indexPagePresenter回调 并 更新界面
  */
 public class AccountBooksFragment extends Fragment implements AccountBooksContract.View {
-    //    private TextView tv_accountName;
     private Button bt_getAccount;
     private Button bt_addAccount;
     private Button bt_editAccount;
@@ -37,53 +35,59 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     LinearLayout slipMenuView;  // 滑动菜单view
     //
     private AccountBooksAdapter accountBooksAdapter;
-
     private AccountBooksContract.Presenter mPresenter;
-
+    //
     public static AccountBooksFragment newInstance() {
         return new AccountBooksFragment();
     }
 
+    /**
+     * 创建view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        // 初始化组件
         View root = inflater.inflate(R.layout.indexpage_accountbooks, container, false);
         bt_getAccount = (Button) root.findViewById(R.id.accountbook_refresh_id);
         bt_addAccount = (Button) root.findViewById(R.id.accountbook_add_id);
         bt_editAccount = (Button) root.findViewById(R.id.accountbook_edit_id);
-        // 账本list
         lv_accounts = (ListView) root.findViewById(R.id.indexpage_accountbooks_id);
-//        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), accountBooks);//TODO
-//        lv_accounts.setAdapter(accountBooksAdapter);
-//        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
-        // 初始化事件
+        return root;
+    }
+
+    /**
+     * activity创建后 view绑定事件
+     * @param savedInstanceState
+     */
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(),"");
+        lv_accounts.setAdapter(accountBooksAdapter);
+        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
+        bt_getAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(),"");
+            }
+        });
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO MVP?
                 JC_AccountBook b = new JC_AccountBook();
                 b.setId(UUID.randomUUID().toString());
-                b.setName("账本a-" + v.getId());
-                AccountBookDao.addAccountBook((GaiaApplication) getActivity().getApplication(), b);
+                b.setName("账本b-" + v.getId());
+                mPresenter.addAccountBook((GaiaApplication) getActivity().getApplication(),b);
             }
         });
         bt_editAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            }
-        });
-        return root;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        bt_getAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(),"");
             }
         });
     }
@@ -96,8 +100,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     @Override
     public void setAccountBooks(List<JC_AccountBook> list) {
         accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list);//TODO
-        lv_accounts.setAdapter(accountBooksAdapter);
-        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
+        accountBooksAdapter.notifyDataSetChanged();
     }
 
     @Override

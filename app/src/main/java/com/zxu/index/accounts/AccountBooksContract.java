@@ -16,6 +16,7 @@ public interface AccountBooksContract {
     interface Presenter {
         void getAccountBooks(GaiaApplication application,String userId);
 
+        void addAccountBook(GaiaApplication application, JC_AccountBook b);
     }
 
     /**
