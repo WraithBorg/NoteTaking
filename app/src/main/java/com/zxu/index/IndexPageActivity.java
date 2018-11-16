@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.zxu.R;
-import com.zxu.index.accounts.AccountBooksFragment;
-import com.zxu.index.accounts.AccountBooksPresenter;
+import com.zxu.index.accountbooks.AccountBooksFragment;
+import com.zxu.index.accountbooks.AccountBooksPresenter;
 import com.zxu.util.ActivityUtils;
 
 /**

@@ -1,10 +1,9 @@
-package com.zxu.index.accounts;
+package com.zxu.index.accountbooks;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.AccountBookDao;
 import com.zxu.model.JC_AccountBook;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -183,5 +183,20 @@
                 android:textColor="@color/white"
                 android:textSize="22sp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/linearlayout_line">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:onClick="showAddAccountBook"
+                android:text="添加账本"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

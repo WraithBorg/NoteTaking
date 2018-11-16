@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.index.IndexPageActivity;
+import com.zxu.index.accountbooks.AddAccountBookActivity;
 import com.zxu.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
 
@@ -155,6 +156,15 @@ public class AFunctionDisplayActivity extends Activity {
      */
     void showMvp2(View view) {
         Intent intent = new Intent(this, IndexPageActivity.class);
+        startActivity(intent);
+    }
+    /**
+     * 主界面 侧滑菜单2
+     *
+     * @param view 视图
+     */
+    void showAddAccountBook(View view) {
+        Intent intent = new Intent(this, AddAccountBookActivity.class);
         startActivity(intent);
     }
 }

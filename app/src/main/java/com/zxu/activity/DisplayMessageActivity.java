@@ -1,4 +1,4 @@
-package com.zxu.admin;
+package com.zxu.activity;
 
 import android.app.Activity;
 import android.os.Bundle;

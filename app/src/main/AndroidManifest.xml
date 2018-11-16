@@ -11,13 +11,13 @@
         android:icon="@mipmap/notetaking"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        <activity android:name=".admin.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".admin.DisplayMessageActivity" />
+        <activity android:name=".activity.DisplayMessageActivity" />
         <activity android:name=".demo.TheTimerActivity" />
         <activity android:name=".demo.AFunctionDisplayActivity" />
         <activity android:name=".demo.KeySaveActivity" />
@@ -30,6 +30,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".demo.CeHuaMainActivity" />
         <activity android:name=".index.IndexPageActivity" />
+        <activity android:name=".index.accountbooks.AddAccountBookActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.zxu.index.accounts;
+package com.zxu.index.accountbooks;
 
 import com.zxu.application.BaseView;
 import com.zxu.application.GaiaApplication;
