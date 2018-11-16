@@ -1,6 +1,7 @@
 package com.zxu.index.accountbooks;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -23,6 +24,18 @@ public class AddAccountBookFragment extends DialogFragment implements AddAccount
     private AddAccountBookContract.Presenter mPresenter;
     Button bt_save;
     EditText et_accountName;
+    /**
+     * 监听弹出窗是否被取消
+     */
+    private OnDialogCancelListener mCancelListener;
+
+    public interface OnDialogCancelListener {
+        void onDissmiss();
+    }
+
+    public AddAccountBookFragment() {
+    }
+
 
     /**
      * 可以设置对话框风格和各种属性，但不能设置view，因为此时对话框为创建
@@ -71,6 +84,8 @@ public class AddAccountBookFragment extends DialogFragment implements AddAccount
                 b.setName(accountName);
                 mPresenter.addAccountBook((GaiaApplication) getActivity().getApplication(), b);
                 dismiss();
+                // TODO 刷新列表
+
             }
         });
     }
@@ -104,5 +119,23 @@ public class AddAccountBookFragment extends DialogFragment implements AddAccount
     @Override
     public void setPresenter(AddAccountBookContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        //监听miss 在DialogFragment里写一个回调接口，当Dialog触发onDismiss时触发
+        super.onDismiss(dialog);
+        if (mCancelListener != null) {
+            mCancelListener.onDissmiss();
+        }
+    }
+
+    /**
+     * 添加监听器
+     *
+     * @param mCancelListener
+     */
+    public void setmCancelListener(OnDialogCancelListener mCancelListener) {
+        this.mCancelListener = mCancelListener;
     }
 }

@@ -35,6 +35,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     //
     private AccountBooksAdapter accountBooksAdapter;
     private AccountBooksContract.Presenter mPresenter;
+    private AddAccountBookFragment addAccountBookFragment = new AddAccountBookFragment();
 
     //
     public static AccountBooksFragment newInstance() {
@@ -80,10 +81,16 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddAccountBookFragment addAccountBookFragment = new AddAccountBookFragment();
+                addAccountBookFragment = new AddAccountBookFragment();
                 AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookFragment);
                 addAccountBookFragment.setPresenter(addAccountBookPresenter);
                 addAccountBookFragment.show(getFragmentManager(), "WHo is W");
+                addAccountBookFragment.setmCancelListener(new AddAccountBookFragment.OnDialogCancelListener() {
+                    @Override
+                    public void onDissmiss() {
+                        UtilTools.showToast(getActivity().getApplicationContext(), "监听dialog 消失", 1000);
+                    }
+                });
             }
         });
         bt_editAccount.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +99,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
 
             }
         });
+
     }
 
     @Override
@@ -101,6 +109,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
 
     /**
      * 刷新账本
+     *
      * @param list
      */
     @Override
