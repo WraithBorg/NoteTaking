@@ -99,9 +99,14 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
         mPresenter = presenter;
     }
 
+    /**
+     * 刷新账本
+     * @param list
+     */
     @Override
     public void setAccountBooks(List<JC_AccountBook> list) {
-        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list);//TODO
+        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list);
+        lv_accounts.setAdapter(accountBooksAdapter);
         accountBooksAdapter.notifyDataSetChanged();
     }
 
