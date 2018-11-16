@@ -88,7 +88,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
                 addAccountBookFragment.setmCancelListener(new AddAccountBookFragment.OnDialogCancelListener() {
                     @Override
                     public void onDissmiss() {
-                        UtilTools.showToast(getActivity().getApplicationContext(), "监听dialog 消失", 1000);
+                        mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
                     }
                 });
             }
