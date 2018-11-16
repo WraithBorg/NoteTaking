@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.index.IndexPageActivity;
 import com.zxu.index.accountbooks.AddAccountBookActivity;
+import com.zxu.index.accountbooks.AddAccountBookFragment;
 import com.zxu.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
 
@@ -150,7 +151,7 @@ public class AFunctionDisplayActivity extends Activity {
         startActivity(intent);
     }
     /**
-     * 主界面 侧滑菜单2
+     * 主界面
      *
      * @param view 视图
      */
@@ -159,12 +160,20 @@ public class AFunctionDisplayActivity extends Activity {
         startActivity(intent);
     }
     /**
-     * 主界面 侧滑菜单2
+     * 主界面
      *
      * @param view 视图
      */
     void showAddAccountBook(View view) {
         Intent intent = new Intent(this, AddAccountBookActivity.class);
         startActivity(intent);
+    }
+    /**
+     * DialogFragment
+     *
+     * @param view 视图
+     */
+    void showDialogFragment(View view) {
+        new AddAccountBookFragment().show(getFragmentManager(), "WHo is W");
     }
 }
