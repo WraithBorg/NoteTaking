@@ -7,10 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.zxu.R;
+import com.zxu.application.GaiaApplication;
+import com.zxu.model.JC_AccountBook;
+import com.zxu.util.UtilTools;
 
-public class AddAccountBookFragment extends DialogFragment {
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.UUID;
+
+public class AddAccountBookFragment extends DialogFragment implements AddAccountBookContract.View {
+    private AddAccountBookContract.Presenter mPresenter;
+    Button bt_save;
+    EditText et_accountName;
+
     /**
      * 可以设置对话框风格和各种属性，但不能设置view，因为此时对话框为创建
      *
@@ -35,16 +48,61 @@ public class AddAccountBookFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.indexpage_accountbook_add, null);
+        bt_save = (Button) view.findViewById(R.id.accountbook_add_save_btn_id);
+        et_accountName = (EditText) view.findViewById(R.id.indexpage_add_accountname_id);
+        initWidgets();
         return view;
     }
 
     /**
+     * 初始化按钮事件
+     */
+    private void initWidgets() {
+        bt_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String accountName = et_accountName.getText().toString();
+                if (StringUtils.isEmpty(accountName)) {
+                    UtilTools.showToast(getActivity().getApplicationContext(), "请输入账户名", 1000);
+                    return;
+                }
+                JC_AccountBook b = new JC_AccountBook();
+                b.setId(UUID.randomUUID().toString());
+                b.setName(accountName);
+                mPresenter.addAccountBook((GaiaApplication) getActivity().getApplication(), b);
+                dismiss();
+            }
+        });
+    }
+
+    /**
      * 处理dialogFragment在onActivityCreated处理，因为setContentView是在onActivityCreated
+     *
      * @param savedInstanceState
      */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void setPresenter(AddAccountBookContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

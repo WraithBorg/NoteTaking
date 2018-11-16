@@ -19,7 +19,6 @@ import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 实现view接口，接收indexPagePresenter回调 并 更新界面
@@ -36,6 +35,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     //
     private AccountBooksAdapter accountBooksAdapter;
     private AccountBooksContract.Presenter mPresenter;
+
     //
     public static AccountBooksFragment newInstance() {
         return new AccountBooksFragment();
@@ -43,6 +43,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
 
     /**
      * 创建view
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -61,27 +62,28 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
 
     /**
      * activity创建后 view绑定事件
+     *
      * @param savedInstanceState
      */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(),"");
+        mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
         lv_accounts.setAdapter(accountBooksAdapter);
         lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
         bt_getAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(),"");
+                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
             }
         });
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JC_AccountBook b = new JC_AccountBook();
-                b.setId(UUID.randomUUID().toString());
-                b.setName("账本b-" + v.getId());
-                mPresenter.addAccountBook((GaiaApplication) getActivity().getApplication(),b);
+                AddAccountBookFragment addAccountBookFragment = new AddAccountBookFragment();
+                AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookFragment);
+                addAccountBookFragment.setPresenter(addAccountBookPresenter);
+                addAccountBookFragment.show(getFragmentManager(), "WHo is W");
             }
         });
         bt_editAccount.setOnClickListener(new View.OnClickListener() {

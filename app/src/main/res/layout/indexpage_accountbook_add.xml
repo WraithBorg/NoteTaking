@@ -56,6 +56,7 @@
             android:visibility="visible" />
 
         <EditText
+            android:id="@+id/indexpage_add_accountname_id"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/app_white"
