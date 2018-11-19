@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.zxu.R;
 import com.zxu.net.IpInfoTask;
-import com.zxu.util.ActivityUtils;
+import com.zxu.util.ActivityUtil;
 
 /**
  * Activity不是View层，而是View Model 和 Presenter三层的纽带
@@ -22,7 +22,7 @@ public class IpInfoActivity extends Activity {
         if (ipInfoFragment == null) {
             // 新建 IpInfoFragment ,并将IpInfoFragment添加到IpInfoActivity中
             ipInfoFragment = IpInfoFragment.newInstance();//1
-            ActivityUtils.addFragmentToActivity(getFragmentManager(), ipInfoFragment, R.id.contentFrame);//2
+            ActivityUtil.addFragmentToActivity(getFragmentManager(), ipInfoFragment, R.id.contentFrame);//2
         }
         // 创建IpInfoTask,并将IpInfoFragment作为参数传入IpInfoPresenter
         IpInfoTask ipInfoTask = IpInfoTask.getInstance();

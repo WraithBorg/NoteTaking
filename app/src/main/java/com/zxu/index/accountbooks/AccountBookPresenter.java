@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * 利用接口 通过Model层 获取保存数据，通过view更新界面
  */
-public class AccountBooksPresenter implements AccountBooksContract.Presenter {
+public class AccountBookPresenter implements AccountBookContract.Presenter {
 
-    private AccountBooksContract.View cView;
+    private AccountBookContract.View cView;
 
-    public AccountBooksPresenter(AccountBooksContract.View cView) {
+    public AccountBookPresenter(AccountBookContract.View cView) {
         this.cView = cView;
     }
 

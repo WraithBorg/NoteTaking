@@ -1,6 +1,7 @@
 package com.zxu.index.accountbooks;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * 实现view接口，接收indexPagePresenter回调 并 更新界面
  */
-public class AccountBooksFragment extends Fragment implements AccountBooksContract.View {
+public class AccountBookFragment extends Fragment implements AccountBookContract.View {
     private Button bt_getAccount;
     private Button bt_addAccount;
     private Button bt_editAccount;
@@ -34,13 +35,13 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     DrawerLayout mDrawerLayout; // DrawerLayout组件
     LinearLayout slipMenuView;  // 滑动菜单view
     //
-    private AccountBooksAdapter accountBooksAdapter;
-    private AccountBooksContract.Presenter mPresenter;
+    private AccountBookAdapter accountBooksAdapter;
+    private AccountBookContract.Presenter mPresenter;
     private AddAccountBookDialogFragment addAccountBookDialogFragment = new AddAccountBookDialogFragment();
 
     //
-    public static AccountBooksFragment newInstance() {
-        return new AccountBooksFragment();
+    public static AccountBookFragment newInstance() {
+        return new AccountBookFragment();
     }
 
     /**
@@ -118,7 +119,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     }
 
     @Override
-    public void setPresenter(AccountBooksContract.Presenter presenter) {
+    public void setPresenter(AccountBookContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -129,7 +130,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
      */
     @Override
     public void setAccountBooks(List<JC_AccountBook> list) {
-        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list, false);
+        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, false);
         lv_accounts.setAdapter(accountBooksAdapter);
         accountBooksAdapter.notifyDataSetChanged();
     }
@@ -161,14 +162,25 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
      */
     @Override
     public void setAccountBooks4EDIT(List<JC_AccountBook> list) {
-        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list, true);
+        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, true);
         lv_accounts.setAdapter(accountBooksAdapter);
         // 接口调用
-        accountBooksAdapter.setOnDeleteItem(new AccountBooksAdapter.OnDeleteItem() {
+        accountBooksAdapter.setOnDeleteItem(new AccountBookAdapter.OnDeleteItem() {
             @Override
             public void deleteClick(JC_AccountBook item) {
-                mPresenter.delAccountBook((GaiaApplication) getActivity().getApplication(), item);
-                UtilTools.showToast(getActivity().getApplicationContext(), "删除成功", 1000);
+                // 弹窗确认
+                AccountBookDelDialog delDialog = new AccountBookDelDialog(getActivity());
+                delDialog.create(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.delAccountBook((GaiaApplication) getActivity().getApplication(), item);
+                        UtilTools.showToast(getActivity().getApplicationContext(), "删除成功", 1000);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
             }
         });
         accountBooksAdapter.notifyDataSetChanged();

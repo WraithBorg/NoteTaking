@@ -6,7 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
 
-public class ActivityUtils {
+public class ActivityUtil {
     /**
      * 负责提交事物，并将Fragment添加到Activity中
      * @param fragmentManager

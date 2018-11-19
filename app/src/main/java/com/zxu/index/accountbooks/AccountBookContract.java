@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 契约接口
  */
-public interface AccountBooksContract {
+public interface AccountBookContract {
     /**
      * 获取数据
      */

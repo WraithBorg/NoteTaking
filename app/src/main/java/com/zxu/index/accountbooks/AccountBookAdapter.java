@@ -17,14 +17,14 @@ import java.util.List;
 /**
  * 适配器
  */
-public class AccountBooksAdapter extends BaseAdapter {
+public class AccountBookAdapter extends BaseAdapter {
     List<JC_AccountBook> accountBooks;
     Context context;
     boolean isEdit;//是否是编辑样式
     private LayoutInflater mInFlater;
     private OnDeleteItem onDeleteItem;
 
-    public AccountBooksAdapter(Context context, List<JC_AccountBook> accountBooks, boolean isEdit) {
+    public AccountBookAdapter(Context context, List<JC_AccountBook> accountBooks, boolean isEdit) {
         this.context = context;
         this.accountBooks = accountBooks;
         this.isEdit = isEdit;

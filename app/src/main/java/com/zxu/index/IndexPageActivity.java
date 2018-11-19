@@ -16,15 +16,15 @@ import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.zxu.R;
 import com.zxu.demo.AFunctionDisplayActivity;
-import com.zxu.index.accountbooks.AccountBooksFragment;
-import com.zxu.index.accountbooks.AccountBooksPresenter;
-import com.zxu.util.ActivityUtils;
+import com.zxu.index.accountbooks.AccountBookFragment;
+import com.zxu.index.accountbooks.AccountBookPresenter;
+import com.zxu.util.ActivityUtil;
 
 /**
  * 索引页,activity 不是view层，是view model presenter三层的纽带
  */
 public class IndexPageActivity extends Activity {
-    private AccountBooksPresenter accountBooksPresenter;
+    private AccountBookPresenter accountBooksPresenter;
 
     LinearLayout slipMenuView;
     DrawerLayout mDrawerLayout; // DrawerLayout组件
@@ -35,10 +35,10 @@ public class IndexPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         initChromeDatabase();
         setContentView(R.layout.indexpage_main);
-        AccountBooksFragment indexPageFragment = (AccountBooksFragment) getFragmentManager().findFragmentById(R.id.accountsFrame_id);
+        AccountBookFragment indexPageFragment = (AccountBookFragment) getFragmentManager().findFragmentById(R.id.accountsFrame_id);
         if (indexPageFragment == null) {
-            indexPageFragment = AccountBooksFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getFragmentManager(), indexPageFragment, R.id.accountsFrame_id);
+            indexPageFragment = AccountBookFragment.newInstance();
+            ActivityUtil.addFragmentToActivity(getFragmentManager(), indexPageFragment, R.id.accountsFrame_id);
         }
 
         //
@@ -50,7 +50,7 @@ public class IndexPageActivity extends Activity {
         slipMenuView = (LinearLayout) findViewById(R.id.indexpage_slipmenu_id);
         mDrawerLayout.closeDrawer(slipMenuView);
         //
-        accountBooksPresenter = new AccountBooksPresenter(indexPageFragment);
+        accountBooksPresenter = new AccountBookPresenter(indexPageFragment);
         indexPageFragment.setPresenter(accountBooksPresenter);
         // 传递对象给Fragment
         LinearLayout mainContent = (LinearLayout)findViewById(R.id.indexpage_content_id);
