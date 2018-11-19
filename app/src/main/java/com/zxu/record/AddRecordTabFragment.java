@@ -16,8 +16,6 @@ import java.util.Random;
 public class AddRecordTabFragment extends Fragment {
     public static final String TITLE_TAG = "tabTitle";
 
-    private int[] colors = {0xff009999, 0xffc6e2ff, 0xff668b8b, 0xff7A67EE, 0xffCD853F, 0xffEECFA1};
-
     public static AddRecordTabFragment newInstance(String tabTitle) {
 
         Bundle args = new Bundle();
@@ -32,12 +30,6 @@ public class AddRecordTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.record_add_fragment_tab, container, false);
-
-        TextView tv = (TextView) view.findViewById(R.id.tv);
-        tv.setBackgroundColor(colors[new Random().nextInt(colors.length)]);
-
-        if (getArguments() != null) tv.setText(getArguments().getString(TITLE_TAG));
-
         return view;
     }
 }

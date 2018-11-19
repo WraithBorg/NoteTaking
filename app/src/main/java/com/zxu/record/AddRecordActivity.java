@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.zxu.R;
-import com.zxu.demo.fragment.TabFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
         fragments = new ArrayList<>();
         for (int i = 0; i < tabs.size(); i++) {
-            fragments.add(TabFragment.newInstance(tabs.get(i)));
+            fragments.add(AddRecordTabFragment.newInstance(tabs.get(i)));
         }
     }
     /**
