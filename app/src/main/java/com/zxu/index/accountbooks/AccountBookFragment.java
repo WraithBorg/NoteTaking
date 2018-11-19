@@ -103,16 +103,16 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             @Override
             public void onClick(View v) {
                 mPresenter.getAccountBooks4EDIT((GaiaApplication) getActivity().getApplication(), "");
-                ll_bottom.setVisibility(View.GONE);
-                bt_complete.setVisibility(View.VISIBLE);
+//                ll_bottom.setVisibility(View.GONE);
+//                bt_complete.setVisibility(View.VISIBLE);
             }
         });
         bt_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
-                ll_bottom.setVisibility(View.VISIBLE);
-                bt_complete.setVisibility(View.GONE);
+//                ll_bottom.setVisibility(View.VISIBLE);
+//                bt_complete.setVisibility(View.GONE);
             }
         });
 
@@ -130,9 +130,68 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
      */
     @Override
     public void setAccountBooks(List<JC_AccountBook> list) {
+        //
+        ll_bottom.setVisibility(View.VISIBLE);
+        bt_complete.setVisibility(View.GONE);
+        //
         accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, false);
         lv_accounts.setAdapter(accountBooksAdapter);
         accountBooksAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 刷新，编辑样式
+     *
+     * @param list
+     */
+    @Override
+    public void setAccountBooks4EDIT(List<JC_AccountBook> list) {
+        //
+        ll_bottom.setVisibility(View.GONE);
+        bt_complete.setVisibility(View.VISIBLE);
+        //
+        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, true);
+        lv_accounts.setAdapter(accountBooksAdapter);
+        accountBooksAdapter.notifyDataSetChanged();
+
+        // 删除接口调用
+        accountBooksAdapter.setOnDeleteItem(new AccountBookAdapter.OnDeleteItem() {
+            @Override
+            public void deleteClick(JC_AccountBook item) {
+                // 弹窗确认
+                DelAccountBookDialog delDialog = new DelAccountBookDialog(getActivity());
+                delDialog.create(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.delAccountBook((GaiaApplication) getActivity().getApplication(), item);
+                        UtilTools.showToast(getActivity().getApplicationContext(), "删除成功", 1000);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+            }
+        });
+        // 编辑接口调用
+        accountBooksAdapter.setOnEditItem(new AccountBookAdapter.OnEditItem() {
+            @Override
+            public void editClick(JC_AccountBook item) {
+                EditAccountBookDialog dialog = new EditAccountBookDialog();
+                EditAccountBookPresenter presenter = new EditAccountBookPresenter(dialog);
+                dialog.setAccountBook(item);
+                dialog.setPresenter(presenter);
+                dialog.show(getFragmentManager(), "");
+                dialog.setMisslListener(new EditAccountBookDialog.OnDialogMissListener() {
+                    @Override
+                    public void onDissmiss(boolean isRrefresh) {
+                        if (isRrefresh) {
+                            mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -153,37 +212,6 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     @Override
     public boolean isActive() {
         return isAdded();
-    }
-
-    /**
-     * 刷新，编辑样式
-     *
-     * @param list
-     */
-    @Override
-    public void setAccountBooks4EDIT(List<JC_AccountBook> list) {
-        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, true);
-        lv_accounts.setAdapter(accountBooksAdapter);
-        // 接口调用
-        accountBooksAdapter.setOnDeleteItem(new AccountBookAdapter.OnDeleteItem() {
-            @Override
-            public void deleteClick(JC_AccountBook item) {
-                // 弹窗确认
-                DelAccountBookDialog delDialog = new DelAccountBookDialog(getActivity());
-                delDialog.create(new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.delAccountBook((GaiaApplication) getActivity().getApplication(), item);
-                        UtilTools.showToast(getActivity().getApplicationContext(), "删除成功", 1000);
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-            }
-        });
-        accountBooksAdapter.notifyDataSetChanged();
     }
 
 

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.model.JC_AccountBook;
-import com.zxu.util.UtilTools;
 
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class AccountBookAdapter extends BaseAdapter {
     boolean isEdit;//是否是编辑样式
     private LayoutInflater mInFlater;
     private OnDeleteItem onDeleteItem;
+    private OnEditItem onEditItem;
 
     public AccountBookAdapter(Context context, List<JC_AccountBook> accountBooks, boolean isEdit) {
         this.context = context;
@@ -48,7 +48,7 @@ public class AccountBookAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         // 判断是否有缓存
         if (convertView == null) {
             holder = new ViewHolder();
@@ -82,7 +82,9 @@ public class AccountBookAdapter extends BaseAdapter {
             holder.iv_setting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    UtilTools.showToast(context, "iv_setting", 1000);
+                    if (onEditItem != null) {
+                        onEditItem.editClick(item);
+                    }
                 }
             });
         }
@@ -106,7 +108,15 @@ public class AccountBookAdapter extends BaseAdapter {
         public void deleteClick(JC_AccountBook item);
     }
 
+    public interface OnEditItem {
+        public void editClick(JC_AccountBook item);
+    }
+
     public void setOnDeleteItem(OnDeleteItem onDeleteItem) {
         this.onDeleteItem = onDeleteItem;
+    }
+
+    public void setOnEditItem(OnEditItem onEditItem) {
+        this.onEditItem = onEditItem;
     }
 }
