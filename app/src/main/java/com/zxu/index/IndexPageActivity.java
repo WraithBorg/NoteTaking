@@ -10,14 +10,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.zxu.R;
 import com.zxu.demo.AFunctionDisplayActivity;
+import com.zxu.demo.PersonActivity;
 import com.zxu.index.accountbooks.AccountBookFragment;
 import com.zxu.index.accountbooks.AccountBookPresenter;
+import com.zxu.record.AddRecordActivity;
 import com.zxu.util.ActivityUtil;
 
 /**
@@ -61,6 +64,15 @@ public class IndexPageActivity extends Activity {
             @Override
             public void onClick(View v) {
                 takeOff();// TODO mvp
+            }
+        });
+        //
+        TextView tv_noteOne = (TextView) findViewById(R.id.noteone_id);
+        tv_noteOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), AddRecordActivity.class);
+                startActivity(intent);
             }
         });
     }
