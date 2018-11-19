@@ -1,5 +1,6 @@
 package com.zxu.index.accountbooks;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
@@ -20,20 +22,19 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
 
-public class AddAccountBookFragment extends DialogFragment implements AddAccountBookContract.View {
+public class AddAccountBookDialogFragment extends DialogFragment implements AddAccountBookContract.View {
     private AddAccountBookContract.Presenter mPresenter;
     Button bt_save;
+    ImageView iv_back;
     EditText et_accountName;
-    /**
-     * 监听弹出窗是否被取消
-     */
-    private OnDialogCancelListener mCancelListener;
 
-    public interface OnDialogCancelListener {
-        void onDissmiss();
+    private OnDialogMissListener misslListener;
+
+    public interface OnDialogMissListener {
+        void onDissmiss(boolean isRrefresh);
     }
 
-    public AddAccountBookFragment() {
+    public AddAccountBookDialogFragment() {
     }
 
 
@@ -62,6 +63,7 @@ public class AddAccountBookFragment extends DialogFragment implements AddAccount
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.indexpage_accountbook_add, null);
         bt_save = (Button) view.findViewById(R.id.accountbook_add_save_btn_id);
+        iv_back = (ImageView) view.findViewById(R.id.indexpage_add_back_id);
         et_accountName = (EditText) view.findViewById(R.id.indexpage_add_accountname_id);
         initWidgets();
         return view;
@@ -83,9 +85,14 @@ public class AddAccountBookFragment extends DialogFragment implements AddAccount
                 b.setId(UUID.randomUUID().toString());
                 b.setName(accountName);
                 mPresenter.addAccountBook((GaiaApplication) getActivity().getApplication(), b);
+                closeDialog(getDialog(), true);
+            }
+        });
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeDialog(getDialog(), false);
                 dismiss();
-                // TODO 刷新列表
-
             }
         });
     }
@@ -123,19 +130,33 @@ public class AddAccountBookFragment extends DialogFragment implements AddAccount
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-        //监听miss 在DialogFragment里写一个回调接口，当Dialog触发onDismiss时触发
         super.onDismiss(dialog);
-        if (mCancelListener != null) {
-            mCancelListener.onDissmiss();
-        }
+
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
     }
 
     /**
      * 添加监听器
      *
-     * @param mCancelListener
+     * @param misslListener
      */
-    public void setmCancelListener(OnDialogCancelListener mCancelListener) {
-        this.mCancelListener = mCancelListener;
+    public void setMisslListener(OnDialogMissListener misslListener) {
+        this.misslListener = misslListener;
+    }
+
+    /**
+     *
+     * @param dialog
+     * @param b false表示直接关闭窗口 不需要后续操作
+     */
+    private void closeDialog(Dialog dialog, boolean b) {
+        if (misslListener != null) {
+            misslListener.onDissmiss(b);
+        }
+        dialog.dismiss();
     }
 }

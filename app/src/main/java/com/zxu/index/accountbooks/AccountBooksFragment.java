@@ -35,7 +35,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     //
     private AccountBooksAdapter accountBooksAdapter;
     private AccountBooksContract.Presenter mPresenter;
-    private AddAccountBookFragment addAccountBookFragment = new AddAccountBookFragment();
+    private AddAccountBookDialogFragment addAccountBookDialogFragment = new AddAccountBookDialogFragment();
 
     //
     public static AccountBooksFragment newInstance() {
@@ -81,14 +81,17 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAccountBookFragment = new AddAccountBookFragment();
-                AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookFragment);
-                addAccountBookFragment.setPresenter(addAccountBookPresenter);
-                addAccountBookFragment.show(getFragmentManager(), "WHo is W");
-                addAccountBookFragment.setmCancelListener(new AddAccountBookFragment.OnDialogCancelListener() {
+                addAccountBookDialogFragment = new AddAccountBookDialogFragment();
+                AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookDialogFragment);
+                addAccountBookDialogFragment.setPresenter(addAccountBookPresenter);
+                addAccountBookDialogFragment.show(getFragmentManager(), "WHo is W");
+                // TODO 判断是否需要刷新列表
+                addAccountBookDialogFragment.setMisslListener(new AddAccountBookDialogFragment.OnDialogMissListener() {
                     @Override
-                    public void onDissmiss() {
-                        mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                    public void onDissmiss(boolean isRrefresh) {
+                        if (isRrefresh) {
+                            mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                        }
                     }
                 });
             }

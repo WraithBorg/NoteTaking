@@ -14,6 +14,7 @@
         android:paddingTop="6dp">
 
         <ImageView
+            android:id="@+id/indexpage_add_back_id"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@mipmap/nextstep"
