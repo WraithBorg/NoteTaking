@@ -37,6 +37,17 @@
                     android:textSize="18sp" />
 
                 <ImageView
+                    android:id="@+id/main_plane_icon_id"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toStartOf="@+id/main_remind_icon_id"
+                    android:background="@mipmap/plane"
+                    android:contentDescription="@string/todo" />
+
+                <ImageView
+                    android:id="@+id/main_remind_icon_id"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerInParent="true"
@@ -59,10 +70,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
                 android:text="@string/monthSpending"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                android:layout_marginTop="75dp"/>
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,8 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:orientation="horizontal"
-                android:weightSum="0"
-                >
+                android:weightSum="0">
 
                 <TextView
                     android:layout_width="30dp"

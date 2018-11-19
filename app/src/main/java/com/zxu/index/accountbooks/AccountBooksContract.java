@@ -17,6 +17,8 @@ public interface AccountBooksContract {
         void getAccountBooks(GaiaApplication application,String userId);
 
         void addAccountBook(GaiaApplication application, JC_AccountBook b);
+
+        void getAccountBooks4EDIT(GaiaApplication application, String s);
     }
 
     /**
@@ -37,6 +39,7 @@ public interface AccountBooksContract {
          */
         boolean isActive();
 
+        void setAccountBooks4EDIT(List<JC_AccountBook> list);
     }
 
 }

@@ -1,15 +1,21 @@
 package com.zxu.index;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.squareup.okhttp.OkHttpClient;
 import com.zxu.R;
+import com.zxu.demo.AFunctionDisplayActivity;
 import com.zxu.index.accountbooks.AccountBooksFragment;
 import com.zxu.index.accountbooks.AccountBooksPresenter;
 import com.zxu.util.ActivityUtils;
@@ -27,6 +33,7 @@ public class IndexPageActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initChromeDatabase();
         setContentView(R.layout.indexpage_main);
         AccountBooksFragment indexPageFragment = (AccountBooksFragment) getFragmentManager().findFragmentById(R.id.accountsFrame_id);
         if (indexPageFragment == null) {
@@ -48,6 +55,14 @@ public class IndexPageActivity extends Activity {
         // 传递对象给Fragment
         LinearLayout mainContent = (LinearLayout)findViewById(R.id.indexpage_content_id);
         indexPageFragment.transWidget(slipMenuView,mDrawerLayout,mainContent);
+        //
+        ImageView iv_takeOff = (ImageView) findViewById(R.id.main_plane_icon_id);
+        iv_takeOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeOff();
+            }
+        });
     }
 
     /**
@@ -98,5 +113,15 @@ public class IndexPageActivity extends Activity {
             return;
         }
         super.onBackPressed();
+    }
+    void takeOff() {
+        Intent intent = new Intent(this, AFunctionDisplayActivity.class);
+        startActivity(intent);
+
+    }
+    void initChromeDatabase(){
+        Stetho.initializeWithDefaults(this);
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
     }
 }

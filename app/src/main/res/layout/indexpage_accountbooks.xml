@@ -19,44 +19,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/indexpage_accountbooks_bottom_id"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+
+            <Button
+                android:id="@+id/accountbook_add_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/app_blue"
+                android:gravity="center"
+                android:text="新增"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/accountbook_edit_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/app_red"
+                android:gravity="center"
+                android:text="编辑"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/accountbook_refresh_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/app_blue"
+                android:gravity="center"
+                android:text="刷新"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/accountbook_add_id"
-            android:layout_width="0dp"
+            android:id="@+id/accountbook_complete_id"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:background="@color/app_blue"
             android:gravity="center"
-            android:text="新增"
+            android:text="完成"
             android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <Button
-            android:id="@+id/accountbook_edit_id"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/app_red"
-            android:gravity="center"
-            android:text="编辑"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <Button
-            android:id="@+id/accountbook_refresh_id"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/app_blue"
-            android:gravity="center"
-            android:text="刷新"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-
+            android:textSize="30sp"
+            android:visibility="gone"/>
     </LinearLayout>
-
-
 </LinearLayout>

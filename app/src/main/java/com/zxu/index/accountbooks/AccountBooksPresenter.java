@@ -31,12 +31,18 @@ public class AccountBooksPresenter implements AccountBooksContract.Presenter {
     }
 
     /**
-     * 新增账本
+     * 新增
      * @param application
      * @param b
      */
     @Override
     public void addAccountBook(GaiaApplication application, JC_AccountBook b) {
         AccountBookDao.addAccountBook(application, b);
+    }
+
+    @Override
+    public void getAccountBooks4EDIT(GaiaApplication application, String s) {
+        List<JC_AccountBook> list = AccountBookDao.getAll(application);
+        cView.setAccountBooks4EDIT(list);
     }
 }

@@ -27,7 +27,9 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     private Button bt_getAccount;
     private Button bt_addAccount;
     private Button bt_editAccount;
+    private Button bt_complete;
     private ListView lv_accounts;
+    private LinearLayout ll_bottom;
     // 外部传递对象
     LinearLayout mainContent;   // 主页面内容
     DrawerLayout mDrawerLayout; // DrawerLayout组件
@@ -57,6 +59,8 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
         bt_getAccount = (Button) root.findViewById(R.id.accountbook_refresh_id);
         bt_addAccount = (Button) root.findViewById(R.id.accountbook_add_id);
         bt_editAccount = (Button) root.findViewById(R.id.accountbook_edit_id);
+        bt_complete = (Button) root.findViewById(R.id.accountbook_complete_id);
+        ll_bottom = (LinearLayout) root.findViewById(R.id.indexpage_accountbooks_bottom_id);
         lv_accounts = (ListView) root.findViewById(R.id.indexpage_accountbooks_id);
         return root;
     }
@@ -99,7 +103,17 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
         bt_editAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mPresenter.getAccountBooks4EDIT((GaiaApplication) getActivity().getApplication(), "");
+                ll_bottom.setVisibility(View.GONE);
+                bt_complete.setVisibility(View.VISIBLE);
+            }
+        });
+        bt_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                ll_bottom.setVisibility(View.VISIBLE);
+                bt_complete.setVisibility(View.GONE);
             }
         });
 
@@ -117,7 +131,7 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
      */
     @Override
     public void setAccountBooks(List<JC_AccountBook> list) {
-        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list);
+        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list, false);
         lv_accounts.setAdapter(accountBooksAdapter);
         accountBooksAdapter.notifyDataSetChanged();
     }
@@ -140,6 +154,18 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     @Override
     public boolean isActive() {
         return isAdded();
+    }
+
+    /**
+     * 刷新，编辑样式
+     *
+     * @param list
+     */
+    @Override
+    public void setAccountBooks4EDIT(List<JC_AccountBook> list) {
+        accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list, true);
+        lv_accounts.setAdapter(accountBooksAdapter);
+        accountBooksAdapter.notifyDataSetChanged();
     }
 
 
