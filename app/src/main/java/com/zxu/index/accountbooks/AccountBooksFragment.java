@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.zxu.R;
-import com.zxu.adapter.AccountBooksAdapter;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
@@ -89,7 +88,6 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
                 AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookDialogFragment);
                 addAccountBookDialogFragment.setPresenter(addAccountBookPresenter);
                 addAccountBookDialogFragment.show(getFragmentManager(), "WHo is W");
-                // TODO 判断是否需要刷新列表
                 addAccountBookDialogFragment.setMisslListener(new AddAccountBookDialogFragment.OnDialogMissListener() {
                     @Override
                     public void onDissmiss(boolean isRrefresh) {
@@ -165,6 +163,14 @@ public class AccountBooksFragment extends Fragment implements AccountBooksContra
     public void setAccountBooks4EDIT(List<JC_AccountBook> list) {
         accountBooksAdapter = new AccountBooksAdapter(getActivity().getApplicationContext(), list, true);
         lv_accounts.setAdapter(accountBooksAdapter);
+        // 接口调用
+        accountBooksAdapter.setOnDeleteItem(new AccountBooksAdapter.OnDeleteItem() {
+            @Override
+            public void deleteClick(JC_AccountBook item) {
+                mPresenter.delAccountBook((GaiaApplication) getActivity().getApplication(), item);
+                UtilTools.showToast(getActivity().getApplicationContext(), "删除成功", 1000);
+            }
+        });
         accountBooksAdapter.notifyDataSetChanged();
     }
 

@@ -1,4 +1,4 @@
-package com.zxu.adapter;
+package com.zxu.index.accountbooks;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import com.zxu.R;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +22,7 @@ public class AccountBooksAdapter extends BaseAdapter {
     Context context;
     boolean isEdit;//是否是编辑样式
     private LayoutInflater mInFlater;
+    private OnDeleteItem onDeleteItem;
 
     public AccountBooksAdapter(Context context, List<JC_AccountBook> accountBooks, boolean isEdit) {
         this.context = context;
@@ -63,22 +63,26 @@ public class AccountBooksAdapter extends BaseAdapter {
             // 通过tag找到缓存的布局
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tv_boolName.setText(getItem(position).getName());
+        JC_AccountBook item = getItem(position);
+        holder.tv_boolName.setText(item.getName());
         // 如果是编辑样式 则显示删除按钮等元素
         if (isEdit) {
             holder.iv_delete.setVisibility(View.VISIBLE);
             holder.iv_setting.setVisibility(View.VISIBLE);
+            if (onDeleteItem != null) {
+                holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onDeleteItem.deleteClick(item);
 
-            holder.iv_delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UtilTools.showToast(context, "编辑", 1000);
-                }
-            });
+                    }
+                });
+            }
+
             holder.iv_setting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    UtilTools.showToast(context, "iv_setting", 1000);
                 }
             });
         }
@@ -91,4 +95,18 @@ public class AccountBooksAdapter extends BaseAdapter {
         public ImageView iv_setting;
     }
 
+    /*
+    Adapter回调数据分为两种方式，
+    第一种是在adapter之中写一个回调接口，在点击item的时候使用接口回调，将点击的position传递给activity之中使用的adapter，
+        在adapter中使用定义的回调方法获取到传递的position。
+    第二种是在activity之中传递数据到adapter的时候将handler一并传进去，使用handler获取到点listView点击之时的position传递。
+     */
+    // 删除按钮 接口回调
+    public interface OnDeleteItem {
+        public void deleteClick(JC_AccountBook item);
+    }
+
+    public void setOnDeleteItem(OnDeleteItem onDeleteItem) {
+        this.onDeleteItem = onDeleteItem;
+    }
 }

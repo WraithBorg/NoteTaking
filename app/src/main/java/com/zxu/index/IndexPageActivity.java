@@ -60,7 +60,7 @@ public class IndexPageActivity extends Activity {
         iv_takeOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takeOff();
+                takeOff();// TODO mvp
             }
         });
     }

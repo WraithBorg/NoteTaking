@@ -14,11 +14,13 @@ public interface AccountBooksContract {
      * 获取数据
      */
     interface Presenter {
-        void getAccountBooks(GaiaApplication application,String userId);
+        void getAccountBooks(GaiaApplication application, String userId);
 
         void addAccountBook(GaiaApplication application, JC_AccountBook b);
 
         void getAccountBooks4EDIT(GaiaApplication application, String s);
+
+        void delAccountBook(GaiaApplication application, JC_AccountBook item);
     }
 
     /**

@@ -21,6 +21,7 @@ public class AccountBookDao {
      * @param database
      */
     private static String tableName;
+
     // 静态代码块优先执行
     static {
         Annotation annotation = JC_AccountBook.class.getAnnotation(DatabaseTable.class);
@@ -117,7 +118,7 @@ public class AccountBookDao {
         int updates;
         ResultHelper res = new ResultHelper(false, "修改失败");
         try {
-            updates = database.update(tableName, values, "_id=?", new String[]{String.valueOf(p.getId())});
+            updates = database.update(tableName, values, "id=?", new String[]{String.valueOf(p.getId())});
             if (updates > 0) {
                 res = new ResultHelper(true, "修改成功");
                 return res;
@@ -148,5 +149,27 @@ public class AccountBookDao {
         cursor.close();
         helper.close();
         return list;
+    }
+
+    /**
+     * 删除账本
+     *
+     * @param application
+     * @param p
+     * @return
+     */
+    public static ResultHelper delAccountBook(GaiaApplication application, JC_AccountBook p) {
+        SQLiteHelper helper = application.getSQLiteHelper();
+        SQLiteDatabase database = helper.getWritableDatabase();
+
+        ResultHelper res = new ResultHelper(true, "删除成功");
+        try {
+            database.delete(tableName, "id=?", new String[]{String.valueOf(p.getId())});
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            res = new ResultHelper(false, "删除失败");
+        }
+        return res;
     }
 }

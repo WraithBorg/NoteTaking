@@ -23,7 +23,7 @@ public class AccountBooksPresenter implements AccountBooksContract.Presenter {
      * @param userId 用户ID
      */
     @Override
-    public void getAccountBooks(GaiaApplication application,String userId) {
+    public void getAccountBooks(GaiaApplication application, String userId) {
         // 1: 获取数据,传给Presenter
         // 2: 通过view进行交互
         List<JC_AccountBook> list = AccountBookDao.getAll(application);
@@ -32,6 +32,7 @@ public class AccountBooksPresenter implements AccountBooksContract.Presenter {
 
     /**
      * 新增
+     *
      * @param application
      * @param b
      */
@@ -40,8 +41,25 @@ public class AccountBooksPresenter implements AccountBooksContract.Presenter {
         AccountBookDao.addAccountBook(application, b);
     }
 
+    /**
+     * 查询
+     *
+     * @param application
+     */
     @Override
     public void getAccountBooks4EDIT(GaiaApplication application, String s) {
+        List<JC_AccountBook> list = AccountBookDao.getAll(application);
+        cView.setAccountBooks4EDIT(list);
+    }
+
+    /**
+     * 删除
+     *
+     * @param application
+     */
+    @Override
+    public void delAccountBook(GaiaApplication application, JC_AccountBook item) {
+        AccountBookDao.delAccountBook(application, item);
         List<JC_AccountBook> list = AccountBookDao.getAll(application);
         cView.setAccountBooks4EDIT(list);
     }
