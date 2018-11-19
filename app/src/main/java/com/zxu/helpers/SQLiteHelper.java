@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.zxu.dao.AccountBookDao;
 import com.zxu.dao.PersonDao;
+import com.zxu.dao.RecordDao;
 
 /**
  * 维护管理数据库的基类
@@ -25,6 +26,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         PersonDao.createTable(database);
         AccountBookDao.createTable(database);
+        RecordDao.createTable(database);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         PersonDao.dropTable(database);
         AccountBookDao.dropTable(database);
+        RecordDao.dropTable(database);
         onCreate(database);
     }
 

@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.zxu.R;
-import com.zxu.adapter.CeHuaDrawerAdapter;
+import com.zxu.demo.adapter.CeHuaDrawerAdapter;
 import com.zxu.fragment.ContentFragment;
 import com.zxu.util.UtilTools;
 

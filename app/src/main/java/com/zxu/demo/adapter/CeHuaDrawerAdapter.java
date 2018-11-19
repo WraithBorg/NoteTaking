@@ -1,4 +1,4 @@
-package com.zxu.adapter;
+package com.zxu.demo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

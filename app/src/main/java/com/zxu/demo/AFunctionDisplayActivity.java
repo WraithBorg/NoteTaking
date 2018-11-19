@@ -173,4 +173,13 @@ public class AFunctionDisplayActivity extends Activity {
     void showDialogFragment(View view) {
         new AddAccountBookDialog().show(getFragmentManager(), "WHo is W");
     }
+    /**
+     * showTabLayout
+     *
+     * @param view 视图
+     */
+    void showTabLayout(View view) {
+        Intent intent = new Intent(this, TabLayoutActivity.class);
+        startActivity(intent);
+    }
 }
