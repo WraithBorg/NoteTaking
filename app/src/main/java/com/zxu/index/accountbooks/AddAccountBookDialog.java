@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
 
-public class AddAccountBookDialogFragment extends DialogFragment implements AddAccountBookContract.View {
+public class AddAccountBookDialog extends DialogFragment implements AddAccountBookContract.View {
     private AddAccountBookContract.Presenter mPresenter;
     Button bt_save;
     ImageView iv_back;
@@ -34,7 +34,7 @@ public class AddAccountBookDialogFragment extends DialogFragment implements AddA
         void onDissmiss(boolean isRrefresh);
     }
 
-    public AddAccountBookDialogFragment() {
+    public AddAccountBookDialog() {
     }
 
 

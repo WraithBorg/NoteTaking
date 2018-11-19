@@ -37,7 +37,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     //
     private AccountBookAdapter accountBooksAdapter;
     private AccountBookContract.Presenter mPresenter;
-    private AddAccountBookDialogFragment addAccountBookDialogFragment = new AddAccountBookDialogFragment();
+    private AddAccountBookDialog addAccountBookDialogFragment = new AddAccountBookDialog();
 
     //
     public static AccountBookFragment newInstance() {
@@ -85,11 +85,11 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAccountBookDialogFragment = new AddAccountBookDialogFragment();
+                addAccountBookDialogFragment = new AddAccountBookDialog();
                 AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookDialogFragment);
                 addAccountBookDialogFragment.setPresenter(addAccountBookPresenter);
                 addAccountBookDialogFragment.show(getFragmentManager(), "WHo is W");
-                addAccountBookDialogFragment.setMisslListener(new AddAccountBookDialogFragment.OnDialogMissListener() {
+                addAccountBookDialogFragment.setMisslListener(new AddAccountBookDialog.OnDialogMissListener() {
                     @Override
                     public void onDissmiss(boolean isRrefresh) {
                         if (isRrefresh) {
@@ -169,7 +169,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             @Override
             public void deleteClick(JC_AccountBook item) {
                 // 弹窗确认
-                AccountBookDelDialog delDialog = new AccountBookDelDialog(getActivity());
+                DelAccountBookDialog delDialog = new DelAccountBookDialog(getActivity());
                 delDialog.create(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

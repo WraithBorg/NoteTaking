@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.index.IndexPageActivity;
 import com.zxu.index.accountbooks.AddAccountBookActivity;
-import com.zxu.index.accountbooks.AddAccountBookDialogFragment;
+import com.zxu.index.accountbooks.AddAccountBookDialog;
 import com.zxu.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
 
@@ -174,6 +174,6 @@ public class AFunctionDisplayActivity extends Activity {
      * @param view 视图
      */
     void showDialogFragment(View view) {
-        new AddAccountBookDialogFragment().show(getFragmentManager(), "WHo is W");
+        new AddAccountBookDialog().show(getFragmentManager(), "WHo is W");
     }
 }

@@ -8,10 +8,10 @@ import android.widget.LinearLayout;
 import com.zxu.R;
 import com.zxu.util.DensityUtil;
 
-public class AccountBookDelDialog {
+public class DelAccountBookDialog {
     private Context context;
 
-    public AccountBookDelDialog(Context context) {
+    public DelAccountBookDialog(Context context) {
         // getActivity():不能使用getApplicationContext()获得的Context,而必须使用Activity,因为只有一个Activity才能添加一个窗体
         this.context = context;
     }
