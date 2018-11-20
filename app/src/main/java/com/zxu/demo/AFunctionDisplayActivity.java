@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.demo.fragment.BottomDialogFragment;
 import com.zxu.index.IndexPageActivity;
 import com.zxu.index.accountbooks.AddAccountBookDialog;
 import com.zxu.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
+import com.zxu.util.UtilTools;
 
 import java.io.IOException;
 
@@ -190,5 +192,22 @@ public class AFunctionDisplayActivity extends Activity {
     void show2ListView(View view) {
         Intent intent = new Intent(this, ScrollChangedActivity.class);
         startActivity(intent);
+    }
+    /**
+     * 底部弹窗
+     *
+     * @param view 视图
+     */
+    void showBottomDialog(View view) {
+        BottomDialogFragment fragment = new BottomDialogFragment();
+        fragment.setOnDialogListener(new BottomDialogFragment.OnDialogListener() {
+            @Override
+            public void onDialogClick(String person) {
+                UtilTools.showToast(getApplicationContext(),person,1111);
+            }
+        });
+
+        fragment.show(getFragmentManager(), "android");
+
     }
 }
