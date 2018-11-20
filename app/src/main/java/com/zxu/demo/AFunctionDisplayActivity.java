@@ -182,4 +182,13 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, TabLayoutActivity.class);
         startActivity(intent);
     }
+    /**
+     * show2ListView 仿订餐软件 左右list联动
+     *
+     * @param view 视图
+     */
+    void show2ListView(View view) {
+        Intent intent = new Intent(this, ScrollChangedActivity.class);
+        startActivity(intent);
+    }
 }
