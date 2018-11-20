@@ -9,6 +9,7 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.helpers.SQLiteHelper;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.util.SqlUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -33,12 +34,8 @@ public class AccountBookDao {
     }
 
     public static void createTable(SQLiteDatabase database) {
-        String createTable = "create table if not exists " + tableName + " (" +
-                " id text primary key ," +
-                " name text not null ," +
-                " imgurl text not null ," +
-                " userid text not null );";
-        database.execSQL(createTable);
+        String createTableSql = SqlUtil.getCreateTableSql(JC_AccountBook.class);
+        database.execSQL(createTableSql);
     }
 
     /**

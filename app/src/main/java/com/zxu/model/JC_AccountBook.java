@@ -1,5 +1,7 @@
 package com.zxu.model;
 
+import com.zxu.annotation.DataType;
+import com.zxu.annotation.DatabaseField;
 import com.zxu.annotation.DatabaseTable;
 
 /**
@@ -7,10 +9,15 @@ import com.zxu.annotation.DatabaseTable;
  */
 @DatabaseTable(tableName = "jc_accountbook")
 public class JC_AccountBook {
+    @DatabaseField(columnName = "id",dataType = DataType.STRING)
     private String id;
+    @DatabaseField(columnName = "name",dataType = DataType.STRING)
     private String name;
+    @DatabaseField(columnName = "imgUrl",dataType = DataType.STRING)
     private String imgUrl;
+    @DatabaseField(columnName = "userId",dataType = DataType.STRING)
     private String userId;
+
     /********** setter and getter *********/
     public String getId() {
         return id;
