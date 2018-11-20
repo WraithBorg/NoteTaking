@@ -1,4 +1,4 @@
-package com.zxu.fragment;
+package com.zxu.demo.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;

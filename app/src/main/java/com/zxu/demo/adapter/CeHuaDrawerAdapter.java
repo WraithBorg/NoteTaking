@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zxu.R;
-import com.zxu.item.TuiCoolMenuItem;
+import com.zxu.demo.item.TuiCoolMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;

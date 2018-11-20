@@ -17,7 +17,7 @@
         <activity android:name=".demo.KeySaveActivity" />
         <activity android:name=".demo.StoreTheDataActivity" />
         <activity android:name=".demo.PersonActivity" />
-        <activity android:name=".ui.person.PersonEditActivity" />
+        <activity android:name=".demo.activity.PersonEditActivity" />
         <activity android:name=".demo.LoginActivity" />
         <activity android:name=".ipinfo.IpInfoActivity" />
         <activity

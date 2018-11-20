@@ -1,8 +1,7 @@
-package com.zxu.ui.person;
+package com.zxu.demo.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,13 +9,10 @@ import android.widget.EditText;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.PersonDao;
-import com.zxu.entity.Person;
+import com.zxu.demo.entity.Person;
 import com.zxu.helpers.ResultHelper;
-import com.zxu.helpers.SQLiteHelper;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
-
-import java.util.List;
 
 /**
  * 编辑用户页面

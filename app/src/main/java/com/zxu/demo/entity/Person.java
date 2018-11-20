@@ -1,4 +1,4 @@
-package com.zxu.entity;
+package com.zxu.demo.entity;
 
 public class Person {
     private int _id;

@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.zxu.application.GaiaApplication;
-import com.zxu.entity.Person;
+import com.zxu.demo.entity.Person;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.helpers.SQLiteHelper;
 

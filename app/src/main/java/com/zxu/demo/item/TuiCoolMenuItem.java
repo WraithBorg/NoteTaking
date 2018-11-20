@@ -1,4 +1,4 @@
-package com.zxu.item;
+package com.zxu.demo.item;
 /**
  * 定义菜单项类
  */

@@ -12,8 +12,8 @@ import android.widget.SimpleAdapter;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.PersonDao;
-import com.zxu.entity.Person;
-import com.zxu.ui.person.PersonEditActivity;
+import com.zxu.demo.entity.Person;
+import com.zxu.demo.activity.PersonEditActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
