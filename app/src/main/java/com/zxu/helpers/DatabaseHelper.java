@@ -6,8 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.zxu.dao.PersonDao;
-import com.zxu.dao.RecordDao;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.model.JC_Category;
+import com.zxu.model.JC_Record;
 import com.zxu.util.SqlUtil;
 
 /**
@@ -27,7 +28,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         PersonDao.createTable(database);
         createTable(database, JC_AccountBook.class);
-        RecordDao.createTable(database);
+        createTable(database, JC_Record.class);
+        createTable(database, JC_Category.class);
     }
 
     @Override
@@ -39,7 +41,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         PersonDao.dropTable(database);
         dropTable(database, JC_AccountBook.class);
-        RecordDao.dropTable(database);
+        dropTable(database, JC_Record.class);
+        dropTable(database, JC_Category.class);
         onCreate(database);
     }
 

@@ -1,5 +1,7 @@
 package com.zxu.model;
 
+import com.zxu.annotation.DataType;
+import com.zxu.annotation.DatabaseField;
 import com.zxu.annotation.DatabaseTable;
 
 /**
@@ -7,14 +9,23 @@ import com.zxu.annotation.DatabaseTable;
  */
 @DatabaseTable(tableName = "jc_record")
 public class JC_Record {
+    @DatabaseField(columnName = "id",id = true,dataType = DataType.STRING)
     private String id;
+    @DatabaseField(columnName = "type",dataType = DataType.STRING)
     private String type;// 收入:0,支出:1，转账:2
+    @DatabaseField(columnName = "category",dataType = DataType.STRING)
     private String category;// 类别：零食，早餐
+    @DatabaseField(columnName = "money",dataType = DataType.STRING)
     private String money;//金额
+    @DatabaseField(columnName = "account",dataType = DataType.STRING)
     private String account;//账户：男钱包，女钱包，信用卡
+    @DatabaseField(columnName = "workTime",dataType = DataType.STRING)
     private String workTime;//业务时间
+    @DatabaseField(columnName = "memo",dataType = DataType.STRING)
     private String memo;//备注
+    @DatabaseField(columnName = "userId",dataType = DataType.STRING)
     private String userId;//创建人
+    @DatabaseField(columnName = "createTime",dataType = DataType.STRING)
     private String createTime;//创建时间
     /********** setter and getter *********/
     public String getId() {
