@@ -1,4 +1,4 @@
-package com.zxu.dao;
+package com.zxu.base.database;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -89,9 +89,13 @@ public abstract class BaseDaoImpl<T> extends AbstractService {
     /**
      * 删除
      *
-     * @param t
      */
-    public void delete(T t) {
+    public void delete(String id) {
+        Annotation annotation = entityClass.getAnnotation(DatabaseTable.class);
+        String tableName = ((DatabaseTable) annotation).tableName();
+        DatabaseHelper helper = getContext().getDatabaseHelper();
+        SQLiteDatabase database = helper.getWritableDatabase();
+        database.delete(tableName, "id=?", new String[]{String.valueOf(id)});
 
     }
 }

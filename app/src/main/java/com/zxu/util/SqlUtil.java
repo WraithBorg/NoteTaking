@@ -57,6 +57,7 @@ public class SqlUtil {
         // sql 计入日志
         return finallySql.toString();
     }
+
     /**
      * 获取insert语句
      */
@@ -93,7 +94,21 @@ public class SqlUtil {
     }
 
     /**
+     * 获取删除表的sql
+     *
+     * @param clazz
+     * @return
+     */
+    public static String getDropTableSql(Class clazz) {
+        Annotation annotation = clazz.getAnnotation(DatabaseTable.class);
+        String tableName = ((DatabaseTable) annotation).tableName();
+        String sql = "drop table if exists " + tableName;
+        return sql;
+    }
+
+    /**
      * 获取Update语句
+     *
      * @param clazz
      * @param obj
      * @param <T>
@@ -131,7 +146,7 @@ public class SqlUtil {
         return sql.toString();
     }
 
-    public static final <T>T cursorToEntity(Class<T> clazz,Cursor cursor){
+    public static final <T> T cursorToEntity(Class<T> clazz, Cursor cursor) {
         T bean;
         try {
             bean = clazz.newInstance();
@@ -144,7 +159,7 @@ public class SqlUtil {
                 }
                 int columnIndex = cursor.getColumnIndex(field.getName());
                 String cursorString = cursor.getString(columnIndex);
-                field.set(bean,cursorString);
+                field.set(bean, cursorString);
             }
             return bean;
         } catch (InstantiationException e) {

@@ -1,4 +1,4 @@
-package com.zxu.dao;
+package com.zxu.base.database;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.helpers.DatabaseHelper;

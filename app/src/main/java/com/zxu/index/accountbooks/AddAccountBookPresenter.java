@@ -2,7 +2,7 @@ package com.zxu.index.accountbooks;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.AccountBookDao;
-import com.zxu.dao.ServiceFactory;
+import com.zxu.base.database.ServiceFactory;
 import com.zxu.model.JC_AccountBook;
 
 public class AddAccountBookPresenter implements AddAccountBookContract.Presenter {

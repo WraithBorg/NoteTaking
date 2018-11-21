@@ -2,7 +2,7 @@ package com.zxu.index.accountbooks;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.AccountBookDao;
-import com.zxu.dao.ServiceFactory;
+import com.zxu.base.database.ServiceFactory;
 import com.zxu.model.JC_AccountBook;
 
 import java.util.List;
@@ -56,7 +56,7 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
      */
     @Override
     public void delAccountBook(JC_AccountBook item) {
-        AccountBookDao.delAccountBook(application, item);
+        getAccountBookDao().delAccountBook(item);
         List<JC_AccountBook> list = getAccountBookDao().getAll();
         cView.setAccountBooks4EDIT(list);
     }

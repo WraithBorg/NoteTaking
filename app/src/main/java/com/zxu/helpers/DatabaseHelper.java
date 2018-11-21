@@ -5,9 +5,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.zxu.dao.AccountBookDao;
 import com.zxu.dao.PersonDao;
 import com.zxu.dao.RecordDao;
+import com.zxu.model.JC_AccountBook;
+import com.zxu.util.SqlUtil;
 
 /**
  * 维护管理数据库的基类
@@ -25,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         PersonDao.createTable(database);
-        AccountBookDao.createTable(database);
+        createTable(database, JC_AccountBook.class);
         RecordDao.createTable(database);
     }
 
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         PersonDao.dropTable(database);
-        AccountBookDao.dropTable(database);
+        dropTable(database, JC_AccountBook.class);
         RecordDao.dropTable(database);
         onCreate(database);
     }
@@ -48,5 +49,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void create() {
         open();
+    }
+
+    /**
+     * 创建表
+     */
+    private void createTable(SQLiteDatabase database, Class clazz) {
+        database.execSQL(SqlUtil.getCreateTableSql(clazz));
+    }
+
+    /**
+     * 删除表
+     */
+    public void dropTable(SQLiteDatabase database, Class clazz) {
+        database.execSQL(SqlUtil.getDropTableSql(clazz));
     }
 }
