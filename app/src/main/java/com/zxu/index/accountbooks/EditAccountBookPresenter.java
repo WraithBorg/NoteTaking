@@ -2,18 +2,28 @@ package com.zxu.index.accountbooks;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.AccountBookDao;
+import com.zxu.dao.ServiceFactory;
 import com.zxu.model.JC_AccountBook;
 
 public class EditAccountBookPresenter implements EditAccountBookContract.Presenter {
-
+    private GaiaApplication application;
+    private ServiceFactory serviceFactory = new ServiceFactory();
     private EditAccountBookContract.View cView;
 
-    public EditAccountBookPresenter(EditAccountBookContract.View cView) {
+    public EditAccountBookPresenter(GaiaApplication application, EditAccountBookContract.View cView) {
         this.cView = cView;
+        this.application = application;
     }
 
     @Override
     public void editAccountBook(GaiaApplication application, JC_AccountBook b) {
-        AccountBookDao.editAccountBook(application, b);
+        getAccountBookDao().editAccountBook(b);
+    }
+
+    /**
+     * @return
+     */
+    public AccountBookDao getAccountBookDao() {
+        return serviceFactory.getService(application, AccountBookDao.class);
     }
 }

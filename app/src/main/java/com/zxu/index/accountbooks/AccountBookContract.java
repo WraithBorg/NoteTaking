@@ -1,7 +1,6 @@
 package com.zxu.index.accountbooks;
 
 import com.zxu.application.BaseView;
-import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
 
 import java.util.List;
@@ -14,13 +13,14 @@ public interface AccountBookContract {
      * 获取数据
      */
     interface Presenter {
-        void getAccountBooks(GaiaApplication application, String userId);
+        void getAccountBooks();
 
-        void addAccountBook(GaiaApplication application, JC_AccountBook b);
+        void addAccountBook( JC_AccountBook b);
 
-        void getAccountBooks4EDIT(GaiaApplication application, String s);
+        void getAccountBooks4EDIT();
 
-        void delAccountBook(GaiaApplication application, JC_AccountBook item);
+        void delAccountBook( JC_AccountBook item);
+
     }
 
     /**
@@ -43,5 +43,4 @@ public interface AccountBookContract {
 
         void setAccountBooks4EDIT(List<JC_AccountBook> list);
     }
-
 }

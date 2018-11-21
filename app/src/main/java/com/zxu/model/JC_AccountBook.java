@@ -9,7 +9,7 @@ import com.zxu.annotation.DatabaseTable;
  */
 @DatabaseTable(tableName = "jc_accountbook")
 public class JC_AccountBook {
-    @DatabaseField(columnName = "id",dataType = DataType.STRING)
+    @DatabaseField(columnName = "id",id = true,dataType = DataType.STRING)
     private String id;
     @DatabaseField(columnName = "name",dataType = DataType.STRING)
     private String name;

@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.demo.entity.Person;
+import com.zxu.helpers.DatabaseHelper;
 import com.zxu.helpers.ResultHelper;
-import com.zxu.helpers.SQLiteHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class PersonDao {
      * @return
      */
     public static List<Person> getAll(GaiaApplication application) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.open();
         List<Person> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("select * from persons", null);
@@ -89,7 +89,7 @@ public class PersonDao {
      * @return
      */
     public static ResultHelper editPerson(GaiaApplication application, Person person) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -118,7 +118,7 @@ public class PersonDao {
      * @return
      */
     public static ResultHelper addPerson(GaiaApplication application, Person p) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.getWritableDatabase();
 
         ResultHelper res = new ResultHelper(true, "新增成功");
@@ -137,7 +137,7 @@ public class PersonDao {
      * 批量新增用户，事物
      */
     public void addPersons(GaiaApplication application, List<Person> persons) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.getWritableDatabase();
         database.beginTransaction();
         try {

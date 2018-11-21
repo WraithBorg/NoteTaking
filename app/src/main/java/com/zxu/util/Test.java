@@ -1,56 +1,52 @@
 package com.zxu.util;
 
-import com.zxu.annotation.DataType;
 import com.zxu.annotation.DatabaseField;
 import com.zxu.annotation.DatabaseTable;
 import com.zxu.model.JC_AccountBook;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(SqlUtil.getCreateTableSql(JC_AccountBook.class));
-//        System.out.println(JC_AccountBook.class.getDeclaredFields().length);
+        JC_AccountBook obj = new JC_AccountBook();
+        obj.setId("123");
+        obj.setName("test 1");
+        obj.setUserId("uuid 123");
+        getEditSql(JC_AccountBook.class, obj);
     }
 
-    static String getCreateTableSql(Class clazz) {
-
+    // 输出 属性名+属性值
+    public static final <T> String getEditSql(Class<T> clazz, Object obj) {
         Annotation annotation = clazz.getAnnotation(DatabaseTable.class);
         String tableName = ((DatabaseTable) annotation).tableName();
         Field[] fields = clazz.getDeclaredFields();
-        Set<String> sqlFragments = new HashSet<>();
-        System.out.println("fields == " + fields.length);
-//        for (int i = 0; i < fields.length; i++) {
-//            fields[i].setAccessible(true);
-//            try {
-//                Field field = clazz.getDeclaredField(fields[i].getName());
-//                DatabaseField dd = field.getAnnotation(DatabaseField.class);
-//                String columnName = dd.columnName();
-//                DataType dataType = dd.dataType();
-//                String temp = columnName + " " + dataType.type();
-//                if (columnName.equals("id")){
-//                    temp = temp + " primary key ";
-//                }else {
-//                    temp = temp + " not null";
-//                }
-//                if (i < fields.length-1){
-//                    temp = temp + ",";
-//                }
-//                sqlFragments.add(temp);
-//            } catch (NoSuchFieldException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-        StringBuilder finallySql = new StringBuilder("create table if not exists " + tableName + "(");
-        for (String str : sqlFragments){
-            finallySql.append(str);
+        Field.setAccessible(fields, true);
+        StringBuilder colSql = new StringBuilder();
+        StringBuilder whrSql = new StringBuilder();
+        for (Field field : fields) {
+            DatabaseField dd = field.getAnnotation(DatabaseField.class);
+            if (dd == null) {
+                continue;
+            }
+            try {
+                String name = field.getName();
+                Object value = field.get(obj);
+                if (value != null) {
+                    if (dd.id()) {
+                        whrSql.append(" where id = ").append("'").append(value).append("'");
+                    } else {
+                        colSql.append(name).append("=").append("'").append(value).append("'").append(",");
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
-        finallySql.append(");");
-
-        return finallySql.toString();
+        colSql.deleteCharAt(colSql.length() - 1);
+        StringBuilder sql = new StringBuilder("update " + tableName + " set ");
+        sql.append(colSql).append(whrSql).append(";");
+        return sql.toString();
     }
+
 }

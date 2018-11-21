@@ -16,8 +16,8 @@ import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.zxu.R;
+import com.zxu.application.GaiaApplication;
 import com.zxu.demo.AFunctionDisplayActivity;
-import com.zxu.demo.PersonActivity;
 import com.zxu.index.accountbooks.AccountBookFragment;
 import com.zxu.index.accountbooks.AccountBookPresenter;
 import com.zxu.record.AddRecordActivity;
@@ -53,11 +53,11 @@ public class IndexPageActivity extends Activity {
         slipMenuView = (LinearLayout) findViewById(R.id.indexpage_slipmenu_id);
         mDrawerLayout.closeDrawer(slipMenuView);
         //
-        accountBooksPresenter = new AccountBookPresenter(indexPageFragment);
+        accountBooksPresenter = new AccountBookPresenter((GaiaApplication) getApplication(), indexPageFragment);
         indexPageFragment.setPresenter(accountBooksPresenter);
         // 传递对象给Fragment
-        LinearLayout mainContent = (LinearLayout)findViewById(R.id.indexpage_content_id);
-        indexPageFragment.transWidget(slipMenuView,mDrawerLayout,mainContent);
+        LinearLayout mainContent = (LinearLayout) findViewById(R.id.indexpage_content_id);
+        indexPageFragment.transWidget(slipMenuView, mDrawerLayout, mainContent);
         //
         ImageView iv_takeOff = (ImageView) findViewById(R.id.main_plane_icon_id);
         iv_takeOff.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +87,7 @@ public class IndexPageActivity extends Activity {
 
         /**
          * 测试菜单完全关闭
+         *
          * @param drawerView
          */
         @Override
@@ -96,6 +97,7 @@ public class IndexPageActivity extends Activity {
 
         /**
          * 侧滑菜单完全打开
+         *
          * @param drawerView
          */
         @Override
@@ -118,7 +120,7 @@ public class IndexPageActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-       // 按下返回功能键的时候，不是直接对Activity进行弹栈，而是先将菜单视图关闭
+        // 按下返回功能键的时候，不是直接对Activity进行弹栈，而是先将菜单视图关闭
         boolean drawerState = mDrawerLayout.isDrawerOpen(slipMenuView);
         if (drawerState) {
             mDrawerLayout.closeDrawers();
@@ -126,12 +128,14 @@ public class IndexPageActivity extends Activity {
         }
         super.onBackPressed();
     }
+
     void takeOff() {
         Intent intent = new Intent(this, AFunctionDisplayActivity.class);
         startActivity(intent);
 
     }
-    void initChromeDatabase(){
+
+    void initChromeDatabase() {
         Stetho.initializeWithDefaults(this);
         OkHttpClient client = new OkHttpClient();
         client.networkInterceptors().add(new StethoInterceptor());

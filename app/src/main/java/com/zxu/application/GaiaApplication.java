@@ -2,17 +2,17 @@ package com.zxu.application;
 
 import android.app.Application;
 
-import com.zxu.helpers.SQLiteHelper;
+import com.zxu.helpers.DatabaseHelper;
 
 import cn.finalteam.okhttpfinal.OkHttpFinal;
 import cn.finalteam.okhttpfinal.OkHttpFinalConfiguration;
 
 public class GaiaApplication extends Application {
-    private SQLiteHelper helper;
+    private DatabaseHelper helper;
 
-    public SQLiteHelper getSQLiteHelper() {
+    public DatabaseHelper getDatabaseHelper() {
         if (helper == null){
-            helper = new SQLiteHelper(this);
+            helper = new DatabaseHelper(this);
         }
         return helper;
     }
@@ -20,7 +20,7 @@ public class GaiaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        getSQLiteHelper().create();
+        getDatabaseHelper().create();
 
         /* 使用OkHttpFinal */
         OkHttpFinalConfiguration.Builder builder = new OkHttpFinalConfiguration.Builder();

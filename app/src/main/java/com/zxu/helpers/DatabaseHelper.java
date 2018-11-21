@@ -12,12 +12,12 @@ import com.zxu.dao.RecordDao;
 /**
  * 维护管理数据库的基类
  */
-public class SQLiteHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "persondata.db";
     private static final int DATABASE_VERSION = 1;
 
-    public SQLiteHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }

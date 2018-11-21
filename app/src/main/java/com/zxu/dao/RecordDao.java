@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.zxu.annotation.DatabaseTable;
 import com.zxu.application.GaiaApplication;
 import com.zxu.helpers.ResultHelper;
-import com.zxu.helpers.SQLiteHelper;
+import com.zxu.helpers.DatabaseHelper;
 import com.zxu.model.JC_Record;
 
 import java.lang.annotation.Annotation;
@@ -88,7 +88,7 @@ public class RecordDao {
      * @return
      */
     public static ResultHelper addRecord(GaiaApplication application, JC_Record p) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.getWritableDatabase();
 
         ResultHelper res = new ResultHelper(true, "新增成功");
@@ -120,7 +120,7 @@ public class RecordDao {
      * @return
      */
     public static ResultHelper editRecord(GaiaApplication application, JC_Record p) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -154,7 +154,7 @@ public class RecordDao {
      * @return
      */
     public static List<JC_Record> getAll(GaiaApplication application) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.open();
         List<JC_Record> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("select * from " + tableName, null);
@@ -177,7 +177,7 @@ public class RecordDao {
      * @return
      */
     public static ResultHelper delRecord(GaiaApplication application, JC_Record p) {
-        SQLiteHelper helper = application.getSQLiteHelper();
+        DatabaseHelper helper = application.getDatabaseHelper();
         SQLiteDatabase database = helper.getWritableDatabase();
 
         ResultHelper res = new ResultHelper(true, "删除成功");

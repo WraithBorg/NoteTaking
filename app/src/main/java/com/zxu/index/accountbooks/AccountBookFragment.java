@@ -73,27 +73,28 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+        mPresenter.getAccountBooks();
         lv_accounts.setAdapter(accountBooksAdapter);
         lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
         bt_getAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                mPresenter.getAccountBooks();
             }
         });
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addAccountBookDialogFragment = new AddAccountBookDialog();
-                AddAccountBookPresenter addAccountBookPresenter = new AddAccountBookPresenter(addAccountBookDialogFragment);
+                AddAccountBookPresenter addAccountBookPresenter
+                        = new AddAccountBookPresenter((GaiaApplication) getActivity().getApplication(), addAccountBookDialogFragment);
                 addAccountBookDialogFragment.setPresenter(addAccountBookPresenter);
                 addAccountBookDialogFragment.show(getFragmentManager(), "WHo is W");
                 addAccountBookDialogFragment.setMisslListener(new AddAccountBookDialog.OnDialogMissListener() {
                     @Override
                     public void onDissmiss(boolean isRrefresh) {
                         if (isRrefresh) {
-                            mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                            mPresenter.getAccountBooks();
                         }
                     }
                 });
@@ -102,7 +103,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         bt_editAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getAccountBooks4EDIT((GaiaApplication) getActivity().getApplication(), "");
+                mPresenter.getAccountBooks4EDIT();
 //                ll_bottom.setVisibility(View.GONE);
 //                bt_complete.setVisibility(View.VISIBLE);
             }
@@ -110,7 +111,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         bt_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                mPresenter.getAccountBooks();
 //                ll_bottom.setVisibility(View.VISIBLE);
 //                bt_complete.setVisibility(View.GONE);
             }
@@ -163,7 +164,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                 delDialog.create(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.delAccountBook((GaiaApplication) getActivity().getApplication(), item);
+                        mPresenter.delAccountBook(item);
                         UtilTools.showToast(getActivity().getApplicationContext(), "删除成功", 1000);
                     }
                 }, new DialogInterface.OnClickListener() {
@@ -178,7 +179,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             @Override
             public void editClick(JC_AccountBook item) {
                 EditAccountBookDialog dialog = new EditAccountBookDialog();
-                EditAccountBookPresenter presenter = new EditAccountBookPresenter(dialog);
+                EditAccountBookPresenter presenter = new EditAccountBookPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setAccountBook(item);
                 dialog.setPresenter(presenter);
                 dialog.show(getFragmentManager(), "");
@@ -186,7 +187,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                     @Override
                     public void onDissmiss(boolean isRrefresh) {
                         if (isRrefresh) {
-                            mPresenter.getAccountBooks((GaiaApplication) getActivity().getApplication(), "");
+                            mPresenter.getAccountBooks();
                         }
                     }
                 });
