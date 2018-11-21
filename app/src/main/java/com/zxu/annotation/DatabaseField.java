@@ -13,4 +13,8 @@ public @interface DatabaseField {
     String columnName() default "";
 
     DataType dataType() default DataType.UNKNOWN;
+
+    boolean id() default false;
+
+    boolean generatedId() default false;
 }
