@@ -24,6 +24,7 @@
             android:name=".demo.MainViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".demo.CeHuaMainActivity" />
+        <activity android:name=".demo.ExpandableListViewActivity" />
         <activity android:name=".business.IndexPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

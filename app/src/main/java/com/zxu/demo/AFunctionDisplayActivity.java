@@ -208,6 +208,14 @@ public class AFunctionDisplayActivity extends Activity {
         });
 
         fragment.show(getFragmentManager(), "android");
-
+    }
+    /**
+     * ExpandableListView 二级类别树
+     *
+     * @param view 视图
+     */
+    void showExpandableListView(View view) {
+        Intent intent = new Intent(this, ExpandableListViewActivity.class);
+        startActivity(intent);
     }
 }
