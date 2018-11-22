@@ -1,4 +1,4 @@
-package com.zxu.ipinfo;
+package com.zxu.demo.ipinfo;
 
 import android.app.Dialog;
 

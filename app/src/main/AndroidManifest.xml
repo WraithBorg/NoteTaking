@@ -19,19 +19,19 @@
         <activity android:name=".demo.PersonActivity" />
         <activity android:name=".demo.activity.PersonEditActivity" />
         <activity android:name=".demo.LoginActivity" />
-        <activity android:name=".ipinfo.IpInfoActivity" />
+        <activity android:name=".demo.ipinfo.IpInfoActivity" />
         <activity
             android:name=".demo.MainViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".demo.CeHuaMainActivity" />
-        <activity android:name=".index.IndexPageActivity">
+        <activity android:name=".business.index.IndexPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".demo.TabLayoutActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".record.AddRecordActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".business.record.AddRecordActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".demo.ScrollChangedActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 </manifest>

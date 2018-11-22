@@ -1,4 +1,4 @@
-package com.zxu.ipinfo;
+package com.zxu.demo.ipinfo;
 
 import com.zxu.model.IpInfo;
 import com.zxu.application.BaseView;

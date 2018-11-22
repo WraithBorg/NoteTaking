@@ -1,4 +1,4 @@
-package com.zxu.record;
+package com.zxu.business.record;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,11 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zxu.R;
-import com.zxu.demo.fragment.BottomDialogFragment;
 import com.zxu.model.JC_Account;
 import com.zxu.util.UtilTools;
-
-import java.util.Random;
 
 public class AddRecordTabFragment extends Fragment {
     public static final String TITLE_TAG = "tabTitle";

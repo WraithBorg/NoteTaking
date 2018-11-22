@@ -162,4 +162,5 @@
     <color name="app_btn_gray">#e6eaee</color>   <!-- 仓库背景 审核按钮 背景色 -->
     <color name="app_divider_gray">#d9dee3</color> <!-- 分割线颜色 -->
     <color name="app_green">#76BC73</color> <!-- 保存按钮背景色 -->
+    <color name="app_mgray">#707070</color>
 </resources>

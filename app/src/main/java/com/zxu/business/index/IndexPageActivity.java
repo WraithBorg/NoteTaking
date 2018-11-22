@@ -1,4 +1,4 @@
-package com.zxu.index;
+package com.zxu.business.index;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,10 +17,10 @@ import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
+import com.zxu.business.index.accountbooks.AccountBookFragment;
+import com.zxu.business.index.accountbooks.AccountBookPresenter;
 import com.zxu.demo.AFunctionDisplayActivity;
-import com.zxu.index.accountbooks.AccountBookFragment;
-import com.zxu.index.accountbooks.AccountBookPresenter;
-import com.zxu.record.AddRecordActivity;
+import com.zxu.business.record.AddRecordActivity;
 import com.zxu.util.ActivityUtil;
 
 /**

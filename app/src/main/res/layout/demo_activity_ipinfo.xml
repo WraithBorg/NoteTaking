@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <fragment
         android:id="@+id/contentFrame"
-        android:name="com.zxu.ipinfo.IpInfoFragment"
+        android:name="com.zxu.demo.ipinfo.IpInfoFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />

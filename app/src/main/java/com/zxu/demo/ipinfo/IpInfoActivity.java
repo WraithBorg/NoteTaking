@@ -1,11 +1,11 @@
-package com.zxu.ipinfo;
+package com.zxu.demo.ipinfo;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.zxu.R;
-import com.zxu.net.IpInfoTask;
+import com.zxu.demo.net.IpInfoTask;
 import com.zxu.util.ActivityUtil;
 
 /**

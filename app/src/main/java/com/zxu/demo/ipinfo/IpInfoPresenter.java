@@ -1,8 +1,8 @@
-package com.zxu.ipinfo;
+package com.zxu.demo.ipinfo;
 
 import com.zxu.model.IpInfo;
 import com.zxu.application.LoadTasksCallBack;
-import com.zxu.net.NetTask;
+import com.zxu.demo.net.NetTask;
 
 /**
  * IpInfoPresenter 包含NetTask和IpInfoContract.View实例，并实现了LoadTasksCallBack接口

@@ -1,4 +1,4 @@
-package com.zxu.record;
+package com.zxu.business.record;
 
 import android.app.DialogFragment;
 import android.content.Context;

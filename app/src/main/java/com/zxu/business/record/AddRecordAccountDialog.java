@@ -1,4 +1,4 @@
-package com.zxu.record;
+package com.zxu.business.record;
 
 import android.app.AlertDialog;
 import android.content.Context;
