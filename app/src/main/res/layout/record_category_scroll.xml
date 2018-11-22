@@ -11,7 +11,7 @@
         >
 
         <ImageView
-            android:id="@+id/demo_scroll_add_category_id"
+            android:id="@+id/record_category_add_category_id"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/round_add"
@@ -19,7 +19,7 @@
             android:layout_marginStart="10dp"
             />
         <ImageView
-            android:id="@+id/demo_scroll_search_category_id"
+            android:id="@+id/record_category_search_category_id"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/search"
