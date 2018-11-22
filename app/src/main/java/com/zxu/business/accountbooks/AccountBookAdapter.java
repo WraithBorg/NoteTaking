@@ -1,4 +1,4 @@
-package com.zxu.business.index.accountbooks;
+package com.zxu.business.accountbooks;
 
 import android.content.Context;
 import android.view.LayoutInflater;

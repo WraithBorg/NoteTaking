@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.demo.fragment.BottomDialogFragment;
-import com.zxu.business.index.IndexPageActivity;
-import com.zxu.business.index.accountbooks.AddAccountBookDialog;
+import com.zxu.business.IndexPageActivity;
+import com.zxu.business.accountbooks.AddAccountBookDialog;
 import com.zxu.demo.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
