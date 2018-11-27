@@ -28,7 +28,7 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
     public void getAccountBooks() {
         // 1: 获取数据,传给Presenter
         // 2: 通过view进行交互
-        List<JC_AccountBook> list = getAccountBookDao().getAll();
+        List<JC_AccountBook> list = accountBookDao().getAll();
         cView.setAccountBooks(list);
     }
 
@@ -39,7 +39,7 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
      */
     @Override
     public void addAccountBook(JC_AccountBook b) {
-        getAccountBookDao().addAccountBook(b);
+        accountBookDao().addAccountBook(b);
     }
 
     /**
@@ -47,7 +47,7 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
      */
     @Override
     public void getAccountBooks4EDIT() {
-        List<JC_AccountBook> list = getAccountBookDao().getAll();
+        List<JC_AccountBook> list = accountBookDao().getAll();
         cView.setAccountBooks4EDIT(list);
     }
 
@@ -56,15 +56,15 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
      */
     @Override
     public void delAccountBook(JC_AccountBook item) {
-        getAccountBookDao().delAccountBook(item);
-        List<JC_AccountBook> list = getAccountBookDao().getAll();
+        accountBookDao().delAccountBook(item);
+        List<JC_AccountBook> list = accountBookDao().getAll();
         cView.setAccountBooks4EDIT(list);
     }
 
     /**
      * @return
      */
-    public AccountBookDao getAccountBookDao() {
+    public AccountBookDao accountBookDao() {
         return serviceFactory.getService(application, AccountBookDao.class);
     }
 }

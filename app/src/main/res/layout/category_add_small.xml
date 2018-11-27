@@ -70,7 +70,7 @@
             android:background="@drawable/bill_memo_shape"
             android:gravity="start|center_vertical"
             android:hint="输入名称"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:paddingStart="10dp"
             android:textColor="@color/app_black"
             android:textSize="20sp" />

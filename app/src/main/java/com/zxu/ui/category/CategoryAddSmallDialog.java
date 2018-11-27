@@ -15,8 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.application.GaiaApplication;
+import com.zxu.model.JC_Category;
 
-public class CategoryAddSmallDialog extends DialogFragment {
+import java.io.Serializable;
+import java.util.UUID;
+
+public class CategoryAddSmallDialog extends DialogFragment implements CategoryAddSmallContract.View{
+    private CategoryAddSmallContract.Presenter mPresenter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -26,7 +33,9 @@ public class CategoryAddSmallDialog extends DialogFragment {
         ImageView iv_back = (ImageView) view.findViewById(R.id.category_add_big_back_id);
         TextView tv_next = (TextView) view.findViewById(R.id.category_add_big_next_id);
         EditText et_name = (EditText) view.findViewById(R.id.category_add_big_type_name_id);
-
+        // get FatherId
+        Bundle bundle = getArguments();
+        String fatherId = (String)bundle.getSerializable("fatherId");
         // return
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +47,15 @@ public class CategoryAddSmallDialog extends DialogFragment {
         tv_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // close
+                dismiss();
+                // save data
+                JC_Category category = new JC_Category();
+                category.setId(UUID.randomUUID().toString());
+                category.setName(et_name.getText().toString());
+                category.setType(1);
+                category.setFatherId(fatherId);
+                mPresenter.addSmallCategory((GaiaApplication) getActivity().getApplication(), category);
             }
         });
         return view;
@@ -54,5 +71,15 @@ public class CategoryAddSmallDialog extends DialogFragment {
         window.setAttributes(params);
         // 设置背景透明
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void setPresenter(CategoryAddSmallContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

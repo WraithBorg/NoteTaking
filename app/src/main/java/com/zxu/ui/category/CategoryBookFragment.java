@@ -15,6 +15,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 import com.zxu.R;
+import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
 import com.zxu.ui.category.adapter.CategoryAdapter;
 
@@ -47,6 +48,8 @@ public class CategoryBookFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 CategoryAddBigDialog dialog = new CategoryAddBigDialog();
+                CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(),dialog);
+                dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(),"android");
             }
         });
