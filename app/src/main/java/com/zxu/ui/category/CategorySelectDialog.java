@@ -112,7 +112,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = Gravity.BOTTOM;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = DensityUtil.dp2px(getActivity().getApplication(), 330);
+        params.height = DensityUtil.dp2px(getActivity().getApplication(), 360);// TODO 会影响record_category_left_text高度及滚动条
         window.setAttributes(params);
         // 设置背景透明
 //        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
