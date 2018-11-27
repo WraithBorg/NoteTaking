@@ -38,8 +38,8 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
     <!-- dialog 跳转动画 -->
-    <style name="dialogWindowAnim">
-        <!--<item name="android:windowEnterAnimation"></item>-->
-
+    <style name="dialogWindowAnim" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
     </style>
 </resources>

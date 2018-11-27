@@ -36,7 +36,7 @@ import java.util.List;
 public class CategorySelectDialog extends DialogFragment implements CategorySelectContract.View{
     /* Scroll << */
     ImageView iv_addCategory;
-    ImageView iv_searchCategory;
+    ImageView iv_folding;
     private RecyclerView recLeft;
     private RecyclerView recRight;
     private TextView rightTitle;
@@ -65,7 +65,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         View view = inflater.inflate(R.layout.record_category_scroll, null);
         mContext = getActivity();
         iv_addCategory = (ImageView) view.findViewById(R.id.record_category_add_category_id);
-        iv_searchCategory = (ImageView) view.findViewById(R.id.record_category_search_category_id);
+        iv_folding = (ImageView) view.findViewById(R.id.record_category_search_category_id);
         recLeft = (RecyclerView) view.findViewById(R.id.rec_left);
         recRight = (RecyclerView) view.findViewById(R.id.rec_right);
         rightTitle = (TextView) view.findViewById(R.id.right_title);
@@ -96,7 +96,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
                 dialog.show(getActivity().getFragmentManager(), "android");
             }
         });
-        iv_searchCategory.setOnClickListener(new View.OnClickListener() {
+        iv_folding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -115,7 +115,9 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         params.height = DensityUtil.dp2px(getActivity().getApplication(), 330);
         window.setAttributes(params);
         // 设置背景透明
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setWindowAnimations(R.style.dialogWindowAnim);
+        window.setBackgroundDrawableResource(R.color.vifrification);
     }
 
     @Override
