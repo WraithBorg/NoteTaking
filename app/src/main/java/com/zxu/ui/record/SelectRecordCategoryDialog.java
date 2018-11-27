@@ -79,8 +79,8 @@ public class SelectRecordCategoryDialog extends DialogFragment {
         iv_addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategoryBookFragment fragment = new CategoryBookFragment();
-                fragment.show(getActivity().getFragmentManager(), "android");
+                CategoryBookFragment dialog = new CategoryBookFragment();
+                dialog.show(getActivity().getFragmentManager(), "android");
             }
         });
         iv_searchCategory.setOnClickListener(new View.OnClickListener() {

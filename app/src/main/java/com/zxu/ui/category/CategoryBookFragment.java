@@ -42,7 +42,23 @@ public class CategoryBookFragment extends DialogFragment {
         ExpandableListView elv_category = (ExpandableListView) view.findViewById(R.id.category_list_id);
         ImageView iv_back = (ImageView) view.findViewById(R.id.category_list_back_id);
         ImageView iv_plus = (ImageView) view.findViewById(R.id.category_list_plus_id);
-        //
+        // add
+        iv_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryAddBigDialog dialog = new CategoryAddBigDialog();
+                dialog.show(getActivity().getFragmentManager(),"android");
+            }
+        });
+        // return
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+        // list
         List<JC_Category> big = new ArrayList<>();
         List<JC_Category> small1 = new ArrayList<>();
         List<JC_Category> small2 = new ArrayList<>();
@@ -65,7 +81,7 @@ public class CategoryBookFragment extends DialogFragment {
         big.add(a);
         big.add(b);
 
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity().getApplication(),big);//getApplication() getApplicationContext()
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(),big);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(categoryAdapter);
 
         return view;
