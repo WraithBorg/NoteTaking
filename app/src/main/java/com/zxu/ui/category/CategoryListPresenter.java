@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CategoryBookListPresenter implements CategoryBookListContract.Presenter {
+public class CategoryListPresenter implements CategoryListContract.Presenter {
     private GaiaApplication application;
     private ServiceFactory serviceFactory = new ServiceFactory();
-    CategoryBookListContract.View cView;
+    CategoryListContract.View cView;
 
-    public CategoryBookListPresenter(GaiaApplication application, CategoryBookListContract.View cView) {
+    public CategoryListPresenter(GaiaApplication application, CategoryListContract.View cView) {
         this.application = application;
         this.cView = cView;
     }

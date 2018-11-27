@@ -1,14 +1,14 @@
-package com.zxu.ui.record;
+package com.zxu.ui.category;
 
 import com.chad.library.adapter.base.entity.SectionEntity;
 
-public class AddRecordCategoryScrollBean extends SectionEntity<AddRecordCategoryScrollBean.ScrollItemBean> {
+public class CategorySelectScrollBean extends SectionEntity<CategorySelectScrollBean.ScrollItemBean> {
 
-    public AddRecordCategoryScrollBean(boolean isHeader, String header) {
+    public CategorySelectScrollBean(boolean isHeader, String header) {
         super(isHeader, header);
     }
 
-    public AddRecordCategoryScrollBean(AddRecordCategoryScrollBean.ScrollItemBean bean) {
+    public CategorySelectScrollBean(CategorySelectScrollBean.ScrollItemBean bean) {
         super(bean);
     }
 

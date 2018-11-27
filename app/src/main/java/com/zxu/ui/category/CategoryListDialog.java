@@ -17,15 +17,12 @@ import android.widget.ImageView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
-import com.zxu.ui.category.adapter.CategoryAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class CategoryBookListDialog extends DialogFragment implements CategoryBookListContract.View  {
+public class CategoryListDialog extends DialogFragment implements CategoryListContract.View  {
     private Context mContext;
-    private CategoryBookListContract.Presenter mPresenter;
+    private CategoryListContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
     /**
      * dialog 创建
@@ -66,8 +63,8 @@ public class CategoryBookListDialog extends DialogFragment implements CategoryBo
         // list
         mPresenter.getAll((GaiaApplication) getActivity().getApplication());
         List<JC_Category> list = getCategoryList();
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
-        elv_category.setAdapter(categoryAdapter);
+        CategoryListAdapter categoryListAdapter = new CategoryListAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
+        elv_category.setAdapter(categoryListAdapter);
         return view;
     }
 
@@ -88,7 +85,7 @@ public class CategoryBookListDialog extends DialogFragment implements CategoryBo
     }
 
     @Override
-    public void setPresenter(CategoryBookListContract.Presenter presenter) {
+    public void setPresenter(CategoryListContract.Presenter presenter) {
         mPresenter = presenter;
     }
 

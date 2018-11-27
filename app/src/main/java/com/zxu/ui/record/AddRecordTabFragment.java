@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.model.JC_Account;
+import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.util.UtilTools;
 
 public class AddRecordTabFragment extends Fragment {
@@ -64,8 +65,8 @@ public class AddRecordTabFragment extends Fragment {
         tv_selCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectRecordCategoryDialog fragment = new SelectRecordCategoryDialog();
-                fragment.setOnDialogListener(new SelectRecordCategoryDialog.OnDialogListener() {
+                CategorySelectDialog fragment = new CategorySelectDialog();
+                fragment.setOnDialogListener(new CategorySelectDialog.OnDialogListener() {
                     @Override
                     public void onItemClick(String person) {
                         UtilTools.showToast(getActivity().getApplicationContext(), person, 1111);

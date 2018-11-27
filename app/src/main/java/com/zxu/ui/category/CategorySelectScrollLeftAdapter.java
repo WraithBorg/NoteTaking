@@ -1,4 +1,4 @@
-package com.zxu.ui.record;
+package com.zxu.ui.category;
 
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -12,11 +12,11 @@ import com.zxu.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddRecordCategoryScrollLeftAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class CategorySelectScrollLeftAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
     private List<TextView> tv = new ArrayList<>();
 
-    public AddRecordCategoryScrollLeftAdapter(int layoutResId, @Nullable List<String> data) {
+    public CategorySelectScrollLeftAdapter(int layoutResId, @Nullable List<String> data) {
         super(layoutResId, data);
     }
 

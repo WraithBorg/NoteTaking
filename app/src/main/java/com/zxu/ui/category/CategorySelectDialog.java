@@ -1,4 +1,4 @@
-package com.zxu.ui.record;
+package com.zxu.ui.category;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -24,14 +24,12 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
-import com.zxu.ui.category.CategoryBookListDialog;
-import com.zxu.ui.category.CategoryBookListPresenter;
 import com.zxu.util.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectRecordCategoryDialog extends DialogFragment {
+public class CategorySelectDialog extends DialogFragment {
     /* Scroll << */
     ImageView iv_addCategory;
     ImageView iv_searchCategory;
@@ -40,9 +38,9 @@ public class SelectRecordCategoryDialog extends DialogFragment {
     private TextView rightTitle;
 
     private List<String> left;
-    private List<AddRecordCategoryScrollBean> right;
-    private AddRecordCategoryScrollLeftAdapter leftAdapter;
-    private AddRecordCategoryScrollRightAdapter rightAdapter;
+    private List<CategorySelectScrollBean> right;
+    private CategorySelectScrollLeftAdapter leftAdapter;
+    private CategorySelectScrollRightAdapter rightAdapter;
     //右侧title在数据中所对应的position集合
     private List<Integer> tPosition = new ArrayList<>();
     private Context mContext;
@@ -81,8 +79,8 @@ public class SelectRecordCategoryDialog extends DialogFragment {
         iv_addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategoryBookListDialog dialog = new CategoryBookListDialog();
-                CategoryBookListPresenter presenter = new CategoryBookListPresenter((GaiaApplication) getActivity().getApplication(), dialog);
+                CategoryListDialog dialog = new CategoryListDialog();
+                CategoryListPresenter presenter = new CategoryListPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
             }
@@ -123,7 +121,7 @@ public class SelectRecordCategoryDialog extends DialogFragment {
         rightManager = new GridLayoutManager(mContext, 3);
 
         if (rightAdapter == null) {
-            rightAdapter = new AddRecordCategoryScrollRightAdapter(R.layout.record_category_scroll_right, R.layout.record_category_scroll_layout_right_title, null);
+            rightAdapter = new CategorySelectScrollRightAdapter(R.layout.record_category_scroll_right, R.layout.record_category_scroll_layout_right_title, null);
             recRight.setLayoutManager(rightManager);
             recRight.addItemDecoration(new RecyclerView.ItemDecoration() {
                 @Override
@@ -210,7 +208,7 @@ public class SelectRecordCategoryDialog extends DialogFragment {
 
     private void initLeft() {
         if (leftAdapter == null) {
-            leftAdapter = new AddRecordCategoryScrollLeftAdapter(R.layout.record_category_scroll_left, null);
+            leftAdapter = new CategorySelectScrollLeftAdapter(R.layout.record_category_scroll_left, null);
             recLeft.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             recLeft.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
             recLeft.setAdapter(leftAdapter);
@@ -248,76 +246,76 @@ public class SelectRecordCategoryDialog extends DialogFragment {
 
         right = new ArrayList<>();
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(0)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("1111111", left.get(0))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("1111111", left.get(0))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("1111111", left.get(0))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("1111111", left.get(0))));
+        right.add(new CategorySelectScrollBean(true, left.get(0)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("1111111", left.get(0))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("1111111", left.get(0))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("1111111", left.get(0))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("1111111", left.get(0))));
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(1)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(true, left.get(1)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("2222222", left.get(1))));
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(2)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("3333333", left.get(2))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("3333333", left.get(2))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("3333333", left.get(2))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("3333333", left.get(2))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("3333333", left.get(2))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("3333333", left.get(2))));
+        right.add(new CategorySelectScrollBean(true, left.get(2)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("3333333", left.get(2))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("3333333", left.get(2))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("3333333", left.get(2))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("3333333", left.get(2))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("3333333", left.get(2))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("3333333", left.get(2))));
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(3)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(true, left.get(3)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("4444444", left.get(3))));
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(4)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(true, left.get(4)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("5555555", left.get(4))));
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(5)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(true, left.get(5)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("6666666", left.get(5))));
 
-        right.add(new AddRecordCategoryScrollBean(true, left.get(6)));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("7777777", left.get(6))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("7777777", left.get(6))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("7777777", left.get(6))));
-        right.add(new AddRecordCategoryScrollBean(new AddRecordCategoryScrollBean.ScrollItemBean("7777777", left.get(6))));
+        right.add(new CategorySelectScrollBean(true, left.get(6)));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("7777777", left.get(6))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("7777777", left.get(6))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("7777777", left.get(6))));
+        right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean("7777777", left.get(6))));
 
         for (int i = 0; i < right.size(); i++) {
             if (right.get(i).isHeader) {

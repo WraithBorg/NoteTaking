@@ -1,4 +1,4 @@
-package com.zxu.ui.category.adapter;
+package com.zxu.ui.category;
 
 import android.content.Context;
 import android.view.View;
@@ -13,20 +13,20 @@ import com.zxu.model.JC_Category;
 
 import java.util.List;
 
-public class CategoryAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
+public class CategoryListAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
 
     private Context context;
     private List<JC_Category> bigList;
 
-    private CategoryAdapter() {
+    private CategoryListAdapter() {
     }
 
-    private CategoryAdapter(Context context) {
+    private CategoryListAdapter(Context context) {
         this();
         this.context = context;
     }
 
-    public CategoryAdapter(Context context, List<JC_Category> bigList) {
+    public CategoryListAdapter(Context context, List<JC_Category> bigList) {
         this(context);
         this.bigList = bigList;
     }
