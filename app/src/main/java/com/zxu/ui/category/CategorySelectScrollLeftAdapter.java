@@ -22,10 +22,10 @@ public class CategorySelectScrollLeftAdapter extends BaseQuickAdapter<String, Ba
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-        helper.setText(R.id.left_text, item)
+        helper.setText(R.id.record_category_left_text, item)
                 .addOnClickListener(R.id.item);
         //将左侧item中的TextView添加到集合中
-        tv.add((TextView) helper.getView(R.id.left_text));
+        tv.add(helper.getView(R.id.record_category_left_text));
         //设置进入页面之后,左边列表的初始状态
         if (tv != null && getData() != null && tv.size() == getData().size()) {
             selectItem(0);
@@ -48,7 +48,8 @@ public class CategorySelectScrollLeftAdapter extends BaseQuickAdapter<String, Ba
                 tv.get(i).setFocusableInTouchMode(true);
                 tv.get(i).setMarqueeRepeatLimit(-1);
             } else {
-                tv.get(i).setBackgroundColor(0xffffffff);
+//                tv.get(i).setBackgroundColor(0xffffffff);
+                tv.get(i).setBackgroundResource(R.color.app_white);
                 tv.get(i).setTextColor(ContextCompat.getColor(mContext, R.color.black));
 
                 //失去焦点则停止滚动

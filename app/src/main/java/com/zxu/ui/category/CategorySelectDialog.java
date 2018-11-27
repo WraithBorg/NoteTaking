@@ -67,8 +67,8 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         iv_addCategory = (ImageView) view.findViewById(R.id.record_category_add_category_id);
         iv_folding = (ImageView) view.findViewById(R.id.record_category_search_category_id);
         recLeft = (RecyclerView) view.findViewById(R.id.record_category_rec_left);
-        recRight = (RecyclerView) view.findViewById(R.id.rec_right);
-        rightTitle = (TextView) view.findViewById(R.id.right_title);
+        recRight = (RecyclerView) view.findViewById(R.id.record_category_rec_right);
+        rightTitle = (TextView) view.findViewById(R.id.record_category_right_title);
 
         initWidgets();
         initData();

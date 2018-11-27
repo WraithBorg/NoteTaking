@@ -7,7 +7,7 @@
     android:background="@color/app_white">
 
     <TextView
-        android:id="@+id/left_text"
+        android:id="@+id/record_category_left_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"

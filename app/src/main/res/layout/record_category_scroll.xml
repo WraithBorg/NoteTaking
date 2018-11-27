@@ -74,23 +74,23 @@
             android:layout_weight="3">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rec_right"
+                android:id="@+id/record_category_rec_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/app_white"/>
 
             <TextView
-                android:id="@+id/right_title"
+                android:id="@+id/record_category_right_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/app_divider_gray"
-                android:paddingLeft="13dp"
+                android:layout_height="@dimen/scroll_item_height"
+                android:background="@color/app_blue"
                 android:paddingTop="10dp"
-                android:paddingRight="10dp"
                 android:paddingBottom="10dp"
                 android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="@color/app_white"
+                android:gravity="center"
+                android:textSize="20sp"
+                />
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

@@ -14,12 +14,12 @@ public class CategorySelectScrollRightAdapter extends BaseSectionQuickAdapter<Ca
 
     @Override
     protected void convertHead(BaseViewHolder helper, CategorySelectScrollBean item) {
-        helper.setText(R.id.right_title, item.header);
+        helper.setText(R.id.record_category_right_title, item.header);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, CategorySelectScrollBean item) {
         CategorySelectScrollBean.ScrollItemBean t = item.t;
-        helper.setText(R.id.right_text, t.getText());
+        helper.setText(R.id.record_category_right_text, t.getText());
     }
 }
