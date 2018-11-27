@@ -15,6 +15,12 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 import com.zxu.R;
+import com.zxu.model.JC_Category;
+import com.zxu.ui.category.adapter.CategoryAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class CategoryBookFragment extends DialogFragment {
     private Context mContext;
@@ -36,6 +42,31 @@ public class CategoryBookFragment extends DialogFragment {
         ExpandableListView elv_category = (ExpandableListView) view.findViewById(R.id.category_list_id);
         ImageView iv_back = (ImageView) view.findViewById(R.id.category_list_back_id);
         ImageView iv_plus = (ImageView) view.findViewById(R.id.category_list_plus_id);
+        //
+        List<JC_Category> big = new ArrayList<>();
+        List<JC_Category> small1 = new ArrayList<>();
+        List<JC_Category> small2 = new ArrayList<>();
+
+        JC_Category a = new JC_Category(UUID.randomUUID().toString(),"大类AAA");
+        JC_Category b = new JC_Category(UUID.randomUUID().toString(),"大类BBB");
+        JC_Category c = new JC_Category(UUID.randomUUID().toString(),"小类cc");
+        JC_Category d = new JC_Category(UUID.randomUUID().toString(),"小类dd");
+        JC_Category e = new JC_Category(UUID.randomUUID().toString(),"小类ee");
+        JC_Category f = new JC_Category(UUID.randomUUID().toString(),"小类ff");
+        JC_Category g = new JC_Category(UUID.randomUUID().toString(),"小类gg");
+
+        small1.add(c);
+        small1.add(d);
+        small2.add(e);
+        small2.add(f);
+        small2.add(g);
+        a.setChilds(small1);
+        b.setChilds(small2);
+        big.add(a);
+        big.add(b);
+
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity().getApplication(),big);//getApplication() getApplicationContext()
+        elv_category.setAdapter(categoryAdapter);
 
         return view;
     }

@@ -163,4 +163,16 @@
     <color name="app_divider_gray">#d9dee3</color> <!-- 分割线颜色 -->
     <color name="app_green">#76BC73</color> <!-- 保存按钮背景色 -->
     <color name="app_mgray">#707070</color>
+    <color name="app_title_yellow">#FCD22D</color>
+
+    <!-- App Black Gray -->
+    <color name="app_2c">#2c2c2c</color>
+    <color name="app_51">#515151</color>
+    <color name="app_70">#707070</color>
+    <color name="app_8a">#8a8a8a</color>
+    <color name="app_bf">#bfbfbf</color>
+    <color name="app_cd">#cdcdcd</color>
+    <color name="app_db">#dbdbdb</color>
+    <color name="app_e6">#e6e6e6</color>
+
 </resources>

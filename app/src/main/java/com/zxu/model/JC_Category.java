@@ -58,4 +58,12 @@ public class JC_Category {
     public void setChilds(List<JC_Category> childs) {
         this.childs = childs;
     }
+
+    public JC_Category() {
+    }
+
+    public JC_Category(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

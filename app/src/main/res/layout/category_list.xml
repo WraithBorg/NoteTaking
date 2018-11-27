@@ -2,26 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/app_white">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal">
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/app_title_yellow">
+
         <ImageView
             android:id="@+id/category_list_back_id"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="33dp"
             android:background="@mipmap/nextstep"
-            android:rotation="180" />
+            android:rotation="180"
+            android:layout_gravity="center_vertical"/>
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="新建支出分类"/>
+            android:layout_weight="1"
+            android:text="新建支出分类"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/app_51"/>
         <ImageView
             android:id="@+id/category_list_plus_id"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@mipmap/plus"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@mipmap/plus"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"/>
     </LinearLayout>
     <ExpandableListView
         android:id="@+id/category_list_id"
