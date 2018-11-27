@@ -82,6 +82,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         iv_addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 CategoryListDialog dialog = new CategoryListDialog();
                 CategoryListPresenter presenter = new CategoryListPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);

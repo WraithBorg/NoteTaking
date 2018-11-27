@@ -18,7 +18,6 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 public class CategoryAddSmallDialog extends DialogFragment implements CategoryAddSmallContract.View{

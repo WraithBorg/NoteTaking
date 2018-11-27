@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
+import com.zxu.util.CodeConstant;
 
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
         iv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 CategoryAddBigDialog dialog = new CategoryAddBigDialog();
                 CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
@@ -65,6 +68,42 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
         CategoryListAdapter categoryListAdapter = new CategoryListAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(categoryListAdapter);
         // list event
+        // 大类点击事件
+        elv_category.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                JC_Category category = categoryList.get(groupPosition);
+                if (category.getId().equals(CodeConstant.ADDONETYPE)){
+                    dismiss();
+                    CategoryAddBigDialog dialog = new CategoryAddBigDialog();
+                    CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
+                    dialog.setPresenter(presenter);
+                    dialog.show(getActivity().getFragmentManager(), "android");
+                }
+                return false;
+            }
+        });
+        // 小类点击事件
+        elv_category.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                JC_Category fatherC = categoryList.get(groupPosition);
+                JC_Category category = fatherC.getChilds().get(childPosition);
+                if (category.getId().equals(CodeConstant.ADDTWOTYPE)){
+                    dismiss();
+                    // next dialog
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("fatherId",fatherC.getId());
+
+                    CategoryAddSmallDialog dialog = new CategoryAddSmallDialog();
+                    CategoryAddSmallPresenter presenter = new CategoryAddSmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
+                    dialog.setPresenter(presenter);
+                    dialog.setArguments(bundle);
+                    dialog.show(getActivity().getFragmentManager(), "android");
+                }
+                return false;
+            }
+        });
         // return
         return view;
     }

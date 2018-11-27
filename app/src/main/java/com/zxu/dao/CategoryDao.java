@@ -3,6 +3,7 @@ package com.zxu.dao;
 import com.zxu.base.database.BaseDaoImpl;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_Category;
+import com.zxu.util.CodeConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
             }
             if (fromAdd){
                 JC_Category c = new JC_Category();
-                c.setId("addTwoType");
+                c.setId(CodeConstant.ADDTWOTYPE);
                 c.setName("新建二级支出分类");
                 c.setType(1);
                 ss.add(c);
@@ -53,7 +54,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
         }
         if (fromAdd){
             JC_Category b = new JC_Category();
-            b.setId("addOneType");
+            b.setId(CodeConstant.ADDONETYPE);
             b.setName("新建一级支出分类");
             b.setChilds(new ArrayList<>());
             b.setType(0);
