@@ -66,7 +66,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         mContext = getActivity();
         iv_addCategory = (ImageView) view.findViewById(R.id.record_category_add_category_id);
         iv_folding = (ImageView) view.findViewById(R.id.record_category_search_category_id);
-        recLeft = (RecyclerView) view.findViewById(R.id.rec_left);
+        recLeft = (RecyclerView) view.findViewById(R.id.record_category_rec_left);
         recRight = (RecyclerView) view.findViewById(R.id.rec_right);
         rightTitle = (TextView) view.findViewById(R.id.right_title);
 
@@ -133,7 +133,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
     /*****************_______________________________________*/
     private void initRight() {
 
-        rightManager = new GridLayoutManager(mContext, 3);
+        rightManager = new GridLayoutManager(mContext, 1);
 
         if (rightAdapter == null) {
             rightAdapter = new CategorySelectScrollRightAdapter(R.layout.record_category_scroll_right, R.layout.record_category_scroll_layout_right_title, null);
@@ -281,19 +281,6 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
                 tPosition.add(i);
             }
         }
-    }
-
-    /**
-     * 获得资源 dimens (dp)
-     *
-     * @param context
-     * @param id      资源id
-     * @return
-     */
-    public float getDimens(Context context, int id) {
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        float px = context.getResources().getDimension(id);
-        return px / dm.density;
     }
 
     /**

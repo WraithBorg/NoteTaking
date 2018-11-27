@@ -12,5 +12,7 @@
         android:padding="10dp"
         android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@color/app_e6"/>
 </LinearLayout>

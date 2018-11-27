@@ -57,7 +57,7 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rec_left"
+            android:id="@+id/record_category_rec_left"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
