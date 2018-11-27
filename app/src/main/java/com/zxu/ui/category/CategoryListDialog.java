@@ -21,7 +21,7 @@ import com.zxu.model.JC_Category;
 import java.util.List;
 
 public class CategoryListDialog extends DialogFragment implements CategoryListContract.View  {
-    private Context mContext;
+
     private CategoryListContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
     /**
@@ -36,7 +36,6 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mContext = getActivity();
 
         View view = inflater.inflate(R.layout.category_list, null);
         ExpandableListView elv_category = (ExpandableListView) view.findViewById(R.id.category_list_id);
@@ -65,6 +64,8 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
         List<JC_Category> list = getCategoryList();
         CategoryListAdapter categoryListAdapter = new CategoryListAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(categoryListAdapter);
+        // list event
+        // return
         return view;
     }
 

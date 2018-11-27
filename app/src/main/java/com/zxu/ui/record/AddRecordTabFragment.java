@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Account;
+import com.zxu.model.JC_Category;
 import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
 import com.zxu.util.UtilTools;
@@ -70,11 +71,11 @@ public class AddRecordTabFragment extends Fragment {
                 CategorySelectDialog dialog = new CategorySelectDialog();
                 CategorySelectPresenter presenter = new CategorySelectPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
-
-                dialog.setOnDialogListener(new CategorySelectDialog.OnDialogListener() {
+                // 监听选择类别事件
+                dialog.setOnSelectSmallTypeListener(new CategorySelectDialog.onSelectSmallTypeListener() {
                     @Override
-                    public void onItemClick(String person) {
-                        UtilTools.showToast(getActivity().getApplicationContext(), person, 1111);
+                    public void selectOn(JC_Category category) {
+                        tv_selCategory.setText(category.getName());
                     }
                 });
                 dialog.show(getActivity().getFragmentManager(), "android");

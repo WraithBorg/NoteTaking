@@ -26,6 +26,7 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
 import com.zxu.util.DensityUtil;
+import com.zxu.util.UtilTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,6 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
     private GridLayoutManager rightManager;
     /* Scroll >> */
 
-    private OnDialogListener onDialogListener;
     private CategorySelectContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
 
@@ -120,14 +120,6 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         mPresenter = presenter;
     }
 
-    public interface OnDialogListener {
-        void onItemClick(String person);
-    }
-
-    public void setOnDialogListener(OnDialogListener onDialogListener) {
-        this.onDialogListener = onDialogListener;
-    }
-
     /*****************_______________________________________*/
     private void initRight() {
 
@@ -152,6 +144,18 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         }
 
         rightAdapter.setNewData(right);
+        // 监听右侧点击事件
+        rightAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                CategorySelectScrollBean scrollBean = right.get(position);
+                if (scrollBean == null || scrollBean.t == null){
+                    return;
+                }
+                JC_Category category = scrollBean.t.getCategory();
+                onSelectSmallTypeListener.selectOn(category);
+            }
+        });
 
         //设置右侧初始title
         if (right.get(first).isHeader) {
@@ -258,7 +262,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
             left.add(cName);
             right.add(new CategorySelectScrollBean(true, cName));
             for (JC_Category cc : c.getChilds()){
-                right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean(cc.getName(), cName)));
+                right.add(new CategorySelectScrollBean(new CategorySelectScrollBean.ScrollItemBean(cc.getName(), cName,cc)));
             }
         }
         for (int i = 0; i < right.size(); i++) {
@@ -300,5 +304,14 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
 
     public void setCategoryList(List<JC_Category> categoryList) {
         this.categoryList = categoryList;
+    }
+    // 选择类别 监听器 for CategorySelectDialog
+    private onSelectSmallTypeListener onSelectSmallTypeListener;
+    public interface  onSelectSmallTypeListener{
+        void selectOn(JC_Category category);
+    }
+
+    public void setOnSelectSmallTypeListener(onSelectSmallTypeListener onSelectSmallTypeListener) {
+        this.onSelectSmallTypeListener = onSelectSmallTypeListener;
     }
 }
