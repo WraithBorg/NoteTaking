@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Account;
 import com.zxu.ui.category.CategorySelectDialog;
+import com.zxu.ui.category.CategorySelectPresenter;
 import com.zxu.util.UtilTools;
 
 public class AddRecordTabFragment extends Fragment {
@@ -65,14 +67,17 @@ public class AddRecordTabFragment extends Fragment {
         tv_selCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategorySelectDialog fragment = new CategorySelectDialog();
-                fragment.setOnDialogListener(new CategorySelectDialog.OnDialogListener() {
+                CategorySelectDialog dialog = new CategorySelectDialog();
+                CategorySelectPresenter presenter = new CategorySelectPresenter((GaiaApplication) getActivity().getApplication(), dialog);
+                dialog.setPresenter(presenter);
+
+                dialog.setOnDialogListener(new CategorySelectDialog.OnDialogListener() {
                     @Override
                     public void onItemClick(String person) {
                         UtilTools.showToast(getActivity().getApplicationContext(), person, 1111);
                     }
                 });
-                fragment.show(getActivity().getFragmentManager(), "android");
+                dialog.show(getActivity().getFragmentManager(), "android");
             }
         });
     }

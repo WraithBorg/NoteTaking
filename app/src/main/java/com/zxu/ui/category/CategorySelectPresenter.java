@@ -7,23 +7,21 @@ import com.zxu.model.JC_Category;
 
 import java.util.List;
 
-public class CategoryListPresenter implements CategoryListContract.Presenter {
+public class CategorySelectPresenter implements CategorySelectContract.Presenter {
     private GaiaApplication application;
     private ServiceFactory serviceFactory = new ServiceFactory();
-    CategoryListContract.View cView;
+    CategorySelectContract.View cView;
 
-    public CategoryListPresenter(GaiaApplication application, CategoryListContract.View cView) {
+    public CategorySelectPresenter(GaiaApplication application, CategorySelectContract.View cView) {
         this.application = application;
         this.cView = cView;
     }
-
     public CategoryDao categoryDao() {
         return serviceFactory.getService(application, CategoryDao.class);
     }
-
     @Override
     public void getAll(GaiaApplication application) {
-        List<JC_Category> list = categoryDao().getBSList(true);
+        List<JC_Category> list = categoryDao().getBSList(false);
         cView.setCategorys(list);
     }
 }
