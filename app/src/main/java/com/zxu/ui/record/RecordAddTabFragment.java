@@ -16,16 +16,15 @@ import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
 import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
-import com.zxu.util.UtilTools;
 
-public class AddRecordTabFragment extends Fragment {
+public class RecordAddTabFragment extends Fragment {
     public static final String TITLE_TAG = "tabTitle";
     TextView tv_selAccount,tv_selCategory;
 
-    public static AddRecordTabFragment newInstance(String tabTitle) {
+    public static RecordAddTabFragment newInstance(String tabTitle) {
 
         Bundle args = new Bundle();
-        AddRecordTabFragment fragment = new AddRecordTabFragment();
+        RecordAddTabFragment fragment = new RecordAddTabFragment();
         args.putString(TITLE_TAG, tabTitle);
         fragment.setArguments(args);
         return fragment;
@@ -49,7 +48,7 @@ public class AddRecordTabFragment extends Fragment {
         tv_selAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddRecordAccountDialog accountDialog = new AddRecordAccountDialog(getContext(), JC_Account.getAccounts(), tv_selAccount.getText().toString());
+                RecordAddDialog accountDialog = new RecordAddDialog(getContext(), JC_Account.getAccounts(), tv_selAccount.getText().toString());
                 accountDialog.create(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

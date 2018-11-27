@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,18 +48,28 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
         iv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
                 CategoryAddBigDialog dialog = new CategoryAddBigDialog();
                 CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismiss();
+                    }
+                }, CodeConstant.DIALOGWAITTIME);
             }
         });
         // return
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismiss();
+                    }
+                }, CodeConstant.DIALOGWAITTIME);
             }
         });
 
@@ -74,11 +85,17 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 JC_Category category = categoryList.get(groupPosition);
                 if (category.getId().equals(CodeConstant.ADDONETYPE)){
-                    dismiss();
+
                     CategoryAddBigDialog dialog = new CategoryAddBigDialog();
                     CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                     dialog.setPresenter(presenter);
                     dialog.show(getActivity().getFragmentManager(), "android");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismiss();
+                        }
+                    }, CodeConstant.DIALOGWAITTIME);
                 }
                 return false;
             }
@@ -90,7 +107,7 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
                 JC_Category fatherC = categoryList.get(groupPosition);
                 JC_Category category = fatherC.getChilds().get(childPosition);
                 if (category.getId().equals(CodeConstant.ADDTWOTYPE)){
-                    dismiss();
+
                     // next dialog
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("fatherId",fatherC.getId());
@@ -100,6 +117,12 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
                     dialog.setPresenter(presenter);
                     dialog.setArguments(bundle);
                     dialog.show(getActivity().getFragmentManager(), "android");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismiss();
+                        }
+                    }, CodeConstant.DIALOGWAITTIME);
                 }
                 return false;
             }
@@ -121,7 +144,9 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
         // 设置背景透明
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setWindowAnimations(R.style.dialogWindowAnim);
+        window.setBackgroundDrawableResource(R.color.vifrification);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,6 +26,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
+import com.zxu.util.CodeConstant;
 import com.zxu.util.DensityUtil;
 import com.zxu.util.UtilTools;
 
@@ -82,7 +84,12 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         iv_addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismiss();
+                    }
+                }, CodeConstant.DIALOGWAITTIME);
                 CategoryListDialog dialog = new CategoryListDialog();
                 CategoryListPresenter presenter = new CategoryListPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);

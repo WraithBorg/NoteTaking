@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
+import com.zxu.util.CodeConstant;
 
 import java.util.UUID;
 
@@ -39,7 +41,12 @@ public class CategoryAddSmallDialog extends DialogFragment implements CategoryAd
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismiss();
+                    }
+                }, CodeConstant.DIALOGWAITTIME);
             }
         });
         // complete
@@ -47,7 +54,12 @@ public class CategoryAddSmallDialog extends DialogFragment implements CategoryAd
             @Override
             public void onClick(View v) {
                 // close
-                dismiss();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismiss();
+                    }
+                }, CodeConstant.DIALOGWAITTIME);
                 // save data
                 JC_Category category = new JC_Category();
                 category.setId(UUID.randomUUID().toString());
@@ -69,7 +81,9 @@ public class CategoryAddSmallDialog extends DialogFragment implements CategoryAd
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
         // 设置背景透明
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setWindowAnimations(R.style.dialogWindowAnim);
+        window.setBackgroundDrawableResource(R.color.vifrification);
     }
 
     @Override

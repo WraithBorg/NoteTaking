@@ -1,5 +1,6 @@
 package com.zxu.ui.record;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
@@ -15,7 +18,7 @@ import com.zxu.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddRecordActivity extends AppCompatActivity {
+public class RecordAddActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public static final int MOVABLE_COUNT = 3;
@@ -32,8 +35,27 @@ public class AddRecordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_add);
+        //
         tabLayout = (TabLayout) findViewById(R.id.record_add_tab_id);
         viewPager = (ViewPager) findViewById(R.id.record_add_pager_id);
+        ImageView iv_back = (ImageView) findViewById(R.id.record_add_back_id);
+        ImageView iv_complete = (ImageView) findViewById(R.id.record_add_complete_id);
+        //
+        // return
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        // complete
+        iv_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //
         initDatas();
         initViewPager();
         initTabLayout();
@@ -50,7 +72,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
         fragments = new ArrayList<>();
         for (int i = 0; i < tabs.size(); i++) {
-            fragments.add(AddRecordTabFragment.newInstance(tabs.get(i)));
+            fragments.add(RecordAddTabFragment.newInstance(tabs.get(i)));
         }
     }
     /**

@@ -20,7 +20,7 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.ui.accountbooks.AccountBookFragment;
 import com.zxu.ui.accountbooks.AccountBookPresenter;
 import com.zxu.demo.AFunctionDisplayActivity;
-import com.zxu.ui.record.AddRecordActivity;
+import com.zxu.ui.record.RecordAddActivity;
 import com.zxu.util.ActivityUtil;
 
 /**
@@ -71,7 +71,7 @@ public class IndexPageActivity extends Activity {
         tv_noteOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), AddRecordActivity.class);
+                Intent intent = new Intent(getApplication(), RecordAddActivity.class);
                 startActivity(intent);
             }
         });

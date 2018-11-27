@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * 选择账户
  */
-public class AddRecordAccountDialog {
+public class RecordAddDialog {
     private Context context;
     private List<JC_Account> accounts;
     private JC_Account selectAccount;
     private String selectedName;
-    public AddRecordAccountDialog(Context context, List<JC_Account> accounts,String selectedName) {
+    public RecordAddDialog(Context context, List<JC_Account> accounts, String selectedName) {
         this.context = context;
         this.accounts = accounts;
         this.selectedName = selectedName;

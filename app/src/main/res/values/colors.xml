@@ -174,5 +174,7 @@
     <color name="app_cd">#cdcdcd</color>
     <color name="app_db">#dbdbdb</color>
     <color name="app_e6">#e6e6e6</color>
+    <!-- 透明 -->
+    <color name="vifrification">#00000000</color>
 
 </resources>
