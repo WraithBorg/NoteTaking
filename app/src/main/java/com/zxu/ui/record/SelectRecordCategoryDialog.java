@@ -23,7 +23,9 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxu.R;
-import com.zxu.ui.category.CategoryBookFragment;
+import com.zxu.application.GaiaApplication;
+import com.zxu.ui.category.CategoryBookListDialog;
+import com.zxu.ui.category.CategoryBookListPresenter;
 import com.zxu.util.DensityUtil;
 
 import java.util.ArrayList;
@@ -79,7 +81,9 @@ public class SelectRecordCategoryDialog extends DialogFragment {
         iv_addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategoryBookFragment dialog = new CategoryBookFragment();
+                CategoryBookListDialog dialog = new CategoryBookListDialog();
+                CategoryBookListPresenter presenter = new CategoryBookListPresenter((GaiaApplication) getActivity().getApplication(), dialog);
+                dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
             }
         });

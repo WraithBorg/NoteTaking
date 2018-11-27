@@ -23,11 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CategoryBookFragment extends DialogFragment {
+public class CategoryBookListDialog extends DialogFragment implements CategoryBookListContract.View  {
     private Context mContext;
-
+    private CategoryBookListContract.Presenter mPresenter;
+    private List<JC_Category> categoryList;
     /**
      * dialog 创建
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -48,9 +50,9 @@ public class CategoryBookFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 CategoryAddBigDialog dialog = new CategoryAddBigDialog();
-                CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(),dialog);
+                CategoryAddBigPresenter presenter = new CategoryAddBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
-                dialog.show(getActivity().getFragmentManager(),"android");
+                dialog.show(getActivity().getFragmentManager(), "android");
             }
         });
         // return
@@ -62,31 +64,10 @@ public class CategoryBookFragment extends DialogFragment {
         });
 
         // list
-        List<JC_Category> big = new ArrayList<>();
-        List<JC_Category> small1 = new ArrayList<>();
-        List<JC_Category> small2 = new ArrayList<>();
-
-        JC_Category a = new JC_Category(UUID.randomUUID().toString(),"大类AAA");
-        JC_Category b = new JC_Category(UUID.randomUUID().toString(),"大类BBB");
-        JC_Category c = new JC_Category(UUID.randomUUID().toString(),"小类cc");
-        JC_Category d = new JC_Category(UUID.randomUUID().toString(),"小类dd");
-        JC_Category e = new JC_Category(UUID.randomUUID().toString(),"小类ee");
-        JC_Category f = new JC_Category(UUID.randomUUID().toString(),"小类ff");
-        JC_Category g = new JC_Category(UUID.randomUUID().toString(),"小类gg");
-
-        small1.add(c);
-        small1.add(d);
-        small2.add(e);
-        small2.add(f);
-        small2.add(g);
-        a.setChilds(small1);
-        b.setChilds(small2);
-        big.add(a);
-        big.add(b);
-
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(),big);// TODO getActivity() getApplication() getApplicationContext() 区别
+        mPresenter.getAll((GaiaApplication) getActivity().getApplication());
+        List<JC_Category> list = getCategoryList();
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(categoryAdapter);
-
         return view;
     }
 
@@ -104,5 +85,23 @@ public class CategoryBookFragment extends DialogFragment {
         window.setAttributes(params);
         // 设置背景透明
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    @Override
+    public void setPresenter(CategoryBookListContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void setCategorys(List<JC_Category> categorys) {
+        setCategoryList(categorys);
+    }
+
+    public List<JC_Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<JC_Category> categoryList) {
+        this.categoryList = categoryList;
     }
 }

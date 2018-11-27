@@ -158,8 +158,19 @@ public class SqlUtil {
                     continue;
                 }
                 int columnIndex = cursor.getColumnIndex(field.getName());
-                String cursorString = cursor.getString(columnIndex);
-                field.set(bean, cursorString);
+                if (dd.dataType() == DataType.STRING) {
+                    String cursorString = cursor.getString(columnIndex);
+                    field.set(bean, cursorString);
+                } else if (dd.dataType() == DataType.INTEGER) {
+                    int cursorString = cursor.getInt(columnIndex);
+                    field.set(bean, cursorString);
+                } else if (dd.dataType() == DataType.DATE) {
+                    String cursorString = cursor.getString(columnIndex);
+                    field.set(bean, cursorString);
+                } else {
+                    String cursorString = cursor.getString(columnIndex);
+                    field.set(bean, cursorString);
+                }
             }
             return bean;
         } catch (InstantiationException e) {

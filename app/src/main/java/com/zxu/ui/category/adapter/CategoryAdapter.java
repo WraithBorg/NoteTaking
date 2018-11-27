@@ -59,6 +59,9 @@ public class CategoryAdapter extends BaseExpandableListAdapter implements Expand
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        if (bigList.get(groupPosition).getChilds() == null){
+            return null;
+        }
         SmallViewHolder holder;
         if (convertView == null){
             convertView = View.inflate(context, R.layout.category_small_item, null);
