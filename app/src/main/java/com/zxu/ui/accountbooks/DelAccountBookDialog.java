@@ -1,9 +1,8 @@
-package com.zxu.business.accountbooks;
+package com.zxu.ui.accountbooks;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.widget.LinearLayout;
 
 import com.zxu.R;
 import com.zxu.util.DensityUtil;

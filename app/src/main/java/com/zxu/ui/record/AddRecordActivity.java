@@ -1,4 +1,4 @@
-package com.zxu.business.record;
+package com.zxu.ui.record;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

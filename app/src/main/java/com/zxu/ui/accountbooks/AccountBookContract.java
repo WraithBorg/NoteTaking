@@ -1,4 +1,4 @@
-package com.zxu.business.accountbooks;
+package com.zxu.ui.accountbooks;
 
 import com.zxu.application.BaseView;
 import com.zxu.model.JC_AccountBook;

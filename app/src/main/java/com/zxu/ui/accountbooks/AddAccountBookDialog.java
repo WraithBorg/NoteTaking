@@ -1,4 +1,4 @@
-package com.zxu.business.accountbooks;
+package com.zxu.ui.accountbooks;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

@@ -1,4 +1,4 @@
-package com.zxu.business.record;
+package com.zxu.ui.record;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

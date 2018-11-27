@@ -1,4 +1,4 @@
-package com.zxu.business.record;
+package com.zxu.ui.record;
 
 import android.content.DialogInterface;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.zxu.business.record;
+package com.zxu.ui.record;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zxu.R;
-import com.zxu.business.category.CategoryBookFragment;
+import com.zxu.ui.category.CategoryBookFragment;
 import com.zxu.util.DensityUtil;
 
 import java.util.ArrayList;

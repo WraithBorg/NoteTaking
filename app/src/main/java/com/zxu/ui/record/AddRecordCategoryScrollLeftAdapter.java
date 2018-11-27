@@ -1,4 +1,4 @@
-package com.zxu.business.record;
+package com.zxu.ui.record;
 
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;

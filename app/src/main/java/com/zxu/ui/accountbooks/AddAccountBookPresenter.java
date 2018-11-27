@@ -1,4 +1,4 @@
-package com.zxu.business.accountbooks;
+package com.zxu.ui.accountbooks;
 
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.AccountBookDao;

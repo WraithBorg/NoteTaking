@@ -4,6 +4,8 @@ import com.zxu.annotation.DataType;
 import com.zxu.annotation.DatabaseField;
 import com.zxu.annotation.DatabaseTable;
 
+import java.util.List;
+
 @DatabaseTable(tableName = "jc_category")
 public class JC_Category {
     @DatabaseField(columnName = "id", id = true, dataType = DataType.STRING)
@@ -15,6 +17,7 @@ public class JC_Category {
     @DatabaseField(columnName = "type", dataType = DataType.INTEGER)
     private int type;// 0 一级分类，1 二级分类
 
+    List<JC_Category> childs;
     /********** setter and getter *********/
     public String getId() {
         return id;
@@ -46,5 +49,13 @@ public class JC_Category {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public List<JC_Category> getChilds() {
+        return childs;
+    }
+
+    public void setChilds(List<JC_Category> childs) {
+        this.childs = childs;
     }
 }
