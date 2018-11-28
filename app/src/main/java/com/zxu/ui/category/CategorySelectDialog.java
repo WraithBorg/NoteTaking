@@ -265,7 +265,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         left = new ArrayList<>();
         right = new ArrayList<>();
 
-        mPresenter.getAll((GaiaApplication) getActivity().getApplication());
+        mPresenter.getAll();
         List<JC_Category> li = getCategoryList();
         for (JC_Category c : li){
             String cName = c.getName();

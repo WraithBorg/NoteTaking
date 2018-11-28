@@ -20,7 +20,7 @@ public class CategoryAddBigPresenter implements CategoryAddBigContract.Presenter
     }
 
     @Override
-    public void addBigCategory(GaiaApplication application, JC_Category category) {
+    public void addBigCategory(JC_Category category) {
         categoryDao().addCategory(category);
     }
 }

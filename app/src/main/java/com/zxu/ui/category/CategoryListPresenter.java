@@ -22,7 +22,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
     }
 
     @Override
-    public void getAll(GaiaApplication application) {
+    public void getAll() {
         List<JC_Category> list = categoryDao().getBSList(true);
         cView.setCategorys(list);
     }

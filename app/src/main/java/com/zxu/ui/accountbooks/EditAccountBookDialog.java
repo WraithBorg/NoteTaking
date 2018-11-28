@@ -88,7 +88,7 @@ public class EditAccountBookDialog extends DialogFragment implements EditAccount
                     return;
                 }
                 accountBook.setName(accountName);
-                mPresenter.editAccountBook((GaiaApplication) getActivity().getApplication(), accountBook);
+                mPresenter.editAccountBook(accountBook);
                 closeDialog(getDialog(), true);
             }
         });

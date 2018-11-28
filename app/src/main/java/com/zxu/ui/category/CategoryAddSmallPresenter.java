@@ -20,7 +20,7 @@ public class CategoryAddSmallPresenter implements CategoryAddSmallContract.Prese
     }
 
     @Override
-    public void addSmallCategory(GaiaApplication application, JC_Category category) {
+    public void addSmallCategory(JC_Category category) {
         categoryDao().addCategory(category);
     }
 }

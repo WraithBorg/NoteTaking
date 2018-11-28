@@ -20,7 +20,7 @@ public class CategorySelectPresenter implements CategorySelectContract.Presenter
         return serviceFactory.getService(application, CategoryDao.class);
     }
     @Override
-    public void getAll(GaiaApplication application) {
+    public void getAll() {
         List<JC_Category> list = categoryDao().getBSList(false);
         cView.setCategorys(list);
     }

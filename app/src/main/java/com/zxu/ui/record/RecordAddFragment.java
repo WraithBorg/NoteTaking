@@ -14,33 +14,39 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
+import com.zxu.model.JC_Record;
 import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
 import com.zxu.util.UtilTools;
 import com.zxu.widget.CustomDatePicker;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
-public class RecordAddTabFragment extends Fragment {
+public class RecordAddFragment extends Fragment implements RecordAddContract.View {
     public static final String TITLE_TAG = "tabTitle";
-    TextView tv_selAccount, tv_selCategory, tv_selTime;
+    TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
     private String titleName;
     // 日期控件
     private CustomDatePicker customDatePicker2;
+    //
+    private RecordAddContract.Presenter mPresenter;
 
-    public RecordAddTabFragment() {
+    public RecordAddFragment() {
     }
 
     /**
      * Fragment
      */
-    public static RecordAddTabFragment newInstance(String tabTitle) {
+    public static RecordAddFragment newInstance(String tabTitle) {
 
         Bundle args = new Bundle();
         args.putString(TITLE_TAG, tabTitle);
-        RecordAddTabFragment fragment = new RecordAddTabFragment();
+        RecordAddFragment fragment = new RecordAddFragment();
         fragment.setArguments(args);
         fragment.setTitleName(tabTitle);
         return fragment;
@@ -54,6 +60,8 @@ public class RecordAddTabFragment extends Fragment {
         tv_selAccount = (TextView) view.findViewById(R.id.record_add_account_id);
         tv_selCategory = (TextView) view.findViewById(R.id.record_add_category_id);
         tv_selTime = (TextView) view.findViewById(R.id.record_add_time_id);
+        tv_money = (TextView) view.findViewById(R.id.record_add_money_id);
+        tv_memo = (TextView) view.findViewById(R.id.record_add_memo_id);
         initWidgets();
         return view;
     }
@@ -139,14 +147,40 @@ public class RecordAddTabFragment extends Fragment {
     /**
      * save data TODO
      */
-    void saveData(){
-
+    void saveData() {
+        // get
         String accountText = tv_selAccount.getText().toString();
         String categoryText = tv_selCategory.getText().toString();
         String timeText = tv_selTime.getText().toString();
-        UtilTools.showToast(getActivity().getApplicationContext(), "accountText:" + accountText+";categoryText："+categoryText, 1111);
+        String moneyText = tv_money.getText().toString();
+        String memoText = tv_memo.getText().toString();
+        //validate
+        if (StringUtils.isEmpty(accountText)
+                || StringUtils.isEmpty(categoryText)
+                || StringUtils.isEmpty(timeText)
+                || StringUtils.isEmpty(moneyText)
+                ) {
+            UtilTools.showToast(getActivity().getApplicationContext(), "账户类型，消费类型，金额，日期不能为空", 1111);
+            return;
+        }
+
+
+        // save
+        JC_Record record = new JC_Record();
+        record.setId(UUID.randomUUID().toString());
+        record.setMoney(moneyText);
+        record.setCreateTime((new Date()).toString());
+        record.setWorkTime(timeText);
+        record.setCategory(categoryText);
+        record.setAccount(accountText);
+        record.setType("0");
+        record.setMemo(memoText);
+
+        mPresenter.addRecord(record);
+
         System.out.println();
     }
+
     /********** setter and getter *********/
     public void setTitleName(String titleName) {
         this.titleName = titleName;
@@ -154,5 +188,10 @@ public class RecordAddTabFragment extends Fragment {
 
     public String getTitleName() {
         return titleName;
+    }
+
+    @Override
+    public void setPresenter(RecordAddContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

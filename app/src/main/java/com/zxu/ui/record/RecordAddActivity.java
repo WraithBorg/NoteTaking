@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
-import com.zxu.util.UtilTools;
+import com.zxu.application.GaiaApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,9 +52,7 @@ public class RecordAddActivity extends AppCompatActivity {
         iv_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecordAddTabFragment currentFragment = (RecordAddTabFragment)((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
-                String titleName = currentFragment.getTitleName();
-                int currentItem = viewPager.getCurrentItem();
+                RecordAddFragment currentFragment = (RecordAddFragment)((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
                 currentFragment.saveData();
                 onCompleteClickListener.onClickComplete();
             }
@@ -72,7 +70,10 @@ public class RecordAddActivity extends AppCompatActivity {
         tabs = Arrays.asList(tabTitle);
         fragments = new ArrayList<>();
         for (String title : tabs) {
-            fragments.add(RecordAddTabFragment.newInstance(title));
+            RecordAddFragment fragment = RecordAddFragment.newInstance(title);
+            RecordAddPresenter presenter = new RecordAddPresenter((GaiaApplication)getApplication(), fragment);
+            fragment.setPresenter(presenter);
+            fragments.add(fragment);
         }
     }
 
@@ -99,7 +100,7 @@ public class RecordAddActivity extends AppCompatActivity {
         }
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
-            currentFragment = (RecordAddTabFragment) object;
+            currentFragment = (RecordAddFragment) object;
             super.setPrimaryItem(container, position, object);
         }
         @Override

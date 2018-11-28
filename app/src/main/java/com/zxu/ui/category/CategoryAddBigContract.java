@@ -9,7 +9,7 @@ public interface CategoryAddBigContract {
      * 业务处理
      */
     interface Presenter{
-        void addBigCategory(GaiaApplication application, JC_Category category);
+        void addBigCategory(JC_Category category);
     }
     /**
      * 界面显示

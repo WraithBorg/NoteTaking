@@ -84,7 +84,7 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
                 JC_AccountBook b = new JC_AccountBook();
                 b.setId(UUID.randomUUID().toString());
                 b.setName(accountName);
-                mPresenter.addAccountBook((GaiaApplication) getActivity().getApplication(), b);
+                mPresenter.addAccountBook(b);
                 closeDialog(getDialog(), true);
             }
         });

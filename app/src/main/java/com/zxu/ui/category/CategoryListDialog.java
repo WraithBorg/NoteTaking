@@ -74,7 +74,7 @@ public class CategoryListDialog extends DialogFragment implements CategoryListCo
         });
 
         // list
-        mPresenter.getAll((GaiaApplication) getActivity().getApplication());
+        mPresenter.getAll();
         List<JC_Category> list = getCategoryList();
         CategoryListAdapter categoryListAdapter = new CategoryListAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(categoryListAdapter);

@@ -65,7 +65,7 @@ public class CategoryAddBigDialog extends DialogFragment implements CategoryAddB
                 category.setId(cId);
                 category.setName(et_name.getText().toString());
                 category.setType(0);
-                mPresenter.addBigCategory((GaiaApplication) getActivity().getApplication(), category);
+                mPresenter.addBigCategory(category);
                 // next dialog
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fatherId",cId);

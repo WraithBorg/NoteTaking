@@ -66,7 +66,7 @@ public class CategoryAddSmallDialog extends DialogFragment implements CategoryAd
                 category.setName(et_name.getText().toString());
                 category.setType(1);
                 category.setFatherId(fatherId);
-                mPresenter.addSmallCategory((GaiaApplication) getActivity().getApplication(), category);
+                mPresenter.addSmallCategory(category);
             }
         });
         return view;

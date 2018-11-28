@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CategoryListContract {
     interface Presenter{
-        void getAll(GaiaApplication application);
+        void getAll();
     }
     interface View extends BaseView<CategoryListContract.Presenter>{
         void setCategorys(List<JC_Category> categorys);

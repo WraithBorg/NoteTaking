@@ -16,7 +16,7 @@ public class EditAccountBookPresenter implements EditAccountBookContract.Present
     }
 
     @Override
-    public void editAccountBook(GaiaApplication application, JC_AccountBook b) {
+    public void editAccountBook(JC_AccountBook b) {
         getAccountBookDao().editAccountBook(b);
     }
 

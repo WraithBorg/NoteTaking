@@ -12,7 +12,7 @@ public interface AddAccountBookContract {
      * 获取数据
      */
     interface Presenter {
-        void addAccountBook(GaiaApplication application, JC_AccountBook b);
+        void addAccountBook(JC_AccountBook b);
     }
 
     /**

@@ -16,7 +16,7 @@ public class AddAccountBookPresenter implements AddAccountBookContract.Presenter
     }
 
     @Override
-    public void addAccountBook(GaiaApplication application, JC_AccountBook b) {
+    public void addAccountBook(JC_AccountBook b) {
         getAccountBookDao().addAccountBook(b);
     }
 
