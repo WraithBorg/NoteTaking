@@ -112,7 +112,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = Gravity.BOTTOM;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = DensityUtil.dp2px(getActivity().getApplication(), 360);// TODO 会影响record_category_left_text高度及滚动条
+        params.height = DensityUtil.dp2px(getActivity().getApplication(), 390);// TODO 会影响record_category_left_text高度及滚动条
         window.setAttributes(params);
         // 设置背景透明
 //        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -280,6 +280,12 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
                 //遍历右侧列表,判断如果是header,则将此header在右侧列表中所在的position添加到集合中
                 tPosition.add(i);
             }
+        }
+        if (right.size() == 0){
+            JC_Category c = new JC_Category();
+            c.setName("请添加分类");
+            c.setChilds(new ArrayList<>());
+            right.add(new CategorySelectScrollBean(true, c.getName()));
         }
     }
 

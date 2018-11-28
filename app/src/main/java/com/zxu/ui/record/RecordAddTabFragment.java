@@ -16,6 +16,7 @@ import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
 import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
+import com.zxu.util.UtilTools;
 import com.zxu.widget.CustomDatePicker;
 
 import java.text.SimpleDateFormat;
@@ -24,23 +25,27 @@ import java.util.Locale;
 
 public class RecordAddTabFragment extends Fragment {
     public static final String TITLE_TAG = "tabTitle";
-    TextView tv_selAccount,tv_selCategory,tv_selTime;
+    TextView tv_selAccount, tv_selCategory, tv_selTime;
+    private String titleName;
     // 日期控件
     private CustomDatePicker customDatePicker2;
 
+    public RecordAddTabFragment() {
+    }
+
     /**
-     * Fragment 单例
-     * @param tabTitle
-     * @return
+     * Fragment
      */
     public static RecordAddTabFragment newInstance(String tabTitle) {
 
         Bundle args = new Bundle();
-        RecordAddTabFragment fragment = new RecordAddTabFragment();
         args.putString(TITLE_TAG, tabTitle);
+        RecordAddTabFragment fragment = new RecordAddTabFragment();
         fragment.setArguments(args);
+        fragment.setTitleName(tabTitle);
         return fragment;
     }
+
 
     @Nullable
     @Override
@@ -103,6 +108,14 @@ public class RecordAddTabFragment extends Fragment {
                 customDatePicker2.show(tv_selTime.getText().toString());
             }
         });
+
+        ((RecordAddActivity) getActivity()).setOnCompleteClickListener(new RecordAddActivity.OnCompleteClickListener() {
+            @Override
+            public void onClickComplete() {
+                UtilTools.showToast(getActivity().getApplicationContext(), "点击完成" + tv_selTime.getText(), 1111);
+            }
+        });
+
     }
 
     /**
@@ -121,5 +134,25 @@ public class RecordAddTabFragment extends Fragment {
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker2.showSpecificTime(true); // 显示时和分
         customDatePicker2.setIsLoop(true); // 允许循环滚动
+    }
+
+    /**
+     * save data TODO
+     */
+    void saveData(){
+
+        String accountText = tv_selAccount.getText().toString();
+        String categoryText = tv_selCategory.getText().toString();
+        String timeText = tv_selTime.getText().toString();
+        UtilTools.showToast(getActivity().getApplicationContext(), "accountText:" + accountText+";categoryText："+categoryText, 1111);
+        System.out.println();
+    }
+    /********** setter and getter *********/
+    public void setTitleName(String titleName) {
+        this.titleName = titleName;
+    }
+
+    public String getTitleName() {
+        return titleName;
     }
 }

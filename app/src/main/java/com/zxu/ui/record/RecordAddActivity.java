@@ -1,6 +1,5 @@
 package com.zxu.ui.record;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,25 +9,26 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.util.UtilTools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RecordAddActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public static final int MOVABLE_COUNT = 3;
-//    private int tabCount = 3;
-    private String[] tabTitle = new String[]{"支出","收入","转账"};
+    private String[] tabTitle = new String[]{"支出", "收入", "转账"};
     private List<String> tabs;
     private List<Fragment> fragments;
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override
@@ -52,7 +52,11 @@ public class RecordAddActivity extends AppCompatActivity {
         iv_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                RecordAddTabFragment currentFragment = (RecordAddTabFragment)((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
+                String titleName = currentFragment.getTitleName();
+                int currentItem = viewPager.getCurrentItem();
+                currentFragment.saveData();
+                onCompleteClickListener.onClickComplete();
             }
         });
         //
@@ -65,31 +69,39 @@ public class RecordAddActivity extends AppCompatActivity {
      *
      */
     private void initDatas() {
-        tabs = new ArrayList<>();
-        for (String tabName : tabTitle) {
-            tabs.add(tabName);
-        }
-
+        tabs = Arrays.asList(tabTitle);
         fragments = new ArrayList<>();
-        for (int i = 0; i < tabs.size(); i++) {
-            fragments.add(RecordAddTabFragment.newInstance(tabs.get(i)));
+        for (String title : tabs) {
+            fragments.add(RecordAddTabFragment.newInstance(title));
         }
     }
+
     /**
      *
      */
     private void initViewPager() {
         viewPager.setAdapter(new AddRecordPagerAdapter(getSupportFragmentManager()));
+        viewPager.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                System.out.println(1);
+            }
+        });
     }
+
     /**
      * viewPager Adapter
      */
     private class AddRecordPagerAdapter extends FragmentPagerAdapter {
-
+        public Fragment currentFragment;
         public AddRecordPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            currentFragment = (RecordAddTabFragment) object;
+            super.setPrimaryItem(container, position, object);
+        }
         @Override
         public Fragment getItem(int position) {
             return fragments.get(position);
@@ -99,7 +111,9 @@ public class RecordAddActivity extends AppCompatActivity {
         public int getCount() {
             return fragments.size();
         }
+
     }
+
     /**
      *
      */
@@ -120,5 +134,14 @@ public class RecordAddActivity extends AppCompatActivity {
         }
     }
 
+    // 监听viewPage外部 点击完成按钮事件
+    public OnCompleteClickListener onCompleteClickListener;
 
+    public interface OnCompleteClickListener {
+        void onClickComplete();
+    }
+
+    public void setOnCompleteClickListener(OnCompleteClickListener onCompleteClickListener) {
+        this.onCompleteClickListener = onCompleteClickListener;
+    }
 }
