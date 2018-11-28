@@ -1,16 +1,13 @@
 package com.zxu.ui.record;
 
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.zxu.R;
@@ -19,14 +16,23 @@ import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
 import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
+import com.zxu.widget.CustomDatePicker;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class RecordAddTabFragment extends Fragment {
     public static final String TITLE_TAG = "tabTitle";
     TextView tv_selAccount,tv_selCategory,tv_selTime;
+    // 日期控件
+    private CustomDatePicker customDatePicker2;
 
+    /**
+     * Fragment 单例
+     * @param tabTitle
+     * @return
+     */
     public static RecordAddTabFragment newInstance(String tabTitle) {
 
         Bundle args = new Bundle();
@@ -87,26 +93,33 @@ public class RecordAddTabFragment extends Fragment {
                 dialog.show(getActivity().getFragmentManager(), "android");
             }
         });
+        // 初始化时间控件
+        initDatePicker();
         // 选择时间
         tv_selTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int monthOfYear = calendar.get(Calendar.MONTH);
-                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int yyyy, int mm, int dd) {
-                        String birthday = yyyy + "-" + (mm + 1) + "-" + dd;
-                        Log.v("Info",birthday);
-                    }
-                }, year, monthOfYear, dayOfMonth);
-                DatePicker datePicker = datePickerDialog.getDatePicker();
-                Date taday = Calendar.getInstance().getTime();//当天
-
-                datePickerDialog.show();
+                // 日期格式为yyyy-MM-dd HH:mm
+                customDatePicker2.show(tv_selTime.getText().toString());
             }
         });
+    }
+
+    /**
+     * 初始化日期控件
+     */
+    private void initDatePicker() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        String now = sdf.format(new Date());
+        tv_selTime.setText(now);
+
+        customDatePicker2 = new CustomDatePicker(getActivity(), new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                tv_selTime.setText(time);
+            }
+        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker2.showSpecificTime(true); // 显示时和分
+        customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
 }

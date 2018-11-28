@@ -10,8 +10,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="6dp"
         android:background="@color/app_divider_gray" />
 
     <EditText
@@ -31,7 +30,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:layout_marginBottom="10dp"
         android:background="@color/app_divider_gray" />
     <LinearLayout
