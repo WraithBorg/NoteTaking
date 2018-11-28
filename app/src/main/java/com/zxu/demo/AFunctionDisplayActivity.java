@@ -218,4 +218,13 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, ExpandableListViewActivity.class);
         startActivity(intent);
     }
+    /**
+     * showTimeBar
+     *
+     * @param view 视图
+     */
+    void showTimeBar(View view) {
+        Intent intent = new Intent(this, TimeBarActivity.class);
+        startActivity(intent);
+    }
 }

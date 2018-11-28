@@ -34,5 +34,6 @@
         <activity android:name=".demo.TabLayoutActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ui.record.RecordAddActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".demo.ScrollChangedActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".demo.TimeBarActivity" />
     </application>
 </manifest>

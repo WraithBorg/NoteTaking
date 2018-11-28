@@ -113,6 +113,7 @@
             android:textSize="20sp"
             />
         <TextView
+            android:id="@+id/record_add_time_id"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="center"
