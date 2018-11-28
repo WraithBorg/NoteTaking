@@ -62,8 +62,11 @@ public class JC_Category {
     public JC_Category() {
     }
 
-    public JC_Category(String id, String name) {
+    public JC_Category(String id, String name, String fatherId, int type, List<JC_Category> childs) {
         this.id = id;
         this.name = name;
+        this.fatherId = fatherId;
+        this.type = type;
+        this.childs = childs;
     }
 }

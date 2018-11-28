@@ -38,7 +38,6 @@ public class CategorySelectScrollLeftAdapter extends BaseQuickAdapter<String, Ba
     public void selectItem(int position) {
         for (int i = 0; i < getData().size(); i++) {
             if (position == i) {
-//                tv.get(i).setBackgroundColor(0xff0068b7);
                 tv.get(i).setBackgroundResource(R.color.app_blue);
                 tv.get(i).setTextColor(ContextCompat.getColor(mContext, R.color.white));
 
@@ -48,7 +47,6 @@ public class CategorySelectScrollLeftAdapter extends BaseQuickAdapter<String, Ba
                 tv.get(i).setFocusableInTouchMode(true);
                 tv.get(i).setMarqueeRepeatLimit(-1);
             } else {
-//                tv.get(i).setBackgroundColor(0xffffffff);
                 tv.get(i).setBackgroundResource(R.color.app_white);
                 tv.get(i).setTextColor(ContextCompat.getColor(mContext, R.color.black));
 

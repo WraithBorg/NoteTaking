@@ -281,12 +281,12 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
                 tPosition.add(i);
             }
         }
-        if (right.size() == 0){
-            JC_Category c = new JC_Category();
-            c.setName("请添加分类");
-            c.setChilds(new ArrayList<>());
-            right.add(new CategorySelectScrollBean(true, c.getName()));
-        }
+//        if (right.size() == 0){
+//            JC_Category c = new JC_Category();
+//            c.setName("请添加分类");
+//            c.setChilds(new ArrayList<>());
+//            right.add(new CategorySelectScrollBean(true, c.getName()));
+//        }
     }
 
     /**
