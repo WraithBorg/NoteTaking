@@ -47,6 +47,10 @@ public class CategorySelectScrollLeftAdapter extends BaseQuickAdapter<String, Ba
                 tv.get(i).setFocusableInTouchMode(true);
                 tv.get(i).setMarqueeRepeatLimit(-1);
             } else {
+                if (i >= tv.size()) {
+                    // tv 和 getData size可能不同
+                    continue;
+                }
                 tv.get(i).setBackgroundResource(R.color.app_white);
                 tv.get(i).setTextColor(ContextCompat.getColor(mContext, R.color.black));
 

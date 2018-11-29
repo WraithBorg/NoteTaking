@@ -1,52 +1,48 @@
 package com.zxu.util;
 
-import com.zxu.annotation.DatabaseField;
-import com.zxu.annotation.DatabaseTable;
-import com.zxu.model.JC_AccountBook;
+import com.zxu.model.JC_Category;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args) {
-        JC_AccountBook obj = new JC_AccountBook();
-        obj.setId("123");
-        obj.setName("test 1");
-        obj.setUserId("uuid 123");
-        getEditSql(JC_AccountBook.class, obj);
-    }
+        String[] strings = new String[]{
+//              "fatherId|id|name|type|num",
+                "|购物消费|购物消费|0|1000",
+                "购物消费|衣服鞋帽|衣服鞋帽|1|1010",
+                "购物消费|厨房用品|厨房用品|1|1020",
+                "购物消费|电子产品|电子产品|1|1030",
 
-    // 输出 属性名+属性值
-    public static final <T> String getEditSql(Class<T> clazz, Object obj) {
-        Annotation annotation = clazz.getAnnotation(DatabaseTable.class);
-        String tableName = ((DatabaseTable) annotation).tableName();
-        Field[] fields = clazz.getDeclaredFields();
-        Field.setAccessible(fields, true);
-        StringBuilder colSql = new StringBuilder();
-        StringBuilder whrSql = new StringBuilder();
-        for (Field field : fields) {
-            DatabaseField dd = field.getAnnotation(DatabaseField.class);
-            if (dd == null) {
-                continue;
-            }
-            try {
-                String name = field.getName();
-                Object value = field.get(obj);
-                if (value != null) {
-                    if (dd.id()) {
-                        whrSql.append(" where id = ").append("'").append(value).append("'");
-                    } else {
-                        colSql.append(name).append("=").append("'").append(value).append("'").append(",");
-                    }
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+                "|食品酒水|食品酒水|0|2000",
+                "食品酒水|水果|水果|1|2010",
+                "食品酒水|买菜|买菜|1|2010",
+                "食品酒水|零食|零食|1|2010",
+
+                "|居家生活|居家生活|0|3000",
+                "食品酒水|房租|房租|1|3010",
+                "食品酒水|水费|水费|1|3010",
+                "食品酒水|电费|电费|1|3010",
+                "食品酒水|网费|网费|1|3010",
+
+                "|行车交通|行车交通|0|4000",
+
+                "|行车交通|休闲娱乐|0|5000",
+
+                "|行车交通|人情费用|0|6000",
+
+                "|行车交通|出差旅行|0|7000",
+
+                "|行车交通|金融保险|0|8000",
+        };
+        for (String str : strings){
+            String[] split = str.split("\\|");
+            String fatherId = split[0];
+            String id = split[1];
+            String name = split[2];
+            int type = Integer.parseInt(split[3]);
+            int num = Integer.parseInt(split[4]);
+            JC_Category category = new JC_Category(id, name, fatherId, type, num, new ArrayList<>());
+            System.out.println(category.toString());
         }
-        colSql.deleteCharAt(colSql.length() - 1);
-        StringBuilder sql = new StringBuilder("update " + tableName + " set ");
-        sql.append(colSql).append(whrSql).append(";");
-        return sql.toString();
     }
-
 }

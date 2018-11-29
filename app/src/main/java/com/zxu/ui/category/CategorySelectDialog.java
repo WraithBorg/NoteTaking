@@ -220,6 +220,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
                 //遍历左边列表,列表对应的内容等于右边的title,则设置左侧对应item高亮
                 for (int i = 0; i < left.size(); i++) {
                     if (left.get(i).equals(rightTitle.getText().toString())) {
+                        // 受record_category_left_text高度影响
                         leftAdapter.selectItem(i);
                     }
                 }
