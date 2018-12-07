@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.zxu.application.GaiaApplication;
+import com.zxu.base.database.ServiceFactory;
+import com.zxu.dao.AccountBookDao;
+import com.zxu.dao.CategoryDao;
 import com.zxu.dao.PersonDao;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.model.JC_Category;
@@ -18,14 +22,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "persondata.db";
     private static final int DATABASE_VERSION = 1;
+    private Context mContext;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
+        this.mContext = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
+        // create table
         PersonDao.createTable(database);
         createTable(database, JC_AccountBook.class);
         createTable(database, JC_Record.class);

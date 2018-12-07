@@ -6,23 +6,24 @@ import android.database.sqlite.SQLiteDatabase;
 import com.zxu.base.database.BaseDaoImpl;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_Category;
-import com.zxu.model.JC_Record;
 import com.zxu.util.CodeConstant;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class CategoryDao extends BaseDaoImpl<JC_Category> {
     public CategoryDao() {
     }
 
+    /**
+     *
+     * @param category
+     * @return
+     */
     public ResultHelper addCategory(JC_Category category) {
         int maxNum = getMaxNum();
         if (category.getType() == 0){
@@ -41,9 +42,6 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
      */
     public List<JC_Category> getBSList(boolean fromAdd) {
         List<JC_Category> list = super.getList();
-        if (list.size() == 0) {
-            initData(list);
-        }
         Map<String, JC_Category> bigs = new HashMap<>();
         Map<String, List<JC_Category>> smalls = new HashMap<>();
         for (JC_Category category : list) {
@@ -106,9 +104,8 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
     /**
      * 初始化数据
      *
-     * @param list
      */
-    private void initData(List<JC_Category> list) {
+    public void initData() {
         String[] strings = new String[]{
                 "|购物消费|购物消费|0|1000",
                 "购物消费|衣服鞋帽|衣服鞋帽|1|1010",
@@ -146,7 +143,6 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
             int num = Integer.parseInt(split[4]);
             category = new JC_Category(id, name, fatherId, type, num, new ArrayList<>());
             super.add(category);
-            list.add(category);
         }
     }
     int getMaxNum(){

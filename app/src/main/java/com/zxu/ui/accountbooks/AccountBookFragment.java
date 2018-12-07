@@ -19,6 +19,8 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.util.UtilTools;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 /**
@@ -222,13 +224,15 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
      */
     private class AcBooksItemClickListener implements ListView.OnItemClickListener {
         private List<JC_AccountBook> accountBooks;
+
         public AcBooksItemClickListener(List<JC_AccountBook> list) {
             this.accountBooks = list;
         }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            UtilTools.showToast(getActivity().getApplicationContext(), "点击" + accountBooks.get(position).getName(), 1505);
+            JC_AccountBook accountBook = accountBooks.get(position);
+            UtilTools.showToast(getActivity().getApplicationContext(), "点击" + accountBook.getName(), 1505);
 
             lv_accounts.setItemChecked(position, true);//高亮选中item
             mDrawerLayout.closeDrawer(slipMenuView);// 关闭侧滑菜单
@@ -236,10 +240,13 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             // 主界面UI更新
             // 账本名称
             TextView tv_accountBookName = (TextView) getActivity().findViewById(R.id.indexpage_accountbook_name_id);
-            tv_accountBookName.setText(accountBooks.get(position).getName());
+            tv_accountBookName.setText(accountBook.getName());
             // 背景色
             LinearLayout lv_topcard = (LinearLayout) mainContent.findViewById(R.id.indexpage_topcard_id);
-            lv_topcard.setBackgroundColor(getResources().getColor(R.color.app_red));
+//            lv_topcard.setBackgroundColor(getResources().getColor(R.color.app_red));
+            if (!StringUtils.isEmpty(accountBook.getImgUrl())) {
+                lv_topcard.setBackgroundResource(Integer.parseInt(accountBook.getImgUrl()));
+            }
         }
     }
 

@@ -2,6 +2,9 @@ package com.zxu.application;
 
 import android.app.Application;
 
+import com.zxu.base.database.ServiceFactory;
+import com.zxu.dao.AccountBookDao;
+import com.zxu.dao.CategoryDao;
 import com.zxu.helpers.DatabaseHelper;
 
 import cn.finalteam.okhttpfinal.OkHttpFinal;
@@ -20,9 +23,15 @@ public class GaiaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // init database
         getDatabaseHelper().create();
-
-        /* 使用OkHttpFinal */
+        // init data
+        ServiceFactory serviceFactory = new ServiceFactory();
+        CategoryDao categoryDao = serviceFactory.getService(this, CategoryDao.class);
+        categoryDao.initData();
+        AccountBookDao accountBookDao = serviceFactory.getService(this, AccountBookDao.class);
+        accountBookDao.initData();
+        // 使用OkHttpFinal
         OkHttpFinalConfiguration.Builder builder = new OkHttpFinalConfiguration.Builder();
         OkHttpFinal.getInstance().init(builder.build());
 
