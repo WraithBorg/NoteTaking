@@ -18,6 +18,7 @@ import com.zxu.model.JC_Category;
 import com.zxu.model.JC_Record;
 import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
+import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 import com.zxu.widget.CustomDatePicker;
 
@@ -29,9 +30,11 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class RecordAddFragment extends Fragment implements RecordAddContract.View {
-    public static final String TITLE_TAG = "tabTitle";
     TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
+    //
     private String titleName;
+    private String accountBookID;
+
     // 日期控件
     private CustomDatePicker customDatePicker2;
     //
@@ -43,13 +46,14 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
     /**
      * Fragment
      */
-    public static RecordAddFragment newInstance(String tabTitle) {
+    public static RecordAddFragment newInstance(String tabTitle,String accountBookID) {
 
         Bundle args = new Bundle();
-        args.putString(TITLE_TAG, tabTitle);
+        args.putString(Constant.TITLE_TAG, tabTitle);
         RecordAddFragment fragment = new RecordAddFragment();
         fragment.setArguments(args);
         fragment.setTitleName(tabTitle);
+        fragment.setAccountBookID(accountBookID);
         return fragment;
     }
 
@@ -175,7 +179,7 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
         record.setAccount(accountText);
         record.setType("0");
         record.setMemo(memoText);
-
+        record.setAccount(getAccountBookID());
         mPresenter.addRecord(record);
 
         return new ResultHelper(true);
@@ -186,8 +190,12 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
         this.titleName = titleName;
     }
 
-    public String getTitleName() {
-        return titleName;
+    public void setAccountBookID(String accountBookID) {
+        this.accountBookID = accountBookID;
+    }
+
+    public String getAccountBookID() {
+        return accountBookID;
     }
 
     @Override

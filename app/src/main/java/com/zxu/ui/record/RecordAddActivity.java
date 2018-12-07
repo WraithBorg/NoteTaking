@@ -1,5 +1,6 @@
 package com.zxu.ui.record;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
+import com.zxu.util.Constant;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,25 +62,30 @@ public class RecordAddActivity extends AppCompatActivity {
                 }
             }
         });
-        //
-        initDatas();
-        initViewPager();
-        initTabLayout();
-    }
+        // 接收参数
+        String accountBookID = Constant.DEFAULT_ACCOUNT_BOOK_ID;
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                accountBookID = bundle.getString(Constant.AccountBookID);
 
-    /**
-     *
-     */
-    private void initDatas() {
+            }
+        }
+        //
         tabs = Arrays.asList(tabTitle);
         fragments = new ArrayList<>();
         for (String title : tabs) {
-            RecordAddFragment fragment = RecordAddFragment.newInstance(title);
+            RecordAddFragment fragment = RecordAddFragment.newInstance(title,accountBookID);
             RecordAddPresenter presenter = new RecordAddPresenter((GaiaApplication)getApplication(), fragment);
             fragment.setPresenter(presenter);
             fragments.add(fragment);
         }
+        //
+        initViewPager();
+        initTabLayout();
     }
+
 
     /**
      *

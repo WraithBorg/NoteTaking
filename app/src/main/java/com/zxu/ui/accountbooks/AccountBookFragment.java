@@ -76,14 +76,16 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // 刷新
         mPresenter.getAccountBooks();
-
+        // 刷新
         bt_getAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.getAccountBooks();
             }
         });
+        // 新增
         bt_addAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,20 +104,18 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                 });
             }
         });
+        // 编辑账本
         bt_editAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.getAccountBooks4EDIT();
-//                ll_bottom.setVisibility(View.GONE);
-//                bt_complete.setVisibility(View.VISIBLE);
             }
         });
+        // 完成按钮
         bt_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.getAccountBooks();
-//                ll_bottom.setVisibility(View.VISIBLE);
-//                bt_complete.setVisibility(View.GONE);
             }
         });
 
@@ -231,14 +231,14 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
 
             lv_accounts.setItemChecked(position, true);//高亮选中item
             mDrawerLayout.closeDrawer(slipMenuView);// 关闭侧滑菜单
-
             // 主界面UI更新
             // 账本名称
+            TextView tv_accountBookId = (TextView) getActivity().findViewById(R.id.indexpage_accountbook_id_id);
             TextView tv_accountBookName = (TextView) getActivity().findViewById(R.id.indexpage_accountbook_name_id);
+            tv_accountBookId.setText(accountBook.getId());
             tv_accountBookName.setText(accountBook.getName());
             // 背景色
             LinearLayout lv_topcard = (LinearLayout) mainContent.findViewById(R.id.indexpage_topcard_id);
-//            lv_topcard.setBackgroundColor(getResources().getColor(R.color.app_red));
             if (!StringUtils.isEmpty(accountBook.getImgUrl())) {
                 lv_topcard.setBackgroundResource(Integer.parseInt(accountBook.getImgUrl()));
             }

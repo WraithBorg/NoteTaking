@@ -4,6 +4,7 @@ import com.zxu.R;
 import com.zxu.base.database.BaseDaoImpl;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.util.Constant;
 
 import java.util.List;
 import java.util.UUID;
@@ -64,8 +65,8 @@ public class AccountBookDao extends BaseDaoImpl<JC_AccountBook> {
     public void initData(){
         if (super.getList()==null||super.getList().size()==0){
             JC_AccountBook p = new JC_AccountBook();
-            p.setId(UUID.randomUUID().toString());
-            p.setName("默认账本");
+            p.setId(Constant.DEFAULT_ACCOUNT_BOOK_ID);
+            p.setName(Constant.DEFAULT_ACCOUNT_BOOK_NAME);
             p.setImgUrl(String.valueOf(R.mipmap.accountbook_03));
             super.add(p);
         }

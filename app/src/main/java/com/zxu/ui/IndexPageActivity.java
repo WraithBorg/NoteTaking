@@ -22,6 +22,8 @@ import com.zxu.ui.accountbooks.AccountBookFragment;
 import com.zxu.ui.accountbooks.AccountBookPresenter;
 import com.zxu.ui.record.RecordAddActivity;
 import com.zxu.util.ActivityUtil;
+import com.zxu.util.Constant;
+import com.zxu.util.UtilTools;
 
 /**
  * 索引页,activity 不是view层，是view model presenter三层的纽带
@@ -66,14 +68,19 @@ public class IndexPageActivity extends Activity {
                 takeOff();// TODO mvp
             }
         });
-        // account name
-        TextView tv_accountBookName = (TextView) findViewById(R.id.indexpage_accountbook_name_id);
+        // account id
+        TextView tv_accountBookId = (TextView) findViewById(R.id.indexpage_accountbook_id_id);
+        tv_accountBookId.setText(Constant.DEFAULT_ACCOUNT_BOOK_ID);
         // add record
         TextView tv_noteOne = (TextView) findViewById(R.id.noteone_id);
         tv_noteOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 传递账户ID
+                Bundle args = new Bundle();
+                args.putString(Constant.AccountBookID,tv_accountBookId.getText().toString());
                 Intent intent = new Intent(getApplication(), RecordAddActivity.class);
+                intent.putExtras(args);
                 startActivity(intent);
             }
         });
