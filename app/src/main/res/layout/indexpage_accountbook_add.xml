@@ -8,14 +8,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:background="@color/app_white"
         android:orientation="horizontal"
         android:paddingTop="6dp">
 
         <ImageView
             android:id="@+id/indexpage_add_back_id"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="@mipmap/nextstep"
             android:rotation="180" />
@@ -26,7 +26,8 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="40dp"
+            android:id="@+id/indexpage_add_confirm_id"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:background="@mipmap/hook" />

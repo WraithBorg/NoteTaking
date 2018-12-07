@@ -25,7 +25,7 @@ import java.util.UUID;
 public class AddAccountBookDialog extends DialogFragment implements AddAccountBookContract.View {
     private AddAccountBookContract.Presenter mPresenter;
     Button bt_save;
-    ImageView iv_back;
+    ImageView iv_back,iv_confirm;
     EditText et_accountName;
 
     private OnDialogMissListener misslListener;
@@ -64,6 +64,7 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
         View view = inflater.inflate(R.layout.indexpage_accountbook_add, null);
         bt_save = (Button) view.findViewById(R.id.accountbook_add_save_btn_id);
         iv_back = (ImageView) view.findViewById(R.id.indexpage_add_back_id);
+        iv_confirm = (ImageView) view.findViewById(R.id.indexpage_add_confirm_id);
         et_accountName = (EditText) view.findViewById(R.id.indexpage_add_accountname_id);
         initWidgets();
         return view;
@@ -93,6 +94,12 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
             public void onClick(View v) {
                 closeDialog(getDialog(), false);
                 dismiss();
+            }
+        });
+        iv_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bt_save.callOnClick();
             }
         });
     }
