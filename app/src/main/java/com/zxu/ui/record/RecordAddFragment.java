@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
+import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
 import com.zxu.model.JC_Record;
@@ -120,7 +121,7 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
         ((RecordAddActivity) getActivity()).setOnCompleteClickListener(new RecordAddActivity.OnCompleteClickListener() {
             @Override
             public void onClickComplete() {
-                UtilTools.showToast(getActivity().getApplicationContext(), "点击完成" + tv_selTime.getText(), 1111);
+                getActivity().onBackPressed();
             }
         });
 
@@ -147,7 +148,7 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
     /**
      * save data TODO
      */
-    void saveData() {
+    ResultHelper saveData() {
         // get
         String accountText = tv_selAccount.getText().toString();
         String categoryText = tv_selCategory.getText().toString();
@@ -161,9 +162,8 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
                 || StringUtils.isEmpty(moneyText)
                 ) {
             UtilTools.showToast(getActivity().getApplicationContext(), "账户类型，消费类型，金额，日期不能为空", 1111);
-            return;
+            return new ResultHelper(false);
         }
-
 
         // save
         JC_Record record = new JC_Record();
@@ -178,7 +178,7 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
 
         mPresenter.addRecord(record);
 
-        System.out.println();
+        return new ResultHelper(true);
     }
 
     /********** setter and getter *********/

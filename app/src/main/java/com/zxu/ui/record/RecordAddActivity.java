@@ -53,8 +53,9 @@ public class RecordAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RecordAddFragment currentFragment = (RecordAddFragment)((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
-                currentFragment.saveData();
-                onCompleteClickListener.onClickComplete();
+                if (currentFragment.saveData().isResult()){
+                    onCompleteClickListener.onClickComplete();
+                }
             }
         });
         //
