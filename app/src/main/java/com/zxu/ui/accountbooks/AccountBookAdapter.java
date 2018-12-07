@@ -17,7 +17,7 @@ import java.util.List;
  * 适配器
  */
 public class AccountBookAdapter extends BaseAdapter {
-    List<JC_AccountBook> accountBooks;
+    private List<JC_AccountBook> accountBooks;
     Context context;
     boolean isEdit;//是否是编辑样式
     private LayoutInflater mInFlater;
@@ -118,5 +118,9 @@ public class AccountBookAdapter extends BaseAdapter {
 
     public void setOnEditItem(OnEditItem onEditItem) {
         this.onEditItem = onEditItem;
+    }
+
+    public List<JC_AccountBook> getAccountBooks() {
+        return accountBooks;
     }
 }

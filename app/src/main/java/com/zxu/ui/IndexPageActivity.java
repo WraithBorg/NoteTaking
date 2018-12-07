@@ -58,7 +58,7 @@ public class IndexPageActivity extends Activity {
         // 传递对象给Fragment
         LinearLayout mainContent = (LinearLayout) findViewById(R.id.indexpage_content_id);
         indexPageFragment.transWidget(slipMenuView, mDrawerLayout, mainContent);
-        //
+        // plane
         ImageView iv_takeOff = (ImageView) findViewById(R.id.main_plane_icon_id);
         iv_takeOff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,9 @@ public class IndexPageActivity extends Activity {
                 takeOff();// TODO mvp
             }
         });
-        //
+        // account name
+        TextView tv_accountBookName = (TextView) findViewById(R.id.indexpage_accountbook_name_id);
+        // add record
         TextView tv_noteOne = (TextView) findViewById(R.id.noteone_id);
         tv_noteOne.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
@@ -75,7 +76,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         super.onActivityCreated(savedInstanceState);
         mPresenter.getAccountBooks();
         lv_accounts.setAdapter(accountBooksAdapter);
-        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener());
+        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener(accountBooksAdapter.getAccountBooks()));
         bt_getAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,15 +218,26 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
 
 
     /**
-     * 侧滑菜单 账本list
+     * 侧滑菜单 账本list item 点击事件
      */
     private class AcBooksItemClickListener implements ListView.OnItemClickListener {
+        private List<JC_AccountBook> accountBooks;
+        public AcBooksItemClickListener(List<JC_AccountBook> list) {
+            this.accountBooks = list;
+        }
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            UtilTools.showToast(getActivity().getApplicationContext(), "点击" + position, 1505);
-            // 关闭侧滑菜单
+            UtilTools.showToast(getActivity().getApplicationContext(), "点击" + accountBooks.get(position).getName(), 1505);
+
             lv_accounts.setItemChecked(position, true);//高亮选中item
-            mDrawerLayout.closeDrawer(slipMenuView);
+            mDrawerLayout.closeDrawer(slipMenuView);// 关闭侧滑菜单
+
+            // 主界面UI更新
+            // 账本名称
+            TextView tv_accountBookName = (TextView) getActivity().findViewById(R.id.indexpage_accountbook_name_id);
+            tv_accountBookName.setText(accountBooks.get(position).getName());
+            // 背景色
             LinearLayout lv_topcard = (LinearLayout) mainContent.findViewById(R.id.indexpage_topcard_id);
             lv_topcard.setBackgroundColor(getResources().getColor(R.color.app_red));
         }
