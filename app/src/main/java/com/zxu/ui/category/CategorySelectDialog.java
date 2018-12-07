@@ -99,7 +99,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         iv_folding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dismiss();
             }
         });
     }
