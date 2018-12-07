@@ -9,24 +9,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.zxu.R;
-import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.ui.adapter.BackDropAdapter;
 import com.zxu.util.UtilTools;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class AddAccountBookDialog extends DialogFragment implements AddAccountBookContract.View {
     private AddAccountBookContract.Presenter mPresenter;
     Button bt_save;
-    ImageView iv_back,iv_confirm;
+    ImageView iv_back, iv_confirm;
     EditText et_accountName;
+    ListView lv_backdrop;
 
     private OnDialogMissListener misslListener;
 
@@ -66,6 +71,7 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
         iv_back = (ImageView) view.findViewById(R.id.indexpage_add_back_id);
         iv_confirm = (ImageView) view.findViewById(R.id.indexpage_add_confirm_id);
         et_accountName = (EditText) view.findViewById(R.id.indexpage_add_accountname_id);
+        lv_backdrop = (ListView) view.findViewById(R.id.indexpage_add_backdrop_id);
         initWidgets();
         return view;
     }
@@ -74,6 +80,25 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
      * 初始化按钮事件
      */
     private void initWidgets() {
+        // list
+        List<String> backDrops = new ArrayList<>();
+        backDrops.add(String.valueOf(R.mipmap.accountbook_01));
+        backDrops.add(String.valueOf(R.mipmap.accountbook_02));
+        backDrops.add(String.valueOf(R.mipmap.accountbook_03));
+        Integer selectedBackDrop = 0;
+        BackDropAdapter adapter = new BackDropAdapter(getActivity().getApplicationContext(), backDrops);
+        adapter.setSelectedBackDrops(selectedBackDrop);
+        lv_backdrop.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        // list listener
+        lv_backdrop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setSelectedBackDrops(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        // save
         bt_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +110,12 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
                 JC_AccountBook b = new JC_AccountBook();
                 b.setId(UUID.randomUUID().toString());
                 b.setName(accountName);
+                b.setImgUrl(backDrops.get(selectedBackDrop));
                 mPresenter.addAccountBook(b);
                 closeDialog(getDialog(), true);
             }
         });
+        // back
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

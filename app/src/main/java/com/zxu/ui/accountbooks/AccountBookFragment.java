@@ -77,8 +77,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mPresenter.getAccountBooks();
-        lv_accounts.setAdapter(accountBooksAdapter);
-        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener(accountBooksAdapter.getAccountBooks()));
+
         bt_getAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,9 +137,8 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         ll_bottom.setVisibility(View.VISIBLE);
         bt_complete.setVisibility(View.GONE);
         //
-        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, false);
-        lv_accounts.setAdapter(accountBooksAdapter);
-        accountBooksAdapter.notifyDataSetChanged();
+        refreshAdapter(list,false);
+
     }
 
     /**
@@ -154,10 +152,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         ll_bottom.setVisibility(View.GONE);
         bt_complete.setVisibility(View.VISIBLE);
         //
-        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, true);
-        lv_accounts.setAdapter(accountBooksAdapter);
-        accountBooksAdapter.notifyDataSetChanged();
-
+        refreshAdapter(list,true);
         // 删除接口调用
         accountBooksAdapter.setOnDeleteItem(new AccountBookAdapter.OnDeleteItem() {
             @Override
@@ -263,4 +258,14 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         this.slipMenuView = slipMenuView;
         this.mainContent = mainContent;
     }
+    /**
+     *
+     */
+    private void refreshAdapter(List<JC_AccountBook> list,boolean isEdit){
+        accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, isEdit);
+        lv_accounts.setAdapter(accountBooksAdapter);
+        lv_accounts.setOnItemClickListener(new AcBooksItemClickListener(accountBooksAdapter.getAccountBooks()));
+        accountBooksAdapter.notifyDataSetChanged();
+    }
+
 }
