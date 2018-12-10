@@ -54,14 +54,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
 
-        <android.support.v7.widget.RecyclerView
+        <ListView
             android:id="@+id/record_category_rec_left"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white" />
+            android:layout_weight="2"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:background="@mipmap/cback"
+
+           />
 
         <View
             android:layout_width="0.5dp"
@@ -73,24 +79,15 @@
             android:layout_height="match_parent"
             android:layout_weight="3">
 
-            <android.support.v7.widget.RecyclerView
+            <ListView
                 android:id="@+id/record_category_rec_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/app_white"/>
-
-            <TextView
-                android:id="@+id/record_category_right_title"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/scroll_item_height"
-                android:background="@color/app_blue"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:singleLine="true"
-                android:textColor="@color/app_white"
-                android:gravity="center"
-                android:textSize="20sp"
+                android:background="@mipmap/cback"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 />
+
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

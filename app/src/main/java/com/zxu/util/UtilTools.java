@@ -1,6 +1,7 @@
 package com.zxu.util;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
@@ -43,5 +44,17 @@ public class UtilTools {
      */
     public static String format(BigDecimal decimal) {
         return new DecimalFormat("0.##########").format(decimal);
+    }
+
+    /**
+     * dp转px
+     *
+     * @param context
+     * @param dp
+     * @return
+     */
+    public int dpToPx(Context context, float dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return (int) ((dp * displayMetrics.density) + 0.5f);
     }
 }
