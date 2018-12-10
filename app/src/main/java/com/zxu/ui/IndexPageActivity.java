@@ -21,6 +21,8 @@ import com.zxu.demo.AFunctionDisplayActivity;
 import com.zxu.ui.accountbooks.AccountBookFragment;
 import com.zxu.ui.accountbooks.AccountBookPresenter;
 import com.zxu.ui.record.RecordAddActivity;
+import com.zxu.ui.report.TodayReportMainFragment;
+import com.zxu.ui.report.TodayReportMainPresenter;
 import com.zxu.util.ActivityUtil;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
@@ -82,6 +84,17 @@ public class IndexPageActivity extends Activity {
                 Intent intent = new Intent(getApplication(), RecordAddActivity.class);
                 intent.putExtras(args);
                 startActivity(intent);
+            }
+        });
+        // 今天
+        TextView tv_today = (TextView) findViewById(R.id.indexpage_today_id);
+        tv_today.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TodayReportMainFragment fragment = new TodayReportMainFragment();
+                TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getApplication()), fragment);
+                fragment.setPresenter(presenter);
+                fragment.show(getFragmentManager()," Test ");
             }
         });
     }

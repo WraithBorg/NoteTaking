@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.ui.report.TodayReportMainFragment;
+import com.zxu.ui.report.TodayReportMainPresenter;
 import com.zxu.util.UtilTools;
 
 import org.apache.commons.lang3.StringUtils;
@@ -242,6 +244,21 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             if (!StringUtils.isEmpty(accountBook.getImgUrl())) {
                 lv_topcard.setBackgroundResource(Integer.parseInt(accountBook.getImgUrl()));
             }
+            // 今天
+            TextView tv_today = (TextView) getActivity().findViewById(R.id.indexpage_today_id);
+            tv_today.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TodayReportMainFragment fragment = new TodayReportMainFragment();
+                    TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
+                    fragment.setPresenter(presenter);
+                    fragment.show(getFragmentManager()," Test ");
+                }
+            });
+            // 本周
+            TextView tv_week = (TextView) getActivity().findViewById(R.id.indexpage_week_id);
+            // 本年
+            TextView tv_year = (TextView) getActivity().findViewById(R.id.indexpage_year_id);
         }
     }
 
