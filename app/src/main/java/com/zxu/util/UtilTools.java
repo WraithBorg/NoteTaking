@@ -3,6 +3,8 @@ package com.zxu.util;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,5 +28,8 @@ public class UtilTools {
                 timer.cancel();
             }
         }, cnt );
+    }
+    public static String format(BigDecimal decimal) {
+        return new DecimalFormat("0.##########").format(decimal);
     }
 }

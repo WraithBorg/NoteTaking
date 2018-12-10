@@ -18,8 +18,6 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.util.Constant;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,8 +54,8 @@ public class RecordAddActivity extends AppCompatActivity {
         iv_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecordAddFragment currentFragment = (RecordAddFragment)((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
-                if (currentFragment.saveData().isResult()){
+                RecordAddFragment currentFragment = (RecordAddFragment) ((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
+                if (currentFragment.saveData().isResult()) {
                     onCompleteClickListener.onClickComplete();
                 }
             }
@@ -75,9 +73,24 @@ public class RecordAddActivity extends AppCompatActivity {
         //
         tabs = Arrays.asList(tabTitle);
         fragments = new ArrayList<>();
+        String type;
         for (String title : tabs) {
-            RecordAddFragment fragment = RecordAddFragment.newInstance(title,accountBookID);
-            RecordAddPresenter presenter = new RecordAddPresenter((GaiaApplication)getApplication(), fragment);
+            switch (title) {
+                case "收入":
+                    type = "0";
+                    break;
+                case "支出":
+                    type = "1";
+                    break;
+                case "转账":
+                    type = "2";
+                    break;
+                default:
+                    type = "";
+                    break;
+            }
+            RecordAddFragment fragment = RecordAddFragment.newInstance(title, accountBookID, type);
+            RecordAddPresenter presenter = new RecordAddPresenter((GaiaApplication) getApplication(), fragment);
             fragment.setPresenter(presenter);
             fragments.add(fragment);
         }
@@ -105,14 +118,17 @@ public class RecordAddActivity extends AppCompatActivity {
      */
     private class AddRecordPagerAdapter extends FragmentPagerAdapter {
         public Fragment currentFragment;
+
         public AddRecordPagerAdapter(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
             currentFragment = (RecordAddFragment) object;
             super.setPrimaryItem(container, position, object);
         }
+
         @Override
         public Fragment getItem(int position) {
             return fragments.get(position);

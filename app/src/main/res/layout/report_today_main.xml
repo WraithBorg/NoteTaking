@@ -21,6 +21,7 @@
             android:paddingTop="6dp">
 
             <ImageView
+                android:id="@+id/report_today_main_back_id"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.model.JC_Record;
+import com.zxu.util.CostEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,14 @@ public class TodayReportMainAdapter extends BaseAdapter {
         holder.tv_catagory.setText(record.getCategory());
         holder.tv_money.setText(record.getMoney());
         holder.tv_time.setText(record.getWorkTime());
+        // prefect
+        if (CostEnum.SPEND.code().equals(record.getType())){
+            holder.tv_money.setTextColor(context.getColor(R.color.app_red));
+        }else if (CostEnum.INCOME.code().equals(record.getType())){
+            holder.tv_money.setTextColor(context.getColor(R.color.app_green));
+        }else {
+            holder.tv_money.setTextColor(context.getColor(R.color.app_black));
+        }
         return convertView;
     }
     private final class ViewHolder{

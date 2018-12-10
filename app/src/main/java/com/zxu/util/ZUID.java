@@ -1,11 +1,11 @@
 package com.zxu.util;
 
-public class UUIDTools {
+public class ZUID {
     private long millis;
     private long number;
 
     //{{{ UUID
-    public UUIDTools() {
+    public ZUID() {
         number = 1000L;
         millis = System.currentTimeMillis();
     }

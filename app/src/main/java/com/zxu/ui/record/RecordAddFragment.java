@@ -20,6 +20,7 @@ import com.zxu.ui.category.CategorySelectDialog;
 import com.zxu.ui.category.CategorySelectPresenter;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
+import com.zxu.util.ZUID;
 import com.zxu.widget.CustomDatePicker;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,33 +28,39 @@ import org.apache.commons.lang3.StringUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.UUID;
 
 public class RecordAddFragment extends Fragment implements RecordAddContract.View {
+    // view
     TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
     //
-    private String titleName;
-    private String accountBookID;
-
+    private String mAccountBookID;
+    private String mType;
     // 日期控件
     private CustomDatePicker customDatePicker2;
     //
     private RecordAddContract.Presenter mPresenter;
 
+    /**
+     *
+     */
     public RecordAddFragment() {
     }
 
     /**
-     * Fragment
+     * @param tabTitle      title
+     * @param accountBookID 账本
+     * @param type          消费类型
+     * @return
      */
-    public static RecordAddFragment newInstance(String tabTitle,String accountBookID) {
+    public static RecordAddFragment newInstance(String tabTitle, String accountBookID, String type) {
 
         Bundle args = new Bundle();
         args.putString(Constant.TITLE_TAG, tabTitle);
         RecordAddFragment fragment = new RecordAddFragment();
         fragment.setArguments(args);
-        fragment.setTitleName(tabTitle);
-        fragment.setAccountBookID(accountBookID);
+        fragment.mAccountBookID = accountBookID;
+        fragment.mType = type;
+
         return fragment;
     }
 
@@ -171,32 +178,22 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
 
         // save
         JC_Record record = new JC_Record();
-        record.setId(UUID.randomUUID().toString());
+        record.setId(new ZUID().next().toString());
         record.setMoney(moneyText);
         record.setCreateTime((new Date()).toString());
         record.setWorkTime(timeText);
         record.setCategory(categoryText);
         record.setAccount(accountText);
-        record.setType("0");
+        record.setType(mType);
         record.setMemo(memoText);
-        record.setAccount(getAccountBookID());
+        record.setAccount(mAccountBookID);
         mPresenter.addRecord(record);
 
         return new ResultHelper(true);
     }
 
     /********** setter and getter *********/
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
 
-    public void setAccountBookID(String accountBookID) {
-        this.accountBookID = accountBookID;
-    }
-
-    public String getAccountBookID() {
-        return accountBookID;
-    }
 
     @Override
     public void setPresenter(RecordAddContract.Presenter presenter) {
