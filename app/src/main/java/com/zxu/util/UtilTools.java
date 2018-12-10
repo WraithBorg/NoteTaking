@@ -12,6 +12,12 @@ import java.util.TimerTask;
  * 工具类
  */
 public class UtilTools {
+    /**
+     * 提示
+     * @param context
+     * @param s
+     * @param cnt
+     */
     public static void showToast(Context context, String s, final int cnt) {
         final Toast toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         final Timer timer = new Timer();
@@ -29,6 +35,12 @@ public class UtilTools {
             }
         }, cnt );
     }
+
+    /**
+     * 格式化
+     * @param decimal
+     * @return
+     */
     public static String format(BigDecimal decimal) {
         return new DecimalFormat("0.##########").format(decimal);
     }

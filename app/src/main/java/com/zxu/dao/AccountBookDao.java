@@ -66,7 +66,7 @@ public class AccountBookDao extends BaseDaoImpl<JC_AccountBook> {
         if (super.getList()==null||super.getList().size()==0){
             JC_AccountBook p = new JC_AccountBook();
             p.setId(Constant.DEFAULT_ACCOUNT_BOOK_ID);
-            p.setName(Constant.DEFAULT_ACCOUNT_BOOK_NAME);
+            p.setName("默认账本");
             p.setImgUrl(String.valueOf(R.mipmap.accountbook_03));
             super.add(p);
         }
