@@ -16,7 +16,7 @@ public class TodayReportMainPresenter implements TodayReportMainContract.Present
 
     @Override
     public void getTodayRecords() {
-        recordDao().getAll();
+        cView.setTodayRecords(recordDao().getAll());
     }
 
     public RecordDao recordDao(){

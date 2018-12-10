@@ -11,22 +11,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.model.JC_Record;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class TodayReportMainFragment extends DialogFragment implements TodayReportMainContract.View{
 
     private TodayReportMainContract.Presenter mPresenter;
+    private List<JC_Record> recordList;
 
-    @Override
-    public void showError() {
-
-    }
 
     @Override
     public void setPresenter(TodayReportMainContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 
     @Override
@@ -50,12 +49,16 @@ public class TodayReportMainFragment extends DialogFragment implements TodayRepo
         Date curDate = new Date(System.currentTimeMillis());
         String nowTime = format.format(curDate);
         //
+        mPresenter.getTodayRecords();
+        TodayReportMainAdapter adapter = new TodayReportMainAdapter(recordList,getActivity().getApplication());
+        //
         tv_topTime.setText(nowTime);
         tv_balance.setText("999");
         tv_income.setText("1999");
         tv_spending.setText("1000");
-
-
+        //
+        lv_details.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         return view;
     }
 
@@ -63,5 +66,10 @@ public class TodayReportMainFragment extends DialogFragment implements TodayRepo
     public void onActivityCreated(Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void setTodayRecords(List<JC_Record> records) {
+        this.recordList = records;
     }
 }
