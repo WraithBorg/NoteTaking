@@ -5,12 +5,12 @@ import com.zxu.base.database.ServiceFactory;
 import com.zxu.dao.CategoryDao;
 import com.zxu.model.JC_Category;
 
-public class CategoryAddBigPresenter implements CategoryAddBigContract.Presenter {
+public class AddCategoryBigPresenter implements AddCategoryBigContract.Presenter {
     private GaiaApplication application;
     private ServiceFactory serviceFactory = new ServiceFactory();
-    private CategoryAddBigContract.View cView;
+    private AddCategoryBigContract.View cView;
 
-    public CategoryAddBigPresenter(GaiaApplication application, CategoryAddBigContract.View cView) {
+    public AddCategoryBigPresenter(GaiaApplication application, AddCategoryBigContract.View cView) {
         this.application = application;
         this.cView = cView;
     }

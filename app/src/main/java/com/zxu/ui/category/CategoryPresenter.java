@@ -5,12 +5,14 @@ import com.zxu.base.database.ServiceFactory;
 import com.zxu.dao.CategoryDao;
 import com.zxu.model.JC_Category;
 
-public class CategoryAddSmallPresenter implements CategoryAddSmallContract.Presenter {
+import java.util.List;
+
+public class CategoryPresenter implements CategoryContract.Presenter {
     private GaiaApplication application;
     private ServiceFactory serviceFactory = new ServiceFactory();
-    CategoryAddSmallContract.View cView;
+    CategoryContract.View cView;
 
-    public CategoryAddSmallPresenter(GaiaApplication application, CategoryAddSmallContract.View cView) {
+    public CategoryPresenter(GaiaApplication application, CategoryContract.View cView) {
         this.application = application;
         this.cView = cView;
     }
@@ -20,7 +22,8 @@ public class CategoryAddSmallPresenter implements CategoryAddSmallContract.Prese
     }
 
     @Override
-    public void addSmallCategory(JC_Category category) {
-        categoryDao().addCategory(category);
+    public void getCategorys(boolean fromAdd, String mType) {
+        List<JC_Category> list = categoryDao().getBSList(fromAdd, mType);
+        cView.setCategorys(list);
     }
 }

@@ -16,8 +16,8 @@ import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
 import com.zxu.model.JC_Record;
-import com.zxu.ui.category.CategorySelectDialog;
-import com.zxu.ui.category.CategorySelectPresenter;
+import com.zxu.ui.category.SelectCategoryDialog;
+import com.zxu.ui.category.CategoryPresenter;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 import com.zxu.util.ZUID;
@@ -105,11 +105,12 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
         tv_selCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategorySelectDialog dialog = new CategorySelectDialog();
-                CategorySelectPresenter presenter = new CategorySelectPresenter((GaiaApplication) getActivity().getApplication(), dialog);
+                SelectCategoryDialog dialog = new SelectCategoryDialog();
+                dialog.setmType(mType);
+                CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 // 监听选择类别事件
-                dialog.setOnSelectSmallTypeListener(new CategorySelectDialog.onSelectSmallTypeListener() {
+                dialog.setOnSelectSmallTypeListener(new SelectCategoryDialog.onSelectSmallTypeListener() {
                     @Override
                     public void selectOn(JC_Category category) {
                         tv_selCategory.setText(category.getName());

@@ -12,8 +12,8 @@ public class ZUID {
     //}}}
 
     //{{{ next
-    public Long next () {
-        return join2Long(millis, number++);
+    public String next () {
+        return join2Long(millis, number++).toString();
     }
     //}}}
     //{{{ join2Long

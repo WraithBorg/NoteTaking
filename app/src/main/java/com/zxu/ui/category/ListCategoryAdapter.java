@@ -13,20 +13,20 @@ import com.zxu.model.JC_Category;
 
 import java.util.List;
 
-public class CategoryListAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
+public class ListCategoryAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
 
     private Context context;
     private List<JC_Category> bigList;
 
-    private CategoryListAdapter() {
+    private ListCategoryAdapter() {
     }
 
-    private CategoryListAdapter(Context context) {
+    private ListCategoryAdapter(Context context) {
         this();
         this.context = context;
     }
 
-    public CategoryListAdapter(Context context, List<JC_Category> bigList) {
+    public ListCategoryAdapter(Context context, List<JC_Category> bigList) {
         this(context);
         this.bigList = bigList;
     }

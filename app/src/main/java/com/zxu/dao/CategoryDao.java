@@ -1,12 +1,11 @@
 package com.zxu.dao;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import com.zxu.base.database.BaseDaoImpl;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_Category;
 import com.zxu.util.CodeConstant;
+import com.zxu.util.CostEnum;
+import com.zxu.util.ZUID;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,12 +24,8 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
      * @return
      */
     public ResultHelper addCategory(JC_Category category) {
-        int maxNum = getMaxNum();
-        if (category.getType() == 0){
-            category.setNum(maxNum+1000);
-        }else {
-            category.setNum(maxNum+10);
-        }
+        ZUID zuid = new ZUID();
+        category.setNum(zuid.next().toString());
         super.add(category);
         return new ResultHelper(true, "新增成功");
     }
@@ -40,7 +35,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
      * @param fromAdd
      * @return
      */
-    public List<JC_Category> getBSList(boolean fromAdd) {
+    public List<JC_Category> getBSList(boolean fromAdd,String mType) {
         List<JC_Category> list = super.getList();
         Map<String, JC_Category> bigs = new HashMap<>();
         Map<String, List<JC_Category>> smalls = new HashMap<>();
@@ -59,6 +54,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
         }
         list.clear();
         // 后期加工
+        ZUID zuid = new ZUID();
         for (String key : bigs.keySet()) {
             JC_Category category = bigs.get(key);
             List<JC_Category> ss = smalls.get(key);
@@ -70,13 +66,14 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
                 c.setId(CodeConstant.ADDTWOTYPE);
                 c.setName("新建二级支出分类");
                 c.setType(1);
+                c.setNum(zuid.next());
                 ss.add(c);
             }
             // 小类排序
             Collections.sort(ss, new Comparator<JC_Category>() {
                 @Override
                 public int compare(JC_Category o1, JC_Category o2) {
-                    return o1.getNum() - o2.getNum();
+                    return Long.compare(Long.parseLong(o1.getNum()), Long.parseLong(o2.getNum()));
                 }
             });
             category.setChilds(ss);
@@ -88,13 +85,14 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
             b.setName("新建一级支出分类");
             b.setChilds(new ArrayList<>());
             b.setType(0);
+            b.setNum(zuid.next());
             list.add(b);
         }
         // 大类排序
         Collections.sort(list, new Comparator<JC_Category>() {
             @Override
             public int compare(JC_Category o1, JC_Category o2) {
-                return o1.getNum() - o2.getNum();
+                return Long.compare(Long.parseLong(o1.getNum()), Long.parseLong(o2.getNum()));
             }
         });
 
@@ -140,20 +138,24 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
             String id = split[1];
             String name = split[2];
             int type = Integer.parseInt(split[3]);
-            int num = Integer.parseInt(split[4]);
-            category = new JC_Category(id, name, fatherId, type, num, new ArrayList<>());
+            String num = String.valueOf(split[4]);
+            category = new JC_Category(id, name, fatherId, type, num,CostEnum.INCOME.code(), new ArrayList<>());
             super.add(category);
         }
-    }
-    int getMaxNum(){
-        SQLiteDatabase database = getDatabaseHelper().open();
-        Cursor cursor = database.query("jc_category",
-                null, null, null, null, null, "NUM DESC");
-        int num = 0;
-        if (cursor.moveToNext()){
-            num = cursor.getInt(cursor.getColumnIndex("num"));
+
+        strings = new String[]{
+                "|职业收入|职业收入|0",
+                "职业收入|工资收入|工资收入|1"}
+                ;
+        ZUID zuid = new ZUID();
+        for (String str : strings){
+            String[] split = str.split("\\|");
+            String fatherId = split[0];
+            String id = split[1];
+            String name = split[2];
+            int type = Integer.parseInt(split[3]);
+            category = new JC_Category(id, name, fatherId, type, zuid.next(),CostEnum.SPEND.code(), new ArrayList<>());
+            super.add(category);
         }
-        getDatabaseHelper().close();
-        return num;
     }
 }

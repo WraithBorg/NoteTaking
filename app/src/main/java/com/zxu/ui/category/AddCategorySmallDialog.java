@@ -1,8 +1,6 @@
 package com.zxu.ui.category;
 
 import android.app.DialogFragment;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,14 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
-import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
 import com.zxu.util.CodeConstant;
 
 import java.util.UUID;
 
-public class CategoryAddSmallDialog extends DialogFragment implements CategoryAddSmallContract.View{
-    private CategoryAddSmallContract.Presenter mPresenter;
+public class AddCategorySmallDialog extends DialogFragment implements AddCategorySmallContract.View{
+    private AddCategorySmallContract.Presenter mPresenter;
 
     @Nullable
     @Override
@@ -92,7 +89,7 @@ public class CategoryAddSmallDialog extends DialogFragment implements CategoryAd
     }
 
     @Override
-    public void setPresenter(CategoryAddSmallContract.Presenter presenter) {
+    public void setPresenter(AddCategorySmallContract.Presenter presenter) {
         mPresenter = presenter;
     }
 }

@@ -1,8 +1,6 @@
 package com.zxu.ui.category;
 
 import android.app.DialogFragment;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -25,8 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
 
-public class CategoryAddBigDialog extends DialogFragment implements CategoryAddBigContract.View {
-    private CategoryAddBigContract.Presenter mPresenter;
+public class AddCategoryBigDialog extends DialogFragment implements AddCategoryBigContract.View {
+    private AddCategoryBigContract.Presenter mPresenter;
 
     @Nullable
     @Override
@@ -70,8 +68,8 @@ public class CategoryAddBigDialog extends DialogFragment implements CategoryAddB
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fatherId",cId);
 
-                CategoryAddSmallDialog dialog = new CategoryAddSmallDialog();
-                CategoryAddSmallPresenter presenter = new CategoryAddSmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
+                AddCategorySmallDialog dialog = new AddCategorySmallDialog();
+                AddCategorySmallPresenter presenter = new AddCategorySmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
                 dialog.setPresenter(presenter);
                 dialog.setArguments(bundle);
                 dialog.show(getActivity().getFragmentManager(), "android");
@@ -109,7 +107,7 @@ public class CategoryAddBigDialog extends DialogFragment implements CategoryAddB
     }
 
     @Override
-    public void setPresenter(CategoryAddBigContract.Presenter presenter) {
+    public void setPresenter(AddCategoryBigContract.Presenter presenter) {
         mPresenter = presenter;
     }
 }

@@ -22,18 +22,19 @@ import com.zxu.util.DensityUtil;
 
 import java.util.List;
 
-public class CategorySelectDialog extends DialogFragment implements CategorySelectContract.View {
-    /* Scroll << */
+public class SelectCategoryDialog extends DialogFragment implements CategoryContract.View {
+    // view
     ImageView iv_addCategory;
     ImageView iv_folding;
     private ListView recLeft;
     private ListView recRight;
-
-    private CategoryLeftAdapter leftAdapter;
-    private CategoryRightAdapter rightAdapter;
+    // java
+    private String mType;
+    private SelectCategoryAdapterLeft leftAdapter;
+    private SelectCategoryAdapterRight rightAdapter;
     //记录右侧当前可见的第一个item的position
 
-    private CategorySelectContract.Presenter mPresenter;
+    private CategoryContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
 
     @Nullable
@@ -64,8 +65,8 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
                         dismiss();
                     }
                 }, CodeConstant.DIALOGWAITTIME);
-                CategoryListDialog dialog = new CategoryListDialog();
-                CategoryListPresenter presenter = new CategoryListPresenter((GaiaApplication) getActivity().getApplication(), dialog);
+                ListCategoryDialog dialog = new ListCategoryDialog();
+                CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
             }
@@ -78,9 +79,9 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
             }
         });
         //
-        mPresenter.getAll();
+        mPresenter.getCategorys(false,mType);
         // left
-        leftAdapter = new CategoryLeftAdapter(categoryList, getActivity());
+        leftAdapter = new SelectCategoryAdapterLeft(categoryList, getActivity());
         recLeft.setAdapter(leftAdapter);
         leftAdapter.notifyDataSetChanged();
         recLeft.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -102,7 +103,7 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
 
     private void initRight(List<JC_Category> list) {
 
-        rightAdapter = new CategoryRightAdapter(list, getActivity());
+        rightAdapter = new SelectCategoryAdapterRight(list, getActivity());
 
         recRight.setAdapter(rightAdapter);
         rightAdapter.notifyDataSetChanged();
@@ -134,19 +135,13 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = DensityUtil.dp2px(getActivity().getApplication(), 260);// TODO 会影响record_category_left_text高度及滚动条
         window.setAttributes(params);
-        // 设置背景透明
-//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setWindowAnimations(R.style.dialogWindowAnim);
         window.setBackgroundDrawableResource(R.color.vifrification);
     }
 
-    @Override
-    public void setCategorys(List<JC_Category> categorys) {
-        setCategoryList(categorys);
-    }
 
     @Override
-    public void setPresenter(CategorySelectContract.Presenter presenter) {
+    public void setPresenter(CategoryContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -167,5 +162,17 @@ public class CategorySelectDialog extends DialogFragment implements CategorySele
 
     public void setOnSelectSmallTypeListener(onSelectSmallTypeListener onSelectSmallTypeListener) {
         this.onSelectSmallTypeListener = onSelectSmallTypeListener;
+    }
+    //
+    @Override
+    public void setCategorys(List<JC_Category> categorys) {
+        setCategoryList(categorys);
+    }
+    /**
+     *
+     * @param mType
+     */
+    public void setmType(String mType) {
+        this.mType = mType;
     }
 }
