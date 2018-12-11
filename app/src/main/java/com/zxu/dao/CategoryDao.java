@@ -106,7 +106,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
      * 初始化数据
      */
     public void initData() {
-        if (super.getList() != null && super.getList().size() >= 0) {
+        if (super.getList() != null && super.getList().size() > 0) {
             return;
         }
         String[] strings = new String[]{

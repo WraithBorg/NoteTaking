@@ -19,12 +19,12 @@ import com.zxu.R;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.ui.adapter.BackDropAdapter;
 import com.zxu.util.UtilTools;
+import com.zxu.util.ZUID;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class AddAccountBookDialog extends DialogFragment implements AddAccountBookContract.View {
     private AddAccountBookContract.Presenter mPresenter;
@@ -107,8 +107,9 @@ public class AddAccountBookDialog extends DialogFragment implements AddAccountBo
                     UtilTools.showToast(getActivity().getApplicationContext(), "请输入账户名", 1000);
                     return;
                 }
+                ZUID zuid = new ZUID();
                 JC_AccountBook b = new JC_AccountBook();
-                b.setId(UUID.randomUUID().toString());
+                b.setId(zuid.next());
                 b.setName(accountName);
                 b.setImgUrl(backDrops.get(selectedBackDrop));
                 mPresenter.addAccountBook(b);

@@ -65,32 +65,8 @@ public class IndexPageActivity extends Activity {
             }
         });
         // account id
-//        TextView tv_accountBookId = (TextView) findViewById(R.id.indexpage_accountbook_id_id);
-//        tv_accountBookId.setText(Constant.DEFAULT_ACCOUNT_BOOK_ID);
-        // add record
-//        TextView tv_noteOne = (TextView) findViewById(R.id.noteone_id);
-//        tv_noteOne.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // 传递账户ID
-//                Bundle args = new Bundle();
-//                args.putString(Constant.AccountBookID,tv_accountBookId.getText().toString());
-//                Intent intent = new Intent(getApplication(), RecordAddActivity.class);
-//                intent.putExtras(args);
-//                startActivity(intent);
-//            }
-//        });
-        // 今天
-//        TextView tv_today = (TextView) findViewById(R.id.indexpage_today_id);
-//        tv_today.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TodayReportMainFragment fragment = new TodayReportMainFragment();
-//                TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getApplication()), fragment);
-//                fragment.setPresenter(presenter);
-//                fragment.show(getFragmentManager()," Test ");
-//            }
-//        });
+        //
+        indexPageFragment.setFirstEnter(true);
     }
 
     /**

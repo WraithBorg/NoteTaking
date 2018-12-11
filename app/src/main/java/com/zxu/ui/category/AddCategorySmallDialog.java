@@ -16,10 +16,9 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.model.JC_Category;
 import com.zxu.util.CodeConstant;
+import com.zxu.util.ZUID;
 
-import java.util.UUID;
-
-public class AddCategorySmallDialog extends DialogFragment implements AddCategorySmallContract.View{
+public class AddCategorySmallDialog extends DialogFragment implements AddCategorySmallContract.View {
     private AddCategorySmallContract.Presenter mPresenter;
 
     @Nullable
@@ -27,13 +26,13 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        View view = inflater.inflate(R.layout.category_add_small,null);
+        View view = inflater.inflate(R.layout.category_add_small, null);
         ImageView iv_back = (ImageView) view.findViewById(R.id.category_add_big_back_id);
         TextView tv_next = (TextView) view.findViewById(R.id.category_add_big_next_id);
         EditText et_name = (EditText) view.findViewById(R.id.category_add_big_type_name_id);
         // get FatherId
         Bundle bundle = getArguments();
-        String fatherId = (String)bundle.getSerializable("fatherId");
+        String fatherId = (String) bundle.getSerializable("fatherId");
         // return
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +57,9 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
                     }
                 }, CodeConstant.DIALOGWAITTIME);
                 // save data
+                ZUID zuid = new ZUID();
                 JC_Category category = new JC_Category();
-                category.setId(UUID.randomUUID().toString());
+                category.setId(zuid.next());
                 category.setName(et_name.getText().toString());
                 category.setType(1);
                 category.setFatherId(fatherId);
@@ -68,6 +68,7 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
         });
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();

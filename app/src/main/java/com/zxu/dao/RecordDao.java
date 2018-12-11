@@ -52,8 +52,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
         }
         String start = strings[0], end = strings[1];
 
-//        SELECT * FROM jc_record WHERE workTime >= '2018-12-11 12:20' AND workTime <= '2018-12-11 12:20'
-        return super.where().eq("account", accountId).and().between("workTime", start, end).query();
+        return super.where().eq("bookId", accountId).and().between("workTime", start, end).query();
     }
 
     /**

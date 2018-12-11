@@ -129,7 +129,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
                 customDatePicker2.show(tv_selTime.getText().toString());
             }
         });
-
+        // 返回按钮监听
         ((AddRecordActivity) getActivity()).setOnCompleteClickListener(new AddRecordActivity.OnCompleteClickListener() {
             @Override
             public void onClickComplete() {
@@ -178,16 +178,17 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         }
 
         // save
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         JC_Record record = new JC_Record();
-        record.setId(new ZUID().next().toString());
+        record.setId(new ZUID().next());
         record.setMoney(moneyText);
-        record.setCreateTime((new Date()).toString());
+        record.setCreateTime(format.format(new Date()));
         record.setWorkTime(timeText);
         record.setCategory(categoryText);
         record.setAccount(accountText);
         record.setType(mType);
         record.setMemo(memoText);
-        record.setAccount(mAccountBookID);
+        record.setBookId(mAccountBookID);
         mPresenter.addRecord(record);
 
         return new ResultHelper(true);

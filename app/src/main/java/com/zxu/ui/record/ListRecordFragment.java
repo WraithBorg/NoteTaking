@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
-import com.zxu.util.ActivityUtil;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
 
@@ -93,6 +92,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 JC_Record record = recordList.get(position);
                 EditRecordDialog dialog = new EditRecordDialog();
+                dialog.setRecord(record);
                 RecordPresenter presenter = new RecordPresenter((GaiaApplication) (getActivity().getApplication()), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getFragmentManager(), "Test");
@@ -107,6 +107,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         super.onActivityCreated(savedInstanceState);
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -120,6 +121,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         window.setWindowAnimations(R.style.dialogWindowAnim);
         window.setBackgroundDrawableResource(R.color.vifrification);
     }
+
     @Override
     public void setRecords(List<JC_Record> records) {
         this.recordList = records;

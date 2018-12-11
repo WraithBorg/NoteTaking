@@ -47,7 +47,8 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     private AccountBookAdapter accountBooksAdapter;
     private AccountBookContract.Presenter mPresenter;
     private AddAccountBookDialog addAccountBookDialogFragment = new AddAccountBookDialog();
-
+    //
+    boolean firstEnter;
     //
     public static AccountBookFragment newInstance() {
         return new AccountBookFragment();
@@ -233,7 +234,6 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             JC_AccountBook accountBook = accountBooks.get(position);
-            UtilTools.showToast(getActivity().getApplicationContext(), "点击" + accountBook.getName(), 1505);
 
             lv_accounts.setItemChecked(position, true);//高亮选中item
             mDrawerLayout.closeDrawer(slipMenuView);// 关闭侧滑菜单
@@ -266,7 +266,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             tv_today.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onPeriodClick(accountBook,CodeConstant.DAY);
+                    onPeriodClick(accountBook, CodeConstant.DAY);
                 }
             });
             // 本周
@@ -274,7 +274,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             tv_week.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onPeriodClick(accountBook,CodeConstant.WEEK);
+                    onPeriodClick(accountBook, CodeConstant.WEEK);
                 }
             });
             // 本月
@@ -282,7 +282,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             tv_month.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onPeriodClick(accountBook,CodeConstant.MONTH);
+                    onPeriodClick(accountBook, CodeConstant.MONTH);
                 }
             });
             // 本年
@@ -290,7 +290,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             tv_year.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onPeriodClick(accountBook,CodeConstant.YEAR);
+                    onPeriodClick(accountBook, CodeConstant.YEAR);
                 }
             });
         }
@@ -298,10 +298,11 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
 
     /**
      * 本周 月 年 点击事件
+     *
      * @param accountBook
      * @param period
      */
-    private void onPeriodClick(JC_AccountBook accountBook,String period) {
+    private void onPeriodClick(JC_AccountBook accountBook, String period) {
         ListRecordFragment fragment = new ListRecordFragment();
         fragment.setAccountId(accountBook.getId());
         fragment.setPeriod(period);
@@ -332,9 +333,19 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         lv_accounts.setAdapter(accountBooksAdapter);
         lv_accounts.setOnItemClickListener(new AcBooksItemClickListener(accountBooksAdapter.getAccountBooks()));
         // list view 触发第一个item click 事件
-        lv_accounts.performItemClick(lv_accounts.getAdapter().getView(0, null, null),
-                0, lv_accounts.getAdapter().getItemId(0));
+        if (firstEnter) {
+            firstEnter = false;
+            lv_accounts.performItemClick(lv_accounts.getAdapter().getView(0, null, null),
+                    0, lv_accounts.getAdapter().getItemId(0));
+        }
         accountBooksAdapter.notifyDataSetChanged();
     }
 
+    /**
+     *
+     * @param firstEnter
+     */
+    public void setFirstEnter(boolean firstEnter) {
+        this.firstEnter = firstEnter;
+    }
 }

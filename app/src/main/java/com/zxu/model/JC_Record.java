@@ -27,6 +27,8 @@ public class JC_Record {
     private String userId;//创建人
     @DatabaseField(columnName = "createTime",dataType = DataType.STRING)
     private String createTime;//创建时间
+    @DatabaseField(columnName = "bookId",dataType = DataType.STRING)
+    private String bookId;//账本
     /********** setter and getter *********/
     public String getId() {
         return id;
@@ -98,5 +100,13 @@ public class JC_Record {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 }
