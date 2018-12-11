@@ -44,7 +44,7 @@ public class SelectCategoryAdapterLeft extends BaseAdapter {
         TextView tv_catagory = (TextView) convertView.findViewById(R.id.category_left_name_id);
         tv_catagory.setText(mCategoryList.get(position).getName());
         if (position == mCategoryList.size()-1){
-            ListView.LayoutParams params = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT,260);//设置宽度和高度
+            ListView.LayoutParams params = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT,550);//设置宽度和高度 TODO 需要适配
             convertView.setLayoutParams(params);
         }
         return convertView;
