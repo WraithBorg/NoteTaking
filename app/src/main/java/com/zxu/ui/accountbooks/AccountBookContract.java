@@ -21,6 +21,7 @@ public interface AccountBookContract {
 
         void delAccountBook( JC_AccountBook item);
 
+        void getMonthReport(String accountId, String period);
     }
 
     /**
@@ -32,9 +33,7 @@ public interface AccountBookContract {
 
         void showLoading();
 
-        void hideLoading();
-
-        void showError();
+        void setMonthReport(String[] strings);//收入支出结余
 
         /**
          * @return 判断Fragment是否添加到Activity中

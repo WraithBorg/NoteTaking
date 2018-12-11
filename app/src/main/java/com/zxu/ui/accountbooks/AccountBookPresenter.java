@@ -3,8 +3,13 @@ package com.zxu.ui.accountbooks;
 import com.zxu.application.GaiaApplication;
 import com.zxu.dao.AccountBookDao;
 import com.zxu.base.database.ServiceFactory;
+import com.zxu.dao.RecordDao;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.model.JC_Record;
+import com.zxu.util.CostEnum;
+import com.zxu.util.UtilTools;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -61,10 +66,35 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
         cView.setAccountBooks4EDIT(list);
     }
 
+    @Override
+    public void getMonthReport(String accountId, String period) {
+
+        List<JC_Record> recordList = recordDao().getAll(accountId, period);
+        // calculate
+        BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
+        for (JC_Record record : recordList) {
+            if (CostEnum.INCOME.code().equals(record.getType())) {
+                inCome = inCome.add(new BigDecimal(record.getMoney()));
+            } else if (CostEnum.SPEND.code().equals(record.getType())) {
+                spending = spending.add(new BigDecimal(record.getMoney()));
+            }
+        }
+        balance = inCome.subtract(spending);
+
+        String[] strings = new String[3];
+        strings[0] = UtilTools.format(inCome);
+        strings[1] = UtilTools.format(spending);
+        strings[2] = UtilTools.format(balance);
+        cView.setMonthReport(strings);
+    }
+
     /**
      * @return
      */
     public AccountBookDao accountBookDao() {
         return serviceFactory.getService(application, AccountBookDao.class);
+    }
+    public RecordDao recordDao() {
+        return serviceFactory.getService(application, RecordDao.class);
     }
 }

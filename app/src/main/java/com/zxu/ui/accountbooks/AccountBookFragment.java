@@ -40,20 +40,22 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     private ListView lv_accounts;
     private LinearLayout ll_bottom;
     // 外部传递对象
-    LinearLayout mainContent;   // 主页面内容
-    DrawerLayout mDrawerLayout; // DrawerLayout组件
-    LinearLayout slipMenuView;  // 滑动菜单view
+    private LinearLayout mainContent;   // 主页面内容
+    private DrawerLayout mDrawerLayout; // DrawerLayout组件
+    private LinearLayout slipMenuView;  // 滑动菜单view
     //
     private AccountBookAdapter accountBooksAdapter;
     private AccountBookContract.Presenter mPresenter;
     private AddAccountBookDialog addAccountBookDialogFragment = new AddAccountBookDialog();
     //
-    boolean firstEnter;
+    private boolean firstEnter;
     //
     public static AccountBookFragment newInstance() {
         return new AccountBookFragment();
     }
 
+    //
+    private String[] monthReport;
     /**
      * 创建view
      *
@@ -206,16 +208,6 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
     }
 
     @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
     public boolean isActive() {
         return isAdded();
     }
@@ -293,6 +285,14 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                     onPeriodClick(accountBook, CodeConstant.YEAR);
                 }
             });
+            // 本月 收入  支出  结余
+            mPresenter.getMonthReport(accountBook.getId(), CodeConstant.MONTH);
+            TextView tv_income = (TextView) getActivity().findViewById(R.id.indexpage_income_id);
+            TextView tv_spend = (TextView) getActivity().findViewById(R.id.indexpage_spend_id);
+            TextView tv_balance = (TextView) getActivity().findViewById(R.id.indexpage_balance_id);
+            tv_income.setText(monthReport[0]);
+            tv_spend.setText(monthReport[1]);
+            tv_balance.setText(monthReport[2]);
         }
     }
 
@@ -347,5 +347,9 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
      */
     public void setFirstEnter(boolean firstEnter) {
         this.firstEnter = firstEnter;
+    }
+    @Override
+    public void setMonthReport(String[] monthReport) {
+        this.monthReport = monthReport;
     }
 }
