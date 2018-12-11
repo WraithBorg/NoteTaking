@@ -266,6 +266,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                 @Override
                 public void onClick(View v) {
                     TodayReportMainFragment fragment = new TodayReportMainFragment();
+                    fragment.setAccountId(tv_accountBookId.getText().toString());
                     TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
                     fragment.setPresenter(presenter);
                     fragment.show(getFragmentManager(), " Test ");

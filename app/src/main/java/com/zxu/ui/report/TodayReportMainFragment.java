@@ -25,7 +25,7 @@ public class TodayReportMainFragment extends DialogFragment implements TodayRepo
 
     private TodayReportMainContract.Presenter mPresenter;
     private List<JC_Record> recordList;
-
+    private String accountId;
 
     @Override
     public void setPresenter(TodayReportMainContract.Presenter presenter) {
@@ -54,7 +54,7 @@ public class TodayReportMainFragment extends DialogFragment implements TodayRepo
         Date curDate = new Date(System.currentTimeMillis());
         String nowTime = format.format(curDate);
         //
-        mPresenter.getTodayRecords();
+        mPresenter.getTodayRecords(accountId);
         TodayReportMainAdapter adapter = new TodayReportMainAdapter(recordList, getActivity().getApplication());
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
@@ -93,5 +93,9 @@ public class TodayReportMainFragment extends DialogFragment implements TodayRepo
     @Override
     public void setTodayRecords(List<JC_Record> records) {
         this.recordList = records;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 }

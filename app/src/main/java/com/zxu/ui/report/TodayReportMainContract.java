@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TodayReportMainContract {
     interface Presenter {
-        void getTodayRecords();
+        void getTodayRecords(String accountId);
 
     }
 

@@ -36,8 +36,8 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
      *
      * @return
      */
-    public List<JC_Record> getAll() {
-        return super.getList();
+    public List<JC_Record> getAll(String accountId) {
+        return super.where().eq("account", accountId).query();
     }
 
     /**

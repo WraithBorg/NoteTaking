@@ -15,11 +15,11 @@ public class TodayReportMainPresenter implements TodayReportMainContract.Present
     }
 
     @Override
-    public void getTodayRecords() {
-        cView.setTodayRecords(recordDao().getAll());
+    public void getTodayRecords(String accountId) {
+        cView.setTodayRecords(recordDao().getAll(accountId));
     }
 
-    public RecordDao recordDao(){
+    public RecordDao recordDao() {
         return serviceFactory.getService(application, RecordDao.class);
     }
 }
