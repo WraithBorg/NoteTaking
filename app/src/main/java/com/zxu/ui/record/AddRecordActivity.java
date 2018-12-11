@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RecordAddActivity extends AppCompatActivity {
+public class AddRecordActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public static final int MOVABLE_COUNT = 3;
@@ -54,7 +54,7 @@ public class RecordAddActivity extends AppCompatActivity {
         iv_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecordAddFragment currentFragment = (RecordAddFragment) ((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
+                AddRecordFragment currentFragment = (AddRecordFragment) ((AddRecordPagerAdapter) viewPager.getAdapter()).currentFragment;
                 if (currentFragment.saveData().isResult()) {
                     onCompleteClickListener.onClickComplete();
                 }
@@ -89,8 +89,8 @@ public class RecordAddActivity extends AppCompatActivity {
                     type = "";
                     break;
             }
-            RecordAddFragment fragment = RecordAddFragment.newInstance(title, accountBookID, type);
-            RecordAddPresenter presenter = new RecordAddPresenter((GaiaApplication) getApplication(), fragment);
+            AddRecordFragment fragment = AddRecordFragment.newInstance(title, accountBookID, type);
+            RecordPresenter presenter = new RecordPresenter((GaiaApplication) getApplication(), fragment);
             fragment.setPresenter(presenter);
             fragments.add(fragment);
         }
@@ -125,7 +125,7 @@ public class RecordAddActivity extends AppCompatActivity {
 
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
-            currentFragment = (RecordAddFragment) object;
+            currentFragment = (AddRecordFragment) object;
             super.setPrimaryItem(container, position, object);
         }
 

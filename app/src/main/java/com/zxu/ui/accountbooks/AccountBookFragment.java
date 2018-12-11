@@ -18,9 +18,9 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
-import com.zxu.ui.record.RecordAddActivity;
-import com.zxu.ui.report.ReportMainFragment;
-import com.zxu.ui.report.ReportMainPresenter;
+import com.zxu.ui.record.AddRecordActivity;
+import com.zxu.ui.record.ListRecordFragment;
+import com.zxu.ui.record.RecordPresenter;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
@@ -256,7 +256,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                     // 传递账户ID
                     Bundle args = new Bundle();
                     args.putString(Constant.AccountBookID, tv_accountBookId.getText().toString());
-                    Intent intent = new Intent(getActivity(), RecordAddActivity.class);
+                    Intent intent = new Intent(getActivity(), AddRecordActivity.class);
                     intent.putExtras(args);
                     startActivity(intent);
                 }
@@ -302,10 +302,10 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
      * @param period
      */
     private void onPeriodClick(JC_AccountBook accountBook,String period) {
-        ReportMainFragment fragment = new ReportMainFragment();
+        ListRecordFragment fragment = new ListRecordFragment();
         fragment.setAccountId(accountBook.getId());
         fragment.setPeriod(period);
-        ReportMainPresenter presenter = new ReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
+        RecordPresenter presenter = new RecordPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
         fragment.setPresenter(presenter);
         fragment.show(getFragmentManager(), " Test ");
     }

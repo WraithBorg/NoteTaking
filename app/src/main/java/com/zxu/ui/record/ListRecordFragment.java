@@ -1,4 +1,4 @@
-package com.zxu.ui.report;
+package com.zxu.ui.record;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,16 +22,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class ReportMainFragment extends DialogFragment implements ReportMainContract.View {
+public class ListRecordFragment extends DialogFragment implements ListRecordContract.View {
 
-    private ReportMainContract.Presenter mPresenter;
+    private ListRecordContract.Presenter mPresenter;
     private List<JC_Record> recordList;
     // param
     private String mAccountId;
     private String mPeriod;
 
     @Override
-    public void setPresenter(ReportMainContract.Presenter presenter) {
+    public void setPresenter(ListRecordContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -56,8 +57,8 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
         Date curDate = new Date(System.currentTimeMillis());
         String nowTime = format.format(curDate);
         //
-        mPresenter.getRecords(mAccountId,mPeriod);
-        ReportMainAdapter adapter = new ReportMainAdapter(recordList, getActivity().getApplication());
+        mPresenter.getRecords(mAccountId, mPeriod);
+        ListRecordAdapter adapter = new ListRecordAdapter(recordList, getActivity().getApplication());
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
         for (JC_Record record : recordList) {
@@ -83,6 +84,15 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
                 dismiss();
             }
         });
+        // jump to edit page
+        lv_details.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JC_Record record = recordList.get(position);
+
+            }
+        });
+
         return view;
     }
 
@@ -96,6 +106,7 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
     public void setRecords(List<JC_Record> records) {
         this.recordList = records;
     }
+
     // init param
     public void setAccountId(String accountId) {
         this.mAccountId = accountId;

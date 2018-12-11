@@ -16,8 +16,8 @@ import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_Account;
 import com.zxu.model.JC_Category;
 import com.zxu.model.JC_Record;
-import com.zxu.ui.category.SelectCategoryDialog;
 import com.zxu.ui.category.CategoryPresenter;
+import com.zxu.ui.category.SelectCategoryDialog;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 import com.zxu.util.ZUID;
@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class RecordAddFragment extends Fragment implements RecordAddContract.View {
+public class AddRecordFragment extends Fragment implements AddRecordContract.View {
     // view
     TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
     //
@@ -38,12 +38,12 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
     // 日期控件
     private CustomDatePicker customDatePicker2;
     //
-    private RecordAddContract.Presenter mPresenter;
+    private AddRecordContract.Presenter mPresenter;
 
     /**
      *
      */
-    public RecordAddFragment() {
+    public AddRecordFragment() {
     }
 
     /**
@@ -52,11 +52,11 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
      * @param type          消费类型
      * @return
      */
-    public static RecordAddFragment newInstance(String tabTitle, String accountBookID, String type) {
+    public static AddRecordFragment newInstance(String tabTitle, String accountBookID, String type) {
 
         Bundle args = new Bundle();
         args.putString(Constant.TITLE_TAG, tabTitle);
-        RecordAddFragment fragment = new RecordAddFragment();
+        AddRecordFragment fragment = new AddRecordFragment();
         fragment.setArguments(args);
         fragment.mAccountBookID = accountBookID;
         fragment.mType = type;
@@ -130,7 +130,7 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
             }
         });
 
-        ((RecordAddActivity) getActivity()).setOnCompleteClickListener(new RecordAddActivity.OnCompleteClickListener() {
+        ((AddRecordActivity) getActivity()).setOnCompleteClickListener(new AddRecordActivity.OnCompleteClickListener() {
             @Override
             public void onClickComplete() {
                 getActivity().onBackPressed();
@@ -197,7 +197,8 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
 
 
     @Override
-    public void setPresenter(RecordAddContract.Presenter presenter) {
+    public void setPresenter(AddRecordContract.Presenter presenter) {
         mPresenter = presenter;
     }
+
 }

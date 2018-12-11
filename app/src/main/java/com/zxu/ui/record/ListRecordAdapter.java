@@ -1,4 +1,4 @@
-package com.zxu.ui.report;
+package com.zxu.ui.record;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,11 +15,11 @@ import com.zxu.util.CostEnum;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportMainAdapter extends BaseAdapter {
+public class ListRecordAdapter extends BaseAdapter {
     private List<JC_Record> recordList;
     private Context context;
 
-    public ReportMainAdapter(List<JC_Record> recordList, Context context) {
+    public ListRecordAdapter(List<JC_Record> recordList, Context context) {
         this.recordList = recordList;
         this.context = context;
         //
