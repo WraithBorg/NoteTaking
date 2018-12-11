@@ -115,6 +115,7 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
                 mRecord.setMemo(memoText);
                 mPresenter.editRecord(mRecord);
                 //
+                dialogListener.onDismiss();
                 dismiss();
             }
         });
@@ -223,5 +224,15 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
      */
     public void setRecord(JC_Record mRecord) {
         this.mRecord = mRecord;
+    }
+
+    //
+    private DialogListener dialogListener;
+    public interface DialogListener{
+        void onDismiss();
+    }
+
+    public void setDialogListener(DialogListener dialogListener) {
+        this.dialogListener = dialogListener;
     }
 }
