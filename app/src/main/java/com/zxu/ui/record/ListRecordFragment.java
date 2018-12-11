@@ -7,13 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
+import com.zxu.util.ActivityUtil;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
 
@@ -45,7 +48,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // view
-        View view = inflater.inflate(R.layout.report_main, null);
+        View view = inflater.inflate(R.layout.records_main, null);
         ImageView iv_back = (ImageView) view.findViewById(R.id.report_today_main_back_id); //返回
         TextView tv_topTime = (TextView) view.findViewById(R.id.report_today_main_top_time_id);//今日时间
         TextView tv_balance = (TextView) view.findViewById(R.id.report_today_main_balance_id);//结余
@@ -89,7 +92,10 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 JC_Record record = recordList.get(position);
-
+                EditRecordDialog dialog = new EditRecordDialog();
+                RecordPresenter presenter = new RecordPresenter((GaiaApplication) (getActivity().getApplication()), dialog);
+                dialog.setPresenter(presenter);
+                dialog.show(getFragmentManager(), "Test");
             }
         });
 
@@ -101,7 +107,19 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         super.onActivityCreated(savedInstanceState);
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 设置位置在底部
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(params);
+        // 设置背景透明
+        window.setWindowAnimations(R.style.dialogWindowAnim);
+        window.setBackgroundDrawableResource(R.color.vifrification);
+    }
     @Override
     public void setRecords(List<JC_Record> records) {
         this.recordList = records;
