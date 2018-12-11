@@ -2,6 +2,7 @@ package com.zxu.ui.accountbooks;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -17,8 +18,10 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
+import com.zxu.ui.record.RecordAddActivity;
 import com.zxu.ui.report.TodayReportMainFragment;
 import com.zxu.ui.report.TodayReportMainPresenter;
+import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 
 import org.apache.commons.lang3.StringUtils;
@@ -139,7 +142,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         ll_bottom.setVisibility(View.VISIBLE);
         bt_complete.setVisibility(View.GONE);
         //
-        refreshAdapter(list,false);
+        refreshAdapter(list, false);
 
     }
 
@@ -154,7 +157,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         ll_bottom.setVisibility(View.GONE);
         bt_complete.setVisibility(View.VISIBLE);
         //
-        refreshAdapter(list,true);
+        refreshAdapter(list, true);
         // 删除接口调用
         accountBooksAdapter.setOnDeleteItem(new AccountBookAdapter.OnDeleteItem() {
             @Override
@@ -244,6 +247,19 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             if (!StringUtils.isEmpty(accountBook.getImgUrl())) {
                 lv_topcard.setBackgroundResource(Integer.parseInt(accountBook.getImgUrl()));
             }
+            // 记一笔
+            TextView tv_noteOne = (TextView) mainContent.findViewById(R.id.noteone_id);
+            tv_noteOne.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 传递账户ID
+                    Bundle args = new Bundle();
+                    args.putString(Constant.AccountBookID, tv_accountBookId.getText().toString());
+                    Intent intent = new Intent(getActivity(), RecordAddActivity.class);
+                    intent.putExtras(args);
+                    startActivity(intent);
+                }
+            });
             // 今天
             TextView tv_today = (TextView) getActivity().findViewById(R.id.indexpage_today_id);
             tv_today.setOnClickListener(new View.OnClickListener() {
@@ -252,7 +268,7 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
                     TodayReportMainFragment fragment = new TodayReportMainFragment();
                     TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
                     fragment.setPresenter(presenter);
-                    fragment.show(getFragmentManager()," Test ");
+                    fragment.show(getFragmentManager(), " Test ");
                 }
             });
             // 本周
@@ -275,13 +291,17 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
         this.slipMenuView = slipMenuView;
         this.mainContent = mainContent;
     }
+
     /**
      *
      */
-    private void refreshAdapter(List<JC_AccountBook> list,boolean isEdit){
+    private void refreshAdapter(List<JC_AccountBook> list, boolean isEdit) {
         accountBooksAdapter = new AccountBookAdapter(getActivity().getApplicationContext(), list, isEdit);
         lv_accounts.setAdapter(accountBooksAdapter);
         lv_accounts.setOnItemClickListener(new AcBooksItemClickListener(accountBooksAdapter.getAccountBooks()));
+        // list view 触发第一个item click 事件
+        lv_accounts.performItemClick(lv_accounts.getAdapter().getView(0, null, null),
+                0, lv_accounts.getAdapter().getItemId(0));
         accountBooksAdapter.notifyDataSetChanged();
     }
 

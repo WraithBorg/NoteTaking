@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
@@ -20,12 +19,7 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.demo.AFunctionDisplayActivity;
 import com.zxu.ui.accountbooks.AccountBookFragment;
 import com.zxu.ui.accountbooks.AccountBookPresenter;
-import com.zxu.ui.record.RecordAddActivity;
-import com.zxu.ui.report.TodayReportMainFragment;
-import com.zxu.ui.report.TodayReportMainPresenter;
 import com.zxu.util.ActivityUtil;
-import com.zxu.util.Constant;
-import com.zxu.util.UtilTools;
 
 /**
  * 索引页,activity 不是view层，是view model presenter三层的纽带
@@ -71,32 +65,32 @@ public class IndexPageActivity extends Activity {
             }
         });
         // account id
-        TextView tv_accountBookId = (TextView) findViewById(R.id.indexpage_accountbook_id_id);
-        tv_accountBookId.setText(Constant.DEFAULT_ACCOUNT_BOOK_ID);
+//        TextView tv_accountBookId = (TextView) findViewById(R.id.indexpage_accountbook_id_id);
+//        tv_accountBookId.setText(Constant.DEFAULT_ACCOUNT_BOOK_ID);
         // add record
-        TextView tv_noteOne = (TextView) findViewById(R.id.noteone_id);
-        tv_noteOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 传递账户ID
-                Bundle args = new Bundle();
-                args.putString(Constant.AccountBookID,tv_accountBookId.getText().toString());
-                Intent intent = new Intent(getApplication(), RecordAddActivity.class);
-                intent.putExtras(args);
-                startActivity(intent);
-            }
-        });
+//        TextView tv_noteOne = (TextView) findViewById(R.id.noteone_id);
+//        tv_noteOne.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // 传递账户ID
+//                Bundle args = new Bundle();
+//                args.putString(Constant.AccountBookID,tv_accountBookId.getText().toString());
+//                Intent intent = new Intent(getApplication(), RecordAddActivity.class);
+//                intent.putExtras(args);
+//                startActivity(intent);
+//            }
+//        });
         // 今天
-        TextView tv_today = (TextView) findViewById(R.id.indexpage_today_id);
-        tv_today.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TodayReportMainFragment fragment = new TodayReportMainFragment();
-                TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getApplication()), fragment);
-                fragment.setPresenter(presenter);
-                fragment.show(getFragmentManager()," Test ");
-            }
-        });
+//        TextView tv_today = (TextView) findViewById(R.id.indexpage_today_id);
+//        tv_today.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TodayReportMainFragment fragment = new TodayReportMainFragment();
+//                TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getApplication()), fragment);
+//                fragment.setPresenter(presenter);
+//                fragment.show(getFragmentManager()," Test ");
+//            }
+//        });
     }
 
     /**
