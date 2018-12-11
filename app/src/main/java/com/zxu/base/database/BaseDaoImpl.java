@@ -88,7 +88,6 @@ public abstract class BaseDaoImpl<T> extends AbstractService {
 
     /**
      * 删除
-     *
      */
     public void delete(String id) {
         Annotation annotation = entityClass.getAnnotation(DatabaseTable.class);
@@ -97,5 +96,12 @@ public abstract class BaseDaoImpl<T> extends AbstractService {
         SQLiteDatabase database = helper.getWritableDatabase();
         database.delete(tableName, "id=?", new String[]{String.valueOf(id)});
 
+    }
+
+    //
+    public ZWhere<T> where() {
+        Annotation annotation = entityClass.getAnnotation(DatabaseTable.class);
+        String tableName = ((DatabaseTable) annotation).tableName();
+        return new ZWhere<T>(getContext(), entityClass,tableName);
     }
 }

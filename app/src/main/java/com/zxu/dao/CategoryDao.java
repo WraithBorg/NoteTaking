@@ -19,7 +19,6 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
     }
 
     /**
-     *
      * @param category
      * @return
      */
@@ -32,11 +31,14 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
 
     /**
      * 获取类别数据
+     *
      * @param fromAdd
      * @return
      */
-    public List<JC_Category> getBSList(boolean fromAdd,String costType) {
-        List<JC_Category> list = super.getList();
+    public List<JC_Category> getBSList(boolean fromAdd, String costType) {
+//        List<JC_Category> list = super.getList();
+        List<JC_Category> list = super.where().eq("species", costType).query();
+
         Map<String, JC_Category> bigs = new HashMap<>();
         Map<String, List<JC_Category>> smalls = new HashMap<>();
         for (JC_Category category : list) {
@@ -99,62 +101,62 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
         return list;
     }
 
+
     /**
      * 初始化数据
-     *
      */
     public void initData() {
         String[] strings = new String[]{
-                "|购物消费|购物消费|0|1000",
-                "购物消费|衣服鞋帽|衣服鞋帽|1|1010",
-                "购物消费|厨房用品|厨房用品|1|1020",
-                "购物消费|电子产品|电子产品|1|1030",
+                "|购物消费|购物消费|0",
+                "购物消费|衣服鞋帽|衣服鞋帽|1",
+                "购物消费|厨房用品|厨房用品|1",
+                "购物消费|电子产品|电子产品|1",
 
-                "|食品酒水|食品酒水|0|2000",
-                "食品酒水|水果|水果|1|2010",
-                "食品酒水|买菜|买菜|1|2010",
-                "食品酒水|零食|零食|1|2010",
+                "|食品酒水|食品酒水|0",
+                "食品酒水|水果|水果|1",
+                "食品酒水|买菜|买菜|1",
+                "食品酒水|零食|零食|1",
 
-                "|居家生活|居家生活|0|3000",
-                "居家生活|房租|房租|1|3010",
-                "居家生活|水费|水费|1|3010",
-                "居家生活|电费|电费|1|3010",
-                "居家生活|网费|网费|1|3010",
+                "|居家生活|居家生活|0",
+                "居家生活|房租|房租|1",
+                "居家生活|水费|水费|1",
+                "居家生活|电费|电费|1",
+                "居家生活|网费|网费|1",
 
-                "|行车交通|行车交通|0|4000",
+                "|行车交通|行车交通|0",
 
-                "|休闲娱乐|休闲娱乐|0|5000",
+                "|休闲娱乐|休闲娱乐|0",
 
-                "|人情费用|人情费用|0|6000",
+                "|人情费用|人情费用|0",
 
-                "|出差旅行|出差旅行|0|7000",
+                "|出差旅行|出差旅行|0",
 
-                "|金融保险|金融保险|0|8000",
+                "|金融保险|金融保险|0",
         };
+        ZUID zuid = new ZUID();
         JC_Category category;
-        for (String str : strings){
+        for (String str : strings) {
             String[] split = str.split("\\|");
             String fatherId = split[0];
             String id = split[1];
             String name = split[2];
             int type = Integer.parseInt(split[3]);
-            String num = String.valueOf(split[4]);
-            category = new JC_Category(id, name, fatherId, type, num,CostEnum.INCOME.code(), new ArrayList<>());
+            category = new JC_Category(id, name, fatherId, type, CostEnum.SPEND.code(), zuid.next(), new ArrayList<>());
             super.add(category);
         }
 
         strings = new String[]{
                 "|职业收入|职业收入|0",
-                "职业收入|工资收入|工资收入|1"}
-                ;
-        ZUID zuid = new ZUID();
-        for (String str : strings){
+                "职业收入|工资收入|工资收入|1"
+        };
+
+        for (String str : strings) {
             String[] split = str.split("\\|");
             String fatherId = split[0];
             String id = split[1];
             String name = split[2];
             int type = Integer.parseInt(split[3]);
-            category = new JC_Category(id, name, fatherId, type, zuid.next(),CostEnum.SPEND.code(), new ArrayList<>());
+            category = new JC_Category(id, name, fatherId, type, CostEnum.INCOME.code(), zuid.next(), new ArrayList<>());
             super.add(category);
         }
     }
