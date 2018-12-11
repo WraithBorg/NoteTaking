@@ -21,14 +21,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class TodayReportMainFragment extends DialogFragment implements TodayReportMainContract.View {
+public class ReportMainFragment extends DialogFragment implements ReportMainContract.View {
 
-    private TodayReportMainContract.Presenter mPresenter;
+    private ReportMainContract.Presenter mPresenter;
     private List<JC_Record> recordList;
     private String accountId;
 
     @Override
-    public void setPresenter(TodayReportMainContract.Presenter presenter) {
+    public void setPresenter(ReportMainContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -55,7 +55,7 @@ public class TodayReportMainFragment extends DialogFragment implements TodayRepo
         String nowTime = format.format(curDate);
         //
         mPresenter.getTodayRecords(accountId);
-        TodayReportMainAdapter adapter = new TodayReportMainAdapter(recordList, getActivity().getApplication());
+        ReportMainAdapter adapter = new ReportMainAdapter(recordList, getActivity().getApplication());
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
         for (JC_Record record : recordList) {

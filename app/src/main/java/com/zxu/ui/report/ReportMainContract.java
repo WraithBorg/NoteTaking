@@ -5,13 +5,13 @@ import com.zxu.model.JC_Record;
 
 import java.util.List;
 
-public class TodayReportMainContract {
+public class ReportMainContract {
     interface Presenter {
         void getTodayRecords(String accountId);
 
     }
 
-    interface View extends BaseView<TodayReportMainContract.Presenter> {
+    interface View extends BaseView<ReportMainContract.Presenter> {
         void setTodayRecords(List<JC_Record> records);
 
     }

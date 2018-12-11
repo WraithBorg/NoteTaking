@@ -4,12 +4,12 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.base.database.ServiceFactory;
 import com.zxu.dao.RecordDao;
 
-public class TodayReportMainPresenter implements TodayReportMainContract.Presenter {
+public class ReportMainPresenter implements ReportMainContract.Presenter {
     private GaiaApplication application;
     private ServiceFactory serviceFactory = new ServiceFactory();
-    private TodayReportMainContract.View cView;
+    private ReportMainContract.View cView;
 
-    public TodayReportMainPresenter(GaiaApplication application, TodayReportMainContract.View cView) {
+    public ReportMainPresenter(GaiaApplication application, ReportMainContract.View cView) {
         this.application = application;
         this.cView = cView;
     }

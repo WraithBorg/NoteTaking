@@ -19,8 +19,8 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_AccountBook;
 import com.zxu.ui.record.RecordAddActivity;
-import com.zxu.ui.report.TodayReportMainFragment;
-import com.zxu.ui.report.TodayReportMainPresenter;
+import com.zxu.ui.report.ReportMainFragment;
+import com.zxu.ui.report.ReportMainPresenter;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 
@@ -265,9 +265,9 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             tv_today.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TodayReportMainFragment fragment = new TodayReportMainFragment();
+                    ReportMainFragment fragment = new ReportMainFragment();
                     fragment.setAccountId(tv_accountBookId.getText().toString());
-                    TodayReportMainPresenter presenter = new TodayReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
+                    ReportMainPresenter presenter = new ReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
                     fragment.setPresenter(presenter);
                     fragment.show(getFragmentManager(), " Test ");
                 }

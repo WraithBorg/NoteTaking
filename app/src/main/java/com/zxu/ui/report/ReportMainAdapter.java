@@ -15,15 +15,15 @@ import com.zxu.util.CostEnum;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodayReportMainAdapter extends BaseAdapter {
+public class ReportMainAdapter extends BaseAdapter {
     private List<JC_Record> recordList;
     private Context context;
 
-    public TodayReportMainAdapter(List<JC_Record> recordList, Context context) {
+    public ReportMainAdapter(List<JC_Record> recordList, Context context) {
         this.recordList = recordList;
         this.context = context;
         //
-        if (recordList == null){
+        if (recordList == null) {
             this.recordList = new ArrayList<>();
         }
     }
@@ -47,7 +47,7 @@ public class TodayReportMainAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         // view
         ViewHolder holder;
-        if (convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.report_today_item, null);
@@ -56,7 +56,7 @@ public class TodayReportMainAdapter extends BaseAdapter {
             holder.tv_money = (TextView) convertView.findViewById(R.id.report_today_item_money_id);
             holder.tv_time = (TextView) convertView.findViewById(R.id.report_today_item_time_id);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         // assignment
@@ -66,16 +66,17 @@ public class TodayReportMainAdapter extends BaseAdapter {
         holder.tv_money.setText(record.getMoney());
         holder.tv_time.setText(record.getWorkTime());
         // prefect
-        if (CostEnum.SPEND.code().equals(record.getType())){
+        if (CostEnum.SPEND.code().equals(record.getType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_red));
-        }else if (CostEnum.INCOME.code().equals(record.getType())){
+        } else if (CostEnum.INCOME.code().equals(record.getType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_green));
-        }else {
+        } else {
             holder.tv_money.setTextColor(context.getColor(R.color.app_black));
         }
         return convertView;
     }
-    private final class ViewHolder{
+
+    private final class ViewHolder {
         ImageView iv_type;
         TextView tv_catagory;
         TextView tv_money;
