@@ -39,6 +39,12 @@ public class ZWhere<T> {
     }
 
     //
+    public ZWhere<T> between(String columnName, String low, String high) {
+        sqlBuilser.append(" " + columnName + " >= '" + low + "' AND " + columnName + " <= '" + high + "' ");
+        return this;
+    }
+
+    //
     public ZWhere<T> and() {
         sqlBuilser.append(" and ");
         return this;
