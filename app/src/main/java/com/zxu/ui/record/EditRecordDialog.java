@@ -33,7 +33,7 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
     // 日期控件
     private CustomDatePicker customDatePicker2;
     // view
-    private TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
+    private TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo, tv_save, tv_delete;
     ImageView iv_confirm, iv_back;
     // java
     private JC_Record mRecord;
@@ -79,6 +79,9 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
         tv_money.setText(mRecord.getMoney());
         tv_memo.setText(mRecord.getMemo());
         //
+        tv_save = (TextView) view.findViewById(R.id.record_edit_save_id);
+        tv_delete = (TextView) view.findViewById(R.id.record_edit_delete_id);
+        //
         initWidgets();
         return view;
     }
@@ -119,10 +122,27 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
                 dismiss();
             }
         });
+        // 保存
+        tv_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_confirm.callOnClick();
+            }
+        });
+        // 删除
+        tv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.delete(mRecord);
+                dialogListener.onDismiss();
+                dismiss();
+            }
+        });
         // 返回
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialogListener.onDismiss();
                 dismiss();
             }
         });
@@ -228,7 +248,8 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
 
     //
     private DialogListener dialogListener;
-    public interface DialogListener{
+
+    public interface DialogListener {
         void onDismiss();
     }
 

@@ -5,12 +5,13 @@ import com.zxu.base.database.ServiceFactory;
 import com.zxu.dao.RecordDao;
 import com.zxu.model.JC_Record;
 
-public class RecordPresenter implements ListRecordContract.Presenter, AddRecordContract.Presenter,EditRecordContract.Presenter {
+public class RecordPresenter implements ListRecordContract.Presenter, AddRecordContract.Presenter, EditRecordContract.Presenter {
     private GaiaApplication application;
     private ServiceFactory serviceFactory = new ServiceFactory();
     private ListRecordContract.View listView;
     private AddRecordContract.View addView;
     private EditRecordContract.View editView;
+
     public RecordPresenter(GaiaApplication application, ListRecordContract.View view) {
         this.application = application;
         this.listView = view;
@@ -43,5 +44,10 @@ public class RecordPresenter implements ListRecordContract.Presenter, AddRecordC
     @Override
     public void editRecord(JC_Record record) {
         recordDao().editRecord(record);
+    }
+
+    @Override
+    public void delete(JC_Record mRecord) {
+        recordDao().delete(mRecord.getId());
     }
 }
