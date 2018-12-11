@@ -7,12 +7,12 @@ import java.util.List;
 
 public class ReportMainContract {
     interface Presenter {
-        void getTodayRecords(String accountId);
+        void getRecords(String accountId,String period);
 
     }
 
     interface View extends BaseView<ReportMainContract.Presenter> {
-        void setTodayRecords(List<JC_Record> records);
+        void setRecords(List<JC_Record> records);
 
     }
 }

@@ -21,6 +21,7 @@ import com.zxu.model.JC_AccountBook;
 import com.zxu.ui.record.RecordAddActivity;
 import com.zxu.ui.report.ReportMainFragment;
 import com.zxu.ui.report.ReportMainPresenter;
+import com.zxu.util.CodeConstant;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 
@@ -265,18 +266,48 @@ public class AccountBookFragment extends Fragment implements AccountBookContract
             tv_today.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ReportMainFragment fragment = new ReportMainFragment();
-                    fragment.setAccountId(tv_accountBookId.getText().toString());
-                    ReportMainPresenter presenter = new ReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
-                    fragment.setPresenter(presenter);
-                    fragment.show(getFragmentManager(), " Test ");
+                    onPeriodClick(accountBook,CodeConstant.DAY);
                 }
             });
             // 本周
             TextView tv_week = (TextView) getActivity().findViewById(R.id.indexpage_week_id);
+            tv_week.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onPeriodClick(accountBook,CodeConstant.WEEK);
+                }
+            });
+            // 本月
+            TextView tv_month = (TextView) getActivity().findViewById(R.id.indexpage_month_id);
+            tv_month.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onPeriodClick(accountBook,CodeConstant.MONTH);
+                }
+            });
             // 本年
             TextView tv_year = (TextView) getActivity().findViewById(R.id.indexpage_year_id);
+            tv_year.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onPeriodClick(accountBook,CodeConstant.YEAR);
+                }
+            });
         }
+    }
+
+    /**
+     * 本周 月 年 点击事件
+     * @param accountBook
+     * @param period
+     */
+    private void onPeriodClick(JC_AccountBook accountBook,String period) {
+        ReportMainFragment fragment = new ReportMainFragment();
+        fragment.setAccountId(accountBook.getId());
+        fragment.setPeriod(period);
+        ReportMainPresenter presenter = new ReportMainPresenter((GaiaApplication) (getActivity().getApplication()), fragment);
+        fragment.setPresenter(presenter);
+        fragment.show(getFragmentManager(), " Test ");
     }
 
     /**

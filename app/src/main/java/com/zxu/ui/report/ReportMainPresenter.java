@@ -15,8 +15,8 @@ public class ReportMainPresenter implements ReportMainContract.Presenter {
     }
 
     @Override
-    public void getTodayRecords(String accountId) {
-        cView.setTodayRecords(recordDao().getAll(accountId));
+    public void getRecords(String accountId,String period) {
+        cView.setRecords(recordDao().getAll(accountId,period));
     }
 
     public RecordDao recordDao() {

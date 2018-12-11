@@ -25,7 +25,9 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
 
     private ReportMainContract.Presenter mPresenter;
     private List<JC_Record> recordList;
-    private String accountId;
+    // param
+    private String mAccountId;
+    private String mPeriod;
 
     @Override
     public void setPresenter(ReportMainContract.Presenter presenter) {
@@ -54,7 +56,7 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
         Date curDate = new Date(System.currentTimeMillis());
         String nowTime = format.format(curDate);
         //
-        mPresenter.getTodayRecords(accountId);
+        mPresenter.getRecords(mAccountId,mPeriod);
         ReportMainAdapter adapter = new ReportMainAdapter(recordList, getActivity().getApplication());
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
@@ -91,11 +93,15 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
     }
 
     @Override
-    public void setTodayRecords(List<JC_Record> records) {
+    public void setRecords(List<JC_Record> records) {
         this.recordList = records;
     }
-
+    // init param
     public void setAccountId(String accountId) {
-        this.accountId = accountId;
+        this.mAccountId = accountId;
+    }
+
+    public void setPeriod(String period) {
+        this.mPeriod = period;
     }
 }

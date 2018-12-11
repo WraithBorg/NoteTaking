@@ -36,7 +36,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
      *
      * @return
      */
-    public List<JC_Record> getAll(String accountId) {
+    public List<JC_Record> getAll(String accountId,String period) {
         return super.where().eq("account", accountId).query();
     }
 
