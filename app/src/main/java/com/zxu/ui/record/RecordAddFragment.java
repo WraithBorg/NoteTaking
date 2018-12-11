@@ -106,7 +106,7 @@ public class RecordAddFragment extends Fragment implements RecordAddContract.Vie
             @Override
             public void onClick(View v) {
                 SelectCategoryDialog dialog = new SelectCategoryDialog();
-                dialog.setmType(mType);
+                dialog.setCostType(mType);
                 CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 // 监听选择类别事件

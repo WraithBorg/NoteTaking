@@ -12,5 +12,6 @@ public interface CategoryContract {
     interface View extends BaseView<CategoryContract.Presenter>{
         void setCategorys(List<JC_Category> categorys);
 
+        void setCostType(String type);
     }
 }

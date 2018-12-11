@@ -24,7 +24,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
     private CategoryContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
     // java
-    private String mType;// TODO
+    private String costType;// TODO
     /**
      * dialog 创建
      *
@@ -72,7 +72,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
         });
 
         // list
-        mPresenter.getCategorys(true,mType);
+        mPresenter.getCategorys(true,costType);
         List<JC_Category> list = getCategoryList();
         ListCategoryAdapter listCategoryAdapter = new ListCategoryAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(listCategoryAdapter);
@@ -163,5 +163,11 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
 
     public void setCategoryList(List<JC_Category> categoryList) {
         this.categoryList = categoryList;
+    }
+    //
+
+    @Override
+    public void setCostType(String type) {
+        this.costType = type;
     }
 }

@@ -29,7 +29,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
     private ListView recLeft;
     private ListView recRight;
     // java
-    private String mType;
+    private String costType;
     private SelectCategoryAdapterLeft leftAdapter;
     private SelectCategoryAdapterRight rightAdapter;
     //记录右侧当前可见的第一个item的position
@@ -66,6 +66,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
                     }
                 }, CodeConstant.DIALOGWAITTIME);
                 ListCategoryDialog dialog = new ListCategoryDialog();
+                dialog.setCostType(costType);
                 CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
@@ -79,7 +80,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
             }
         });
         //
-        mPresenter.getCategorys(false,mType);
+        mPresenter.getCategorys(false,costType);
         // left
         leftAdapter = new SelectCategoryAdapterLeft(categoryList, getActivity());
         recLeft.setAdapter(leftAdapter);
@@ -170,9 +171,9 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
     }
     /**
      *
-     * @param mType
      */
-    public void setmType(String mType) {
-        this.mType = mType;
+    @Override
+    public void setCostType(String type) {
+        costType = type;
     }
 }

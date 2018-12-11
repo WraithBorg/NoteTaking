@@ -35,7 +35,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
      * @param fromAdd
      * @return
      */
-    public List<JC_Category> getBSList(boolean fromAdd,String mType) {
+    public List<JC_Category> getBSList(boolean fromAdd,String costType) {
         List<JC_Category> list = super.getList();
         Map<String, JC_Category> bigs = new HashMap<>();
         Map<String, List<JC_Category>> smalls = new HashMap<>();
