@@ -50,7 +50,7 @@ public class ReportMainAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.report_today_item, null);
+            convertView = inflater.inflate(R.layout.report_item, null);
             holder.iv_type = (ImageView) convertView.findViewById(R.id.report_today_item_icon_id);
             holder.tv_catagory = (TextView) convertView.findViewById(R.id.report_today_item_category_id);
             holder.tv_money = (TextView) convertView.findViewById(R.id.report_today_item_money_id);

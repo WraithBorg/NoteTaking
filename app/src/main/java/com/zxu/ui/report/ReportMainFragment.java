@@ -44,7 +44,7 @@ public class ReportMainFragment extends DialogFragment implements ReportMainCont
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // view
-        View view = inflater.inflate(R.layout.report_today_main, null);
+        View view = inflater.inflate(R.layout.report_main, null);
         ImageView iv_back = (ImageView) view.findViewById(R.id.report_today_main_back_id); //返回
         TextView tv_topTime = (TextView) view.findViewById(R.id.report_today_main_top_time_id);//今日时间
         TextView tv_balance = (TextView) view.findViewById(R.id.report_today_main_balance_id);//结余
