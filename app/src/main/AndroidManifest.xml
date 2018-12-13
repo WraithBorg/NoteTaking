@@ -38,9 +38,7 @@
         <activity
             android:name=".ui.record.AddRecordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".demo.ScrollChangedActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".demo.CameraActivity" />
         <activity android:name=".demo.TimeBarActivity" />
     </application>
 </manifest>

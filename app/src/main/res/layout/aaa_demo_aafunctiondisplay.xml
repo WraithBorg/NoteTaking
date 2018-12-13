@@ -311,8 +311,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:gravity="center"
-                android:onClick="TODO"
-                android:text="TODO"
+                android:onClick="demoCamera"
+                android:text="相机"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
         </LinearLayout>

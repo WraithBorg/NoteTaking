@@ -218,4 +218,13 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, TimeBarActivity.class);
         startActivity(intent);
     }
+    /**
+     * 相机
+     *
+     * @param view 视图
+     */
+    void demoCamera(View view) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
 }
