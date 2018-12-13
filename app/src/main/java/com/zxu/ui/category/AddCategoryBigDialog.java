@@ -18,6 +18,7 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Category;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.UtilTools;
+import com.zxu.util.ZUID;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,7 +26,7 @@ import java.util.UUID;
 
 public class AddCategoryBigDialog extends DialogFragment implements AddCategoryBigContract.View {
     private AddCategoryBigContract.Presenter mPresenter;
-
+    private String mSpecies;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -58,17 +59,16 @@ public class AddCategoryBigDialog extends DialogFragment implements AddCategoryB
                     return;
                 }
                 // save data
-                JC_Category category = new JC_Category();
-                String cId = UUID.randomUUID().toString();
-                category.setId(cId);
-                category.setName(et_name.getText().toString());
-                category.setType(0);
+                ZUID zuid = new ZUID();
+                String cId = zuid.next();
+                JC_Category category = new JC_Category(cId,et_name.getText().toString(),"",0,mSpecies,zuid.next(),null);
                 mPresenter.addBigCategory(category);
                 // next dialog
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fatherId",cId);
 
                 AddCategorySmallDialog dialog = new AddCategorySmallDialog();
+                dialog.setmSpecies(mSpecies);
                 AddCategorySmallPresenter presenter = new AddCategorySmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
                 dialog.setPresenter(presenter);
                 dialog.setArguments(bundle);
@@ -109,5 +109,9 @@ public class AddCategoryBigDialog extends DialogFragment implements AddCategoryB
     @Override
     public void setPresenter(AddCategoryBigContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    public void setmSpecies(String mSpecies) {
+        this.mSpecies = mSpecies;
     }
 }

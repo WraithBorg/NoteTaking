@@ -66,7 +66,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
             if (fromAdd) {
                 JC_Category c = new JC_Category();
                 c.setId(CodeConstant.ADDTWOTYPE);
-                c.setName("新建二级支出分类");
+                c.setName("新建二级分类");
                 c.setType(1);
                 c.setNum(zuid.next());
                 ss.add(c);
@@ -84,7 +84,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
         if (fromAdd) {
             JC_Category b = new JC_Category();
             b.setId(CodeConstant.ADDONETYPE);
-            b.setName("新建一级支出分类");
+            b.setName("新建一级分类");
             b.setChilds(new ArrayList<>());
             b.setType(0);
             b.setNum(zuid.next());

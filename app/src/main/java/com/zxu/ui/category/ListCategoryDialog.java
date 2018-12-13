@@ -24,7 +24,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
     private CategoryContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
     // java
-    private String costType;// TODO
+    private String mSpecies;;// TODO
     /**
      * dialog 创建
      *
@@ -47,6 +47,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
             @Override
             public void onClick(View v) {
                 AddCategoryBigDialog dialog = new AddCategoryBigDialog();
+                dialog.setmSpecies(mSpecies);
                 AddCategoryBigPresenter presenter = new AddCategoryBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
@@ -72,7 +73,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
         });
 
         // list
-        mPresenter.getCategorys(true,costType);
+        mPresenter.getCategorys(true,mSpecies);
         List<JC_Category> list = getCategoryList();
         ListCategoryAdapter listCategoryAdapter = new ListCategoryAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(listCategoryAdapter);
@@ -85,6 +86,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
                 if (category.getId().equals(CodeConstant.ADDONETYPE)){
 
                     AddCategoryBigDialog dialog = new AddCategoryBigDialog();
+                    dialog.setmSpecies(mSpecies);
                     AddCategoryBigPresenter presenter = new AddCategoryBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                     dialog.setPresenter(presenter);
                     dialog.show(getActivity().getFragmentManager(), "android");
@@ -111,6 +113,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
                     bundle.putSerializable("fatherId",fatherC.getId());
 
                     AddCategorySmallDialog dialog = new AddCategorySmallDialog();
+                    dialog.setmSpecies(mSpecies);
                     AddCategorySmallPresenter presenter = new AddCategorySmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
                     dialog.setPresenter(presenter);
                     dialog.setArguments(bundle);
@@ -168,6 +171,6 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
 
     @Override
     public void setCostType(String type) {
-        this.costType = type;
+        this.mSpecies = type;
     }
 }

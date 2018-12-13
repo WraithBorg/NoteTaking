@@ -20,7 +20,7 @@ import com.zxu.util.ZUID;
 
 public class AddCategorySmallDialog extends DialogFragment implements AddCategorySmallContract.View {
     private AddCategorySmallContract.Presenter mPresenter;
-
+    private String mSpecies;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -58,11 +58,7 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
                 }, CodeConstant.DIALOGWAITTIME);
                 // save data
                 ZUID zuid = new ZUID();
-                JC_Category category = new JC_Category();
-                category.setId(zuid.next());
-                category.setName(et_name.getText().toString());
-                category.setType(1);
-                category.setFatherId(fatherId);
+                JC_Category category = new JC_Category(zuid.next(),et_name.getText().toString(),fatherId,1,mSpecies,zuid.next(),null);
                 mPresenter.addSmallCategory(category);
             }
         });
@@ -92,5 +88,9 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
     @Override
     public void setPresenter(AddCategorySmallContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    public void setmSpecies(String mSpecies) {
+        this.mSpecies = mSpecies;
     }
 }
