@@ -17,7 +17,7 @@ public class IpInfoActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_activity_ipinfo);
+        setContentView(R.layout.aaa_demo_activity_ipinfo);
         IpInfoFragment ipInfoFragment = (IpInfoFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
         if (ipInfoFragment == null) {
             // 新建 IpInfoFragment ,并将IpInfoFragment添加到IpInfoActivity中

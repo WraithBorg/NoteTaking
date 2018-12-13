@@ -25,7 +25,7 @@ public class PersonEditActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_person_edit);
+        setContentView(R.layout.aaa_demo_person_edit);
 
         etName = (EditText) findViewById(R.id.etName_id);
         etInfo = (EditText) findViewById(R.id.etInfo_id);

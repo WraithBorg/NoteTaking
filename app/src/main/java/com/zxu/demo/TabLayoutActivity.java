@@ -31,7 +31,7 @@ public class TabLayoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_tab_activity_tablayout);
+        setContentView(R.layout.aaa_demo_tab_activity_tablayout);
 
         tl = (TabLayout) findViewById(R.id.tl);
         vp = (ViewPager) findViewById(R.id.vp);
@@ -52,7 +52,7 @@ public class TabLayoutActivity extends AppCompatActivity {
         //自定义标签布局
         for (int i = 0; i < tabs.size(); i++) {
             TabLayout.Tab tab = tl.getTabAt(i);
-            TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.demo_tab_tabview_main, tl, false);
+            TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.aaa_demo_tab_tabview_main, tl, false);
             tv.setText(tabs.get(i));
             tab.setCustomView(tv);
         }

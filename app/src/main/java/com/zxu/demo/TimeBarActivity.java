@@ -21,7 +21,7 @@ public class TimeBarActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_time_activity_main);
+        setContentView(R.layout.aaa_demo_time_activity_main);
 
         selectTime = (RelativeLayout) findViewById(R.id.selectTime);
         selectTime.setOnClickListener(this);

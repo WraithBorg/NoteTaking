@@ -39,7 +39,7 @@ public class MainViewActivity extends Activity implements View.OnClickListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.demo_activity_main);
+        setContentView(R.layout.aaa_demo_activity_main);
         initWindow();
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_na);
         navigationView = (NavigationView) findViewById(R.id.nav);

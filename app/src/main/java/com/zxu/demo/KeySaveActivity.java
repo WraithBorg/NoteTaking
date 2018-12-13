@@ -18,7 +18,7 @@ public class KeySaveActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_keysave);
+        setContentView(R.layout.aaa_demo_keysave);
     }
     public void btnWriteClick(View view){
         EditText etWrite = (EditText) findViewById(R.id.etWrite_id);

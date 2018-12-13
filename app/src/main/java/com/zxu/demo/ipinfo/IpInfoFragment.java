@@ -38,7 +38,7 @@ public class IpInfoFragment extends Fragment implements IpInfoContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.demo_fragment_ipinfo, container, false);
+        View root = inflater.inflate(R.layout.aaa_demo_fragment_ipinfo, container, false);
         tv_country = (TextView) root.findViewById(R.id.tv_country);
         tv_area = (TextView) root.findViewById(R.id.tv_area);
         tv_city = (TextView) root.findViewById(R.id.tv_city);

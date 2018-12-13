@@ -57,7 +57,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/demo_head"
+        app:headerLayout="@layout/aaa_demo_head"
         app:menu="@menu/demo_new_menu"
 
         >

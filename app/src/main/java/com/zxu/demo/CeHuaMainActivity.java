@@ -34,7 +34,7 @@ public class CeHuaMainActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_cehua_main);
+        setContentView(R.layout.aaa_demo_cehua_main);
         //为侧滑菜单设置Adapter，并为ListView添加单击事件监听器
         slipMenuView = (LinearLayout) findViewById(R.id.slipmenu_id);
         menuDrawer = (ListView) findViewById(R.id.left_drawer);

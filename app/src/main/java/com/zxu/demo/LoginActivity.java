@@ -17,7 +17,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_login);
+        setContentView(R.layout.aaa_demo_login);
     }
     public void btnLoginClick(View view){
         // 获取用户名密码

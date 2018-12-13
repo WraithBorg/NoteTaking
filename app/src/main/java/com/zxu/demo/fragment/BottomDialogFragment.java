@@ -22,7 +22,7 @@ public class BottomDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View view = inflater.inflate(R.layout.demo_bottom_dialog,null);
+        View view = inflater.inflate(R.layout.aaa_demo_bottom_dialog,null);
         TextView tv_01 = (TextView) view.findViewById(R.id.tv1);
         tv_01.setOnClickListener(new View.OnClickListener() {
             @Override

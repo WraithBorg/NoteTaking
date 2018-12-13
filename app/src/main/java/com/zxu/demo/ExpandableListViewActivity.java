@@ -14,7 +14,7 @@ public class ExpandableListViewActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_expandablelist_main);
+        setContentView(R.layout.aaa_demo_expandablelist_main);
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.expandable_list);
         DemoExpandableListAdapter adapter = new DemoExpandableListAdapter(this);
         listView.setAdapter(adapter);

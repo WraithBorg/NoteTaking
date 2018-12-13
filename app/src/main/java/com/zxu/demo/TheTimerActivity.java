@@ -27,7 +27,7 @@ public class TheTimerActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_thetimer);
+        setContentView(R.layout.aaa_demo_thetimer);
         counter = (TextView) findViewById(R.id.thetimer_timer_id);
         start = (Button) findViewById(R.id.thetimer_start_button_id);
         stop = (Button) findViewById(R.id.thetimer_stop_button_id);

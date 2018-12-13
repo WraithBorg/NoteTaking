@@ -31,7 +31,7 @@ public class TabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.demo_tab_fragment_tab, container, false);
+        View view = inflater.inflate(R.layout.aaa_demo_tab_fragment_tab, container, false);
 
         TextView tv = (TextView) view.findViewById(R.id.tv);
         tv.setBackgroundColor(colors[new Random().nextInt(colors.length)]);

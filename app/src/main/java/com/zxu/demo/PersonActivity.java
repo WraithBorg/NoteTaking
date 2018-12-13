@@ -27,7 +27,7 @@ public class PersonActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_person_main);
+        setContentView(R.layout.aaa_demo_person_main);
 
         listPerson();
     }

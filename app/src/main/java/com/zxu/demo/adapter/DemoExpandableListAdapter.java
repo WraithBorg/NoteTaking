@@ -65,7 +65,7 @@ public class DemoExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         GroupViewHolder groupViewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.demo_expandablelist_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.aaa_demo_expandablelist_item, parent, false);
             groupViewHolder = new GroupViewHolder();
             groupViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.label_expand_group);
             convertView.setTag(groupViewHolder);
@@ -81,7 +81,7 @@ public class DemoExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         ChildViewHolder childViewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.demo_expandablelist_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.aaa_demo_expandablelist_item, parent, false);
             childViewHolder = new ChildViewHolder();
             childViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.label_expand_group);
             convertView.setTag(childViewHolder);
