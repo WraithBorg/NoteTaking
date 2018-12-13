@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/app_white"
     android:orientation="vertical">
 
@@ -13,19 +13,33 @@
         android:layout_marginBottom="6dp"
         android:background="@color/app_divider_gray" />
 
-    <EditText
-        android:id="@+id/record_add_money_id"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="left|center_vertical"
-        android:inputType="numberDecimal"
-        android:textColor="@color/app_black"
-        android:textSize="30sp"
-        android:background="@drawable/bill_memo_shape"
-        android:paddingLeft="10dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/record_add_money_id"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bill_memo_shape"
+            android:gravity="left|center_vertical"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dp"
+            android:textColor="@color/app_black"
+            android:textSize="30sp" />
+        <ImageView
+            android:id="@+id/record_add_camera_id"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_gravity="center"
+            android:background="@mipmap/camera"/>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -33,9 +47,11 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="10dp"
         android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="50dp"
             android:layout_height="30dp"
@@ -44,8 +60,8 @@
             android:gravity="left|center_vertical"
             android:text="类别:"
             android:textColor="@color/app_black"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/record_add_category_id"
             android:layout_width="match_parent"
@@ -54,20 +70,22 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:gravity="left|center_vertical"
-            tools:text="零食"
             android:textColor="@color/app_black"
             android:textSize="20sp"
-            />
+            tools:text="零食" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="50dp"
             android:layout_height="30dp"
@@ -76,8 +94,8 @@
             android:gravity="left|center_vertical"
             android:text="账户:"
             android:textColor="@color/app_black"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/record_add_account_id"
             android:layout_width="match_parent"
@@ -86,21 +104,23 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:gravity="left|center_vertical"
-            tools:text="信用卡"
             android:textColor="@color/app_black"
             android:textSize="20sp"
-            />
+            tools:text="信用卡" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="50dp"
             android:layout_height="30dp"
@@ -109,8 +129,8 @@
             android:gravity="left|center_vertical"
             android:text="时间:"
             android:textColor="@color/app_black"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/record_add_time_id"
             android:layout_width="match_parent"
@@ -119,21 +139,23 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:gravity="left|center_vertical"
-            tools:text="2018-01-01 21:21"
             android:textColor="@color/app_black"
             android:textSize="20sp"
-            />
+            tools:text="2018-01-01 21:21" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
             android:id="@+id/record_add_memo_id"
             android:layout_width="match_parent"
@@ -141,14 +163,14 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/bill_memo_shape"
             android:gravity="left"
+            android:hint="备注"
             android:textColor="@color/app_black"
             android:textSize="19sp"
-            android:hint="备注"
-            tools:text="备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注"
-            android:background="@drawable/bill_memo_shape"
-            />
+            tools:text="备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

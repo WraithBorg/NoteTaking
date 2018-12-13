@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
@@ -31,7 +32,8 @@ import java.util.Locale;
 
 public class AddRecordFragment extends Fragment implements AddRecordContract.View {
     // view
-    TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
+    private TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo;
+    private ImageView tv_camera;
     //
     private String mAccountBookID;
     private String mType;
@@ -74,6 +76,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         tv_selTime = (TextView) view.findViewById(R.id.record_add_time_id);
         tv_money = (TextView) view.findViewById(R.id.record_add_money_id);
         tv_memo = (TextView) view.findViewById(R.id.record_add_memo_id);
+        tv_camera = (ImageView) view.findViewById(R.id.record_add_camera_id);
         initWidgets();
         return view;
     }
@@ -134,6 +137,13 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
             @Override
             public void onClickComplete() {
                 getActivity().onBackPressed();
+            }
+        });
+        // 拍照按钮
+        tv_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
             }
         });
 
