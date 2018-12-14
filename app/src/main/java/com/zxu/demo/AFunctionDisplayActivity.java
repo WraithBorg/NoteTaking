@@ -3,6 +3,7 @@ package com.zxu.demo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,8 @@ import okhttp3.Response;
  * Demo显示入口
  */
 public class AFunctionDisplayActivity extends Activity {
+    int REQUEST_CODE_CAPTURE_SMALL = 100;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,18 +87,7 @@ public class AFunctionDisplayActivity extends Activity {
         startActivityForResult(intent, Constant.LoginRequestCode);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            String name = bundle.getString(Constant.NAME, "");
-            String pwd = bundle.getString(Constant.PASSWORD, "");
-            String str = "用户名：" + name + ";密码：" + pwd;
-            TextView tv = (TextView) findViewById(R.id.tvLogin_id);
-            tv.setText(str);
-        }
-    }
+
 
     /**
      * 网络请求
@@ -226,5 +218,34 @@ public class AFunctionDisplayActivity extends Activity {
     void demoCamera(View view) {
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
+    }/**
+     * 拍照返回缩略图
+     *
+     * @param view 视图
+     */
+    void cameraAndReturn(View view) {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CODE_CAPTURE_SMALL);
+//        intent.resolveActivity(packageManager)?.let {
+//            startActivityForResult(intent, REQUEST_CODE_CAPTURE_SMALL)
+//        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String name = bundle.getString(Constant.NAME, "");
+            String pwd = bundle.getString(Constant.PASSWORD, "");
+            String str = "用户名：" + name + ";密码：" + pwd;
+            TextView tv = (TextView) findViewById(R.id.tvLogin_id);
+            tv.setText(str);
+        }else if (requestCode == REQUEST_CODE_CAPTURE_SMALL){//
+            Bundle bundle = data.getExtras();
+//            bundle.getByte() TODO
+//            Bitmap bitmap = data?.extras?.get("data") as Bitmap
+//            ivResult.setImageBitmap(bitmap)
+        }
     }
 }

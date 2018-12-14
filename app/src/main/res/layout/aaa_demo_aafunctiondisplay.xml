@@ -326,8 +326,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:gravity="center"
-                android:onClick="TODO"
-                android:text="TODO"
+                android:onClick="cameraAndReturn"
+                android:text="拍照返回缩略图"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -337,14 +337,11 @@
             android:layout_marginLeft="6dp"
             android:background="@drawable/linearlayout_line">
 
-            <TextView
+            <ImageView
+                android:id="@+id/ivResult"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:gravity="center"
-                android:onClick="TODO"
-                android:text="TODO"
-                android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:scaleType="center" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
