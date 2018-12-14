@@ -2,18 +2,19 @@ package com.zxu.demo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.zxu.R;
 import com.zxu.demo.fragment.BottomDialogFragment;
+import com.zxu.demo.ipinfo.IpInfoActivity;
 import com.zxu.ui.IndexPageActivity;
 import com.zxu.ui.accountbooks.AddAccountBookDialog;
-import com.zxu.demo.ipinfo.IpInfoActivity;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 
@@ -88,7 +89,6 @@ public class AFunctionDisplayActivity extends Activity {
     }
 
 
-
     /**
      * 网络请求
      *
@@ -143,6 +143,7 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, CeHuaMainActivity.class);
         startActivity(intent);
     }
+
     /**
      * 主界面
      *
@@ -152,6 +153,7 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, IndexPageActivity.class);
         startActivity(intent);
     }
+
     /**
      * 主界面
      *
@@ -159,6 +161,7 @@ public class AFunctionDisplayActivity extends Activity {
      */
     void showAddAccountBook(View view) {
     }
+
     /**
      * DialogFragment
      *
@@ -167,6 +170,7 @@ public class AFunctionDisplayActivity extends Activity {
     void showDialogFragment(View view) {
         new AddAccountBookDialog().show(getFragmentManager(), "WHo is W");
     }
+
     /**
      * showTabLayout
      *
@@ -176,6 +180,7 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, TabLayoutActivity.class);
         startActivity(intent);
     }
+
     /**
      * 底部弹窗
      *
@@ -186,12 +191,13 @@ public class AFunctionDisplayActivity extends Activity {
         fragment.setOnDialogListener(new BottomDialogFragment.OnDialogListener() {
             @Override
             public void onDialogClick(String person) {
-                UtilTools.showToast(getApplicationContext(),person,1111);
+                UtilTools.showToast(getApplicationContext(), person, 1111);
             }
         });
 
         fragment.show(getFragmentManager(), "android");
     }
+
     /**
      * ExpandableListView 二级类别树
      *
@@ -201,6 +207,7 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, ExpandableListViewActivity.class);
         startActivity(intent);
     }
+
     /**
      * showTimeBar
      *
@@ -210,6 +217,7 @@ public class AFunctionDisplayActivity extends Activity {
         Intent intent = new Intent(this, TimeBarActivity.class);
         startActivity(intent);
     }
+
     /**
      * 相机
      *
@@ -218,7 +226,9 @@ public class AFunctionDisplayActivity extends Activity {
     void demoCamera(View view) {
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
-    }/**
+    }
+
+    /**
      * 拍照返回缩略图
      *
      * @param view 视图
@@ -226,26 +236,29 @@ public class AFunctionDisplayActivity extends Activity {
     void cameraAndReturn(View view) {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.resolveActivity(getPackageManager());
         startActivityForResult(intent, REQUEST_CODE_CAPTURE_SMALL);
 //        intent.resolveActivity(packageManager)?.let {
 //            startActivityForResult(intent, REQUEST_CODE_CAPTURE_SMALL)
 //        }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+//        if (resultCode == Activity.RESULT_OK) {
+//            Bundle bundle = data.getExtras();
+//            String name = bundle.getString(Constant.NAME, "");
+//            String pwd = bundle.getString(Constant.PASSWORD, "");
+//            String str = "用户名：" + name + ";密码：" + pwd;
+//            TextView tv = findViewById(R.id.tvLogin_id);
+//            tv.setText(str);
+//        }
+        if (requestCode == REQUEST_CODE_CAPTURE_SMALL) {//
             Bundle bundle = data.getExtras();
-            String name = bundle.getString(Constant.NAME, "");
-            String pwd = bundle.getString(Constant.PASSWORD, "");
-            String str = "用户名：" + name + ";密码：" + pwd;
-            TextView tv = (TextView) findViewById(R.id.tvLogin_id);
-            tv.setText(str);
-        }else if (requestCode == REQUEST_CODE_CAPTURE_SMALL){//
-            Bundle bundle = data.getExtras();
-//            bundle.getByte() TODO
-//            Bitmap bitmap = data?.extras?.get("data") as Bitmap
-//            ivResult.setImageBitmap(bitmap)
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            ImageView iv_result = findViewById(R.id.ivResult);
+            iv_result.setImageBitmap(bitmap);
         }
     }
 }
