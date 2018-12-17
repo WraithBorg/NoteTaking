@@ -52,19 +52,34 @@
             android:layout_marginBottom="6dp"
             android:background="@color/app_divider_gray" />
 
-        <EditText
-            android:id="@+id/record_add_money_id"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/bill_memo_shape"
-            android:gravity="left|center_vertical"
-            android:inputType="numberDecimal"
-            android:paddingLeft="10dp"
-            android:textColor="@color/app_black"
-            android:textSize="30sp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/record_add_money_id"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/bill_memo_shape"
+                android:gravity="left|center_vertical"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textColor="@color/app_black"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/record_edit_camera_id"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:background="@mipmap/camera" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

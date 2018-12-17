@@ -2,7 +2,13 @@ package com.zxu.ui.record;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +30,11 @@ import com.zxu.widget.CustomDatePicker;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -34,9 +45,12 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
     private CustomDatePicker customDatePicker2;
     // view
     private TextView tv_selAccount, tv_selCategory, tv_selTime, tv_money, tv_memo, tv_save, tv_delete;
-    ImageView iv_confirm, iv_back;
+    ImageView iv_confirm, iv_back, tv_camera;
     // java
     private JC_Record mRecord;
+    //
+    private int REQUEST_CODE_CAPTURE_SMALL = 101;
+    private String mImgPath;
 
     /**
      * @param presenter
@@ -72,6 +86,7 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
         tv_memo = (TextView) view.findViewById(R.id.record_add_memo_id);
         iv_confirm = (ImageView) view.findViewById(R.id.report_edit_complete_id);
         iv_back = (ImageView) view.findViewById(R.id.report_edit_back_id);
+        tv_camera = (ImageView) view.findViewById(R.id.record_edit_camera_id);
         //assignment
         tv_selAccount.setText(mRecord.getAccount());
         tv_selCategory.setText(mRecord.getCategory());
@@ -116,6 +131,9 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
                 mRecord.setCategory(categoryText);
                 mRecord.setAccount(accountText);
                 mRecord.setMemo(memoText);
+                if (!StringUtils.isEmpty(mImgPath)) {
+                    mRecord.setImgUrl(mImgPath);
+                }
                 mPresenter.editRecord(mRecord);
                 //
                 dialogListener.onDismiss();
@@ -193,6 +211,72 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
                 customDatePicker2.show(tv_selTime.getText().toString());
             }
         });
+        // 显示图片 TODO 内存溢出优化
+        if (!StringUtils.isEmpty(mRecord.getImgUrl())) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(mRecord.getImgUrl());
+                Bitmap bitmap = BitmapFactory.decodeStream(fis);
+                tv_camera.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 拍照
+        tv_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 判断有无存储权限
+                PackageManager pm = getActivity().getPackageManager();
+                boolean permission = (PackageManager.PERMISSION_GRANTED ==
+                        pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", getActivity().getPackageName()));
+                if (!permission) {
+                    UtilTools.showToast(getActivity(), "没有存储权限", 1111);
+                    return;
+                }
+                // 打开相机
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.resolveActivity(getActivity().getPackageManager());
+                startActivityForResult(intent, REQUEST_CODE_CAPTURE_SMALL);
+            }
+        });
+    }
+
+    /**
+     * 拍照后显示缩略图，保存图片到本地
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //
+        if (requestCode == REQUEST_CODE_CAPTURE_SMALL) {//
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            tv_camera.setImageBitmap(bitmap);
+            // 保存bitmap到本地
+            File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+            mImgPath = file.getPath();
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                System.out.println("___________保存的__sd___下_______________________");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**

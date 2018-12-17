@@ -9,26 +9,29 @@ import com.zxu.annotation.DatabaseTable;
  */
 @DatabaseTable(tableName = "jc_record")
 public class JC_Record {
-    @DatabaseField(columnName = "id",id = true,dataType = DataType.STRING)
+    @DatabaseField(columnName = "id", id = true, dataType = DataType.STRING)
     private String id;
-    @DatabaseField(columnName = "type",dataType = DataType.STRING)
+    @DatabaseField(columnName = "type", dataType = DataType.STRING)
     private String type;// 收入:0,支出:1，转账:2
-    @DatabaseField(columnName = "category",dataType = DataType.STRING)
+    @DatabaseField(columnName = "category", dataType = DataType.STRING)
     private String category;// 类别：零食，早餐
-    @DatabaseField(columnName = "money",dataType = DataType.STRING)
+    @DatabaseField(columnName = "money", dataType = DataType.STRING)
     private String money;//金额
-    @DatabaseField(columnName = "account",dataType = DataType.STRING)
+    @DatabaseField(columnName = "account", dataType = DataType.STRING)
     private String account;//账户：男钱包，女钱包，信用卡
-    @DatabaseField(columnName = "workTime",dataType = DataType.STRING)
+    @DatabaseField(columnName = "workTime", dataType = DataType.STRING)
     private String workTime;//业务时间
-    @DatabaseField(columnName = "memo",dataType = DataType.STRING)
+    @DatabaseField(columnName = "memo", dataType = DataType.STRING)
     private String memo;//备注
-    @DatabaseField(columnName = "userId",dataType = DataType.STRING)
+    @DatabaseField(columnName = "userId", dataType = DataType.STRING)
     private String userId;//创建人
-    @DatabaseField(columnName = "createTime",dataType = DataType.STRING)
+    @DatabaseField(columnName = "createTime", dataType = DataType.STRING)
     private String createTime;//创建时间
-    @DatabaseField(columnName = "bookId",dataType = DataType.STRING)
+    @DatabaseField(columnName = "bookId", dataType = DataType.STRING)
     private String bookId;//账本
+    @DatabaseField(columnName = "imgUrl", dataType = DataType.STRING)
+    private String imgUrl;//图片
+
     /********** setter and getter *********/
     public String getId() {
         return id;
@@ -108,5 +111,13 @@ public class JC_Record {
 
     public void setBookId(String bookId) {
         this.bookId = bookId;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

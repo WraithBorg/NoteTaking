@@ -1,7 +1,12 @@
 package com.zxu.ui.record;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +31,10 @@ import com.zxu.widget.CustomDatePicker;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,6 +50,9 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
     private CustomDatePicker customDatePicker2;
     //
     private AddRecordContract.Presenter mPresenter;
+    //
+    private int REQUEST_CODE_CAPTURE_SMALL = 101;
+    private String mImgPath;
 
     /**
      *
@@ -66,6 +78,42 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         return fragment;
     }
 
+    /**
+     * 拍照后显示缩略图，保存图片到本地
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //
+        if (requestCode == REQUEST_CODE_CAPTURE_SMALL) {//
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            tv_camera.setImageBitmap(bitmap);
+            // 保存bitmap到本地
+            mImgPath = Environment.getExternalStorageDirectory() + "/" + String.valueOf(System.currentTimeMillis()) + ".jpg";
+
+            File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                System.out.println("___________保存的__sd___下_______________________");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @Nullable
     @Override
@@ -143,7 +191,18 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         tv_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                // 判断有无存储权限
+                PackageManager pm = getActivity().getPackageManager();
+                boolean permission = (PackageManager.PERMISSION_GRANTED ==
+                        pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", getActivity().getPackageName()));
+                if (!permission) {
+                    UtilTools.showToast(getActivity(), "没有存储权限", 1111);
+                    return;
+                }
+                // 打开相机
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.resolveActivity(getActivity().getPackageManager());
+                startActivityForResult(intent, REQUEST_CODE_CAPTURE_SMALL);
             }
         });
 
@@ -199,6 +258,9 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         record.setType(mType);
         record.setMemo(memoText);
         record.setBookId(mAccountBookID);
+        if (!StringUtils.isEmpty(mImgPath)) {
+            record.setImgUrl(mImgPath);
+        }
         mPresenter.addRecord(record);
 
         return new ResultHelper(true);
