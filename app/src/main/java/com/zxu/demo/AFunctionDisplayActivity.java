@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.zxu.R;
 import com.zxu.demo.fragment.BottomDialogFragment;
@@ -18,6 +20,9 @@ import com.zxu.ui.accountbooks.AddAccountBookDialog;
 import com.zxu.util.Constant;
 import com.zxu.util.UtilTools;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -259,6 +264,25 @@ public class AFunctionDisplayActivity extends Activity {
             Bitmap bitmap = (Bitmap) bundle.get("data");
             ImageView iv_result = findViewById(R.id.ivResult);
             iv_result.setImageBitmap(bitmap);
+            // 保存bitmap到本地
+            File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis()+".jpg");
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                System.out.println("___________保存的__sd___下_______________________");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(AFunctionDisplayActivity.this,"保存已经至"+Environment.getExternalStorageDirectory()+"下", Toast.LENGTH_SHORT).show();
         }
+
     }
 }
