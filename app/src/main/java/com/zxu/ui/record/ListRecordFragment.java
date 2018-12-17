@@ -8,14 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
+import com.zxu.model.JC_RecordSumWeek;
+import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
 
@@ -28,13 +29,15 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
 
     private ListRecordContract.Presenter mPresenter;
     private List<JC_Record> recordList;
+    private List<JC_RecordSumWeek> recordSums4Week;
     // param
     private String mAccountId;
     private String mPeriod;
     // view
-    private ListView lv_details;
+    private ExpandableListView lv_details, lv_dayDetails;
     private ImageView iv_back;
     private TextView tv_topTime, tv_balance, tv_income, tv_spending;
+
     @Override
     public void setPresenter(ListRecordContract.Presenter presenter) {
         mPresenter = presenter;
@@ -51,17 +54,24 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // view
         View view = inflater.inflate(R.layout.records_main, null);
-        iv_back = (ImageView) view.findViewById(R.id.report_today_main_back_id); //返回
-        tv_topTime = (TextView) view.findViewById(R.id.report_today_main_top_time_id);//今日时间
-        tv_balance = (TextView) view.findViewById(R.id.report_today_main_balance_id);//结余
-        tv_income = (TextView) view.findViewById(R.id.report_today_main_income_id);//收入
-        tv_spending = (TextView) view.findViewById(R.id.report_today_main_spending_id);//支出
-        lv_details = (ListView) view.findViewById(R.id.report_today_main_detail_list_id);//消费记录
+        iv_back = view.findViewById(R.id.report_today_main_back_id); //返回
+        tv_topTime = view.findViewById(R.id.report_today_main_top_time_id);//今日时间
+        tv_balance = view.findViewById(R.id.report_today_main_balance_id);//结余
+        tv_income = view.findViewById(R.id.report_today_main_income_id);//收入
+        tv_spending = view.findViewById(R.id.report_today_main_spending_id);//支出
+        lv_details = view.findViewById(R.id.report_today_main_detail_list_id);//消费记录
+        lv_dayDetails = view.findViewById(R.id.report_today_main_detail_list_day_id);//消费记录
         // assignment
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         String nowTime = format.format(new Date());
         //
-        mPresenter.getRecords(mAccountId, mPeriod);//自动刷新list
+        if (CodeConstant.DAY.equals(mPeriod)) {
+            lv_dayDetails.setVisibility(View.VISIBLE);
+            mPresenter.getRecords(mAccountId, mPeriod);//自动刷新list
+        } else if (CodeConstant.WEEK.equals(mPeriod)) {
+            lv_details.setVisibility(View.VISIBLE);
+            mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
+        }
         tv_topTime.setText(nowTime);
         // init widgets
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +81,13 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
             }
         });
         // jump to edit page
-        lv_details.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv_details.setGroupIndicator(null);
+        //
+        lv_dayDetails.setGroupIndicator(null);
+        lv_dayDetails.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JC_Record record = recordList.get(position);
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                JC_Record record = recordList.get(groupPosition);
                 EditRecordDialog dialog = new EditRecordDialog();
                 dialog.setRecord(record);
                 RecordPresenter presenter = new RecordPresenter((GaiaApplication) (getActivity().getApplication()), dialog);
@@ -84,24 +97,27 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
                 dialog.setDialogListener(new EditRecordDialog.DialogListener() {
                     @Override
                     public void onDismiss() {
-                        mPresenter.getRecords(mAccountId, mPeriod);
+                        if (CodeConstant.DAY.equals(mPeriod)) {
+                            mPresenter.getRecords(mAccountId, mPeriod);
+                        } else if (CodeConstant.WEEK.equals(mPeriod)) {
+                            mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
+                        }
                     }
                 });
+                return false;
             }
         });
-
         return view;
     }
 
     /**
      * 局部刷新
      */
-    private void refreshAdapter() {
+    private void refreshAdapter4Day() {
         //
-        ListRecordAdapter adapter = new ListRecordAdapter(recordList, getActivity().getApplication());
-        lv_details.setAdapter(adapter);
+        ListRecordAdapterDay adapter = new ListRecordAdapterDay(recordList, getActivity().getApplication());
+        lv_dayDetails.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        //
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
         for (JC_Record record : recordList) {
@@ -116,6 +132,28 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         tv_balance.setText(UtilTools.format(balance));
         tv_income.setText(UtilTools.format(inCome));
         tv_spending.setText(UtilTools.format(spending));
+    }
+
+    /**
+     * 查询 年月周的记录并刷新
+     */
+    private void refreshAdapter4Week() {
+        //
+        ListRecordAdapter adapter = new ListRecordAdapter(recordSums4Week, getActivity().getApplication());
+        lv_details.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        // calculate
+        BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
+        for (JC_RecordSumWeek sumWeek : recordSums4Week) {
+            inCome = inCome.add(new BigDecimal(sumWeek.getInCome()));
+            spending = spending.add(new BigDecimal(sumWeek.getSpend()));
+        }
+        balance = inCome.subtract(spending);
+        //
+        tv_balance.setText(UtilTools.format(balance));
+        tv_income.setText(UtilTools.format(inCome));
+        tv_spending.setText(UtilTools.format(spending));
+
     }
 
     @Override
@@ -141,7 +179,13 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     @Override
     public void setRecords(List<JC_Record> records) {
         this.recordList = records;
-        refreshAdapter();
+        refreshAdapter4Day();
+    }
+
+    @Override
+    public void setRecordSumByWeek(List<JC_RecordSumWeek> sums) {
+        this.recordSums4Week = sums;
+        refreshAdapter4Week();
     }
 
     // init param
