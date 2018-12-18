@@ -76,7 +76,6 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
             holder.tv_income = convertView.findViewById(R.id.record_item_sum_income);
             holder.tv_spend = convertView.findViewById(R.id.record_item_sum_spend);
             holder.tv_balance = convertView.findViewById(R.id.record_item_sum_balance);
-            holder.iv_more = convertView.findViewById(R.id.record_item_sum_more);
             convertView.setTag(holder);
         } else {
             holder = (SumViewHolder) convertView.getTag();
@@ -87,13 +86,6 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
         holder.tv_income.setText(recordSum.getInCome());
         holder.tv_spend.setText(recordSum.getSpend());
         holder.tv_balance.setText(recordSum.getBalance());
-
-        holder.iv_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         return convertView;
     }
