@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class CustomDatePicker {
@@ -564,7 +565,14 @@ public class CustomDatePicker {
                     day.add(formatTimeUnit(i));
                 }
             } else if (selectedYear == endYear && selectedMonth == endMonth) {
-                for (int i = 1; i <= endDay; i++) {
+                /*for (int i = 1; i <= endDay; i++) {
+                    day.add(formatTimeUnit(i));
+                }*/
+                // 获取当月天数
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date());
+                int currentMonthDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                for (int i = 1; i <= currentMonthDays; i++) {
                     day.add(formatTimeUnit(i));
                 }
             } else {
