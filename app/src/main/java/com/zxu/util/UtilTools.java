@@ -5,10 +5,14 @@ import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -129,5 +133,56 @@ public class UtilTools {
         calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
         str[1] = format.format(calendar.getTime()) + " 23:59";
         return str;
+    }
+
+    /**
+     * 第1周,开始日期：2018-12-1,结束日期：2018-12-2
+     * 第2周,开始日期：2018-12-3,结束日期：2018-12-9
+     * @param date
+     * @return
+     * @throws Exception
+     */
+    public static List<String[]> printfWeeks(String date) throws Exception {
+        List<String[]> list = new ArrayList<>();//第几周，开始日期，结束日期
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+        Date date1 = dateFormat.parse(date);
+        Calendar calendar = new GregorianCalendar();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.setTime(date1);
+        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int count = 0;
+        String startDate,endDate;
+        for (int i = 1; i <= days; i++) {
+            DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date date2 = dateFormat1.parse(date + "-" + i);
+            calendar.clear();
+            calendar.setTime(date2);
+            int k = new Integer(calendar.get(Calendar.DAY_OF_WEEK));
+            if (k == 1) {// 若当天是周日
+                count++;
+                if (i - 6 <= 1) {
+                    startDate = date + "-" + 1;
+                } else {
+                    startDate = date + "-" + (i - 6);
+                }
+                endDate = date + "-" + i;
+                String[] strings = new String[]{String.valueOf(count),startDate,endDate};
+                list.add(strings);
+            }else if (i == days) {// 若是本月最好一天，且不是周日
+                count++;
+                startDate = date + "-" + (i - k + 2);
+                endDate = date + "-" + i;
+                String[] strings = new String[]{String.valueOf(count),startDate,endDate};
+                list.add(strings);
+            }
+        }
+
+        /*List<String[]> list = printfWeeks("2018-12");
+        for (int i = 0; i < list.size(); i++) {
+            String[] strings = list.get(i);
+            System.out.println("第"+strings[0]+"周,开始日期："+strings[1]+",结束日期："+strings[2]);
+
+        }*/
+        return list;
     }
 }
