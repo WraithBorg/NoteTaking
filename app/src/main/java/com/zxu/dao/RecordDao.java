@@ -96,7 +96,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
 
             String s = format.format(calendar.getTime());
             List<JC_Record> records = super.where().eq("bookId", accountId).and()
-                    .between("workTime", s + " 00:00:00", s + " 59:59:59").query();
+                    .between("workTime", s + " 00:00", s + " 23:59").query();
             // 可抽取到adapter
             BigDecimal inCome = BigDecimal.ZERO, spend = BigDecimal.ZERO;
             for (int j = 0; j < records.size(); j++) {

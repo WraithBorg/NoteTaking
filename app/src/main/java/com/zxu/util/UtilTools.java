@@ -70,8 +70,8 @@ public class UtilTools {
         String[] str = new String[2];
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String day = format.format(new Date());
-        str[0] = day + " 00:00:00";
-        str[1] = day + " 59:59:59";
+        str[0] = day + " 00:00";
+        str[1] = day + " 23:59";
         return str;
 
     }
@@ -87,13 +87,13 @@ public class UtilTools {
         calendar.setTime(new Date());
         calendar.set(Calendar.DAY_OF_WEEK,
                 calendar.getFirstDayOfWeek()); // Sunday
-        str[0] = format.format(calendar.getTime()) + " 00:00:00";
+        str[0] = format.format(calendar.getTime()) + " 00:00";
         //
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.setTime(new Date());
         calendar.set(Calendar.DAY_OF_WEEK,
                 calendar.getFirstDayOfWeek() + 6);
-        str[1] = format.format(calendar.getTime()) + " 59:59:59";
+        str[1] = format.format(calendar.getTime()) + " 23:59";
         return str;
     }
 
@@ -107,12 +107,12 @@ public class UtilTools {
         calendar.setTime(new Date());
         calendar.set(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH), 1);
-        str[0] = format.format(calendar.getTime()) + " 00:00:00";
+        str[0] = format.format(calendar.getTime()) + " 00:00";
         calendar.setTime(new Date());
         calendar.set(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH), 1);
         calendar.roll(Calendar.DATE, -1);
-        str[1] = format.format(calendar.getTime()) + " 59:59:59";
+        str[1] = format.format(calendar.getTime()) + " 23:59";
         return str;
     }
 
@@ -125,9 +125,9 @@ public class UtilTools {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_YEAR, 1);
         calendar.getTime();
-        str[0] = format.format(calendar.getTime()) + " 00:00:00";
+        str[0] = format.format(calendar.getTime()) + " 00:00";
         calendar.set(Calendar.DAY_OF_YEAR, calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
-        str[1] = format.format(calendar.getTime()) + " 59:59:59";
+        str[1] = format.format(calendar.getTime()) + " 23:59";
         return str;
     }
 }
