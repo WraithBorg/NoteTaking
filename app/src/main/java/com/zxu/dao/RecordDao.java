@@ -114,7 +114,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
             sumWeek.setInCome(UtilTools.format(inCome));
             sumWeek.setSpend(UtilTools.format(spend));
             sumWeek.setBalance(UtilTools.format(inCome.subtract(spend)));
-
+            sumWeek.setFromWeek(false);
             calendar.add(Calendar.DATE, 1);
             if (records.size() > 0) {
                 sumWeek.setRecords(records);
@@ -157,6 +157,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
             sumWeek.setInCome(UtilTools.format(inCome));
             sumWeek.setSpend(UtilTools.format(spend));
             sumWeek.setBalance(UtilTools.format(inCome.subtract(spend)));
+            sumWeek.setFromWeek(true);
             if (records.size() > 0) {
                 sumWeek.setRecords(records);
                 recordSumWeeks.add(sumWeek);

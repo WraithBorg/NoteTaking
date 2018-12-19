@@ -13,6 +13,7 @@ import com.zxu.R;
 import com.zxu.model.JC_Record;
 import com.zxu.model.JC_RecordSum;
 import com.zxu.util.CostEnum;
+import com.zxu.util.UtilTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,16 +102,22 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
             holder.tv_catagory = convertView.findViewById(R.id.report_today_item_category_id);
             holder.tv_money = convertView.findViewById(R.id.report_today_item_money_id);
             holder.tv_time = convertView.findViewById(R.id.report_today_item_time_id);
+            holder.tv_weekDay = convertView.findViewById(R.id.weekDay_id);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         // assignment
-        JC_Record record = mRecordSum.get(groupPosition).getRecords().get(childPosition);
+        JC_RecordSum jc_recordSum = mRecordSum.get(groupPosition);
+        JC_Record record = jc_recordSum.getRecords().get(childPosition);
         holder.iv_type.setBackgroundResource(R.mipmap.rmb);
         holder.tv_catagory.setText(record.getCategory());
         holder.tv_money.setText(record.getMoney());
         holder.tv_time.setText(record.getWorkTime());
+        if (jc_recordSum.isFromWeek()){
+            holder.tv_weekDay.setVisibility(View.VISIBLE);
+            holder.tv_weekDay.setText(UtilTools.getWeekDay(record.getWorkTime()));
+        }
         // prefect
         if (CostEnum.SPEND.code().equals(record.getType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_red));
@@ -132,6 +139,7 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
         TextView tv_catagory;
         TextView tv_money;
         TextView tv_time;
+        TextView tv_weekDay;
     }
 
     private final class SumViewHolder {

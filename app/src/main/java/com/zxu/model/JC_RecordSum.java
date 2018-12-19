@@ -9,6 +9,7 @@ public class JC_RecordSum {
     private String dayOrWeek;//18日or6周
     private String bottomTime;
     private List<JC_Record> records;
+    private boolean fromWeek;
 
     public List<JC_Record> getRecords() {
         return records;
@@ -56,5 +57,13 @@ public class JC_RecordSum {
 
     public void setBottomTime(String bottomTime) {
         this.bottomTime = bottomTime;
+    }
+
+    public boolean isFromWeek() {
+        return fromWeek;
+    }
+
+    public void setFromWeek(boolean fromWeek) {
+        this.fromWeek = fromWeek;
     }
 }

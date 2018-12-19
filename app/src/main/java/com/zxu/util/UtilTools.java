@@ -9,6 +9,7 @@ import com.zxu.model.JC_MonthPeriod;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -235,5 +236,24 @@ public class UtilTools {
             }
         }
         System.out.println("*******************************************");*/
+    }
+
+    /**
+     * 获取星期几
+     * @param date 2018-12-22 00:00
+     * @return
+     */
+    public static String getWeekDay(String date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Calendar cal4Week = new GregorianCalendar();
+        try {
+            cal4Week.setTime(format.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String[] bigNum = new String[]{"","日","一","二","三","四","五","六"};
+        int dayOfWeek = cal4Week.get(Calendar.DAY_OF_WEEK);
+        String weekDay = "周" + bigNum[dayOfWeek];
+        return weekDay;
     }
 }
