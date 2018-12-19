@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
-import com.zxu.model.JC_RecordSumWeek;
+import com.zxu.model.JC_RecordSum;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
@@ -29,7 +29,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
 
     private ListRecordContract.Presenter mPresenter;
     private List<JC_Record> recordList;
-    private List<JC_RecordSumWeek> recordSums4Week;
+    private List<JC_RecordSum> recordSums4WeekOrMonth;
     // param
     private String mAccountId;
     private String mPeriod;
@@ -71,6 +71,9 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         } else if (CodeConstant.WEEK.equals(mPeriod)) {
             lv_details.setVisibility(View.VISIBLE);
             mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
+        }else if (CodeConstant.MONTH.equals(mPeriod)) {
+            lv_details.setVisibility(View.VISIBLE);
+            mPresenter.getRecordSumByMonth(mAccountId, mPeriod);
         }
         tv_topTime.setText(nowTime);
         // init widgets
@@ -101,6 +104,8 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
                             mPresenter.getRecords(mAccountId, mPeriod);
                         } else if (CodeConstant.WEEK.equals(mPeriod)) {
                             mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
+                        } else if (CodeConstant.MONTH.equals(mPeriod)) {
+                            mPresenter.getRecordSumByMonth(mAccountId, mPeriod);
                         }
                     }
                 });
@@ -135,16 +140,16 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     }
 
     /**
-     * 查询 年月周的记录并刷新
+     * 查询 每周的记录并刷新
      */
     private void refreshAdapter4Week() {
         //
-        ListRecordAdapter adapter = new ListRecordAdapter(recordSums4Week, getActivity().getApplication());
+        ListRecordAdapter adapter = new ListRecordAdapter(recordSums4WeekOrMonth, getActivity().getApplication());
         lv_details.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
-        for (JC_RecordSumWeek sumWeek : recordSums4Week) {
+        for (JC_RecordSum sumWeek : recordSums4WeekOrMonth) {
             inCome = inCome.add(new BigDecimal(sumWeek.getInCome()));
             spending = spending.add(new BigDecimal(sumWeek.getSpend()));
         }
@@ -183,8 +188,8 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     }
 
     @Override
-    public void setRecordSumByWeek(List<JC_RecordSumWeek> sums) {
-        this.recordSums4Week = sums;
+    public void setRecordSumByWeekOrMonth(List<JC_RecordSum> sums) {
+        this.recordSums4WeekOrMonth = sums;
         refreshAdapter4Week();
     }
 

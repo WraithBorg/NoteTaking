@@ -11,17 +11,17 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.model.JC_Record;
-import com.zxu.model.JC_RecordSumWeek;
+import com.zxu.model.JC_RecordSum;
 import com.zxu.util.CostEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListRecordAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
-    private List<JC_RecordSumWeek> mRecordSum;
+    private List<JC_RecordSum> mRecordSum;
     private Context context;
 
-    public ListRecordAdapter(List<JC_RecordSumWeek> recordSums, Context context) {
+    public ListRecordAdapter(List<JC_RecordSum> recordSums, Context context) {
         this.mRecordSum = recordSums;
         this.context = context;
         if (mRecordSum == null) {
@@ -80,9 +80,9 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
         } else {
             holder = (SumViewHolder) convertView.getTag();
         }
-        JC_RecordSumWeek recordSum = mRecordSum.get(groupPosition);
-        holder.tv_day.setText(recordSum.getDay());
-        holder.tv_month.setText(recordSum.getMonth());
+        JC_RecordSum recordSum = mRecordSum.get(groupPosition);
+        holder.tv_day.setText(recordSum.getDayOrWeek());
+        holder.tv_month.setText(recordSum.getBottomTime());
         holder.tv_income.setText(recordSum.getInCome());
         holder.tv_spend.setText(recordSum.getSpend());
         holder.tv_balance.setText(recordSum.getBalance());

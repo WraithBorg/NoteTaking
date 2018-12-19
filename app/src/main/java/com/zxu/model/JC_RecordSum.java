@@ -1,15 +1,13 @@
 package com.zxu.model;
 
-import java.util.Date;
 import java.util.List;
 
-public class JC_RecordSumWeek {
-    private Date date;
+public class JC_RecordSum {
     private String inCome;
     private String spend;
     private String balance;
-    private String day;
-    private String month;
+    private String dayOrWeek;//18日or6周
+    private String bottomTime;
     private List<JC_Record> records;
 
     public List<JC_Record> getRecords() {
@@ -18,14 +16,6 @@ public class JC_RecordSumWeek {
 
     public void setRecords(List<JC_Record> records) {
         this.records = records;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getInCome() {
@@ -52,19 +42,19 @@ public class JC_RecordSumWeek {
         this.balance = balance;
     }
 
-    public String getDay() {
-        return day;
+    public String getDayOrWeek() {
+        return dayOrWeek;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setDayOrWeek(String dayOrWeek) {
+        this.dayOrWeek = dayOrWeek;
     }
 
-    public String getMonth() {
-        return month;
+    public String getBottomTime() {
+        return bottomTime;
     }
 
-    public void setMonth(String month) {
-        this.month = month;
+    public void setBottomTime(String bottomTime) {
+        this.bottomTime = bottomTime;
     }
 }

@@ -4,7 +4,7 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.base.database.ServiceFactory;
 import com.zxu.dao.RecordDao;
 import com.zxu.model.JC_Record;
-import com.zxu.model.JC_RecordSumWeek;
+import com.zxu.model.JC_RecordSum;
 
 import java.util.List;
 
@@ -41,8 +41,14 @@ public class RecordPresenter implements ListRecordContract.Presenter, AddRecordC
 
     @Override
     public void getRecordSumByWeek(String accountId, String period) {
-        List<JC_RecordSumWeek> recordSums = recordDao().getRecordSumByWeek(accountId);
-        listView.setRecordSumByWeek(recordSums);
+        List<JC_RecordSum> recordSums = recordDao().getRecordSumByWeek(accountId);
+        listView.setRecordSumByWeekOrMonth(recordSums);
+    }
+
+    @Override
+    public void getRecordSumByMonth(String accountId, String period) {
+        List<JC_RecordSum> recordSums = recordDao().getRecordSumByMonth(accountId);
+        listView.setRecordSumByWeekOrMonth(recordSums);
     }
 
     @Override

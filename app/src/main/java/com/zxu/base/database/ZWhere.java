@@ -29,7 +29,8 @@ public class ZWhere<T> {
 
     //
     public List<T> query() {
-        return getList(sqlBuilser.toString());
+        String s = sqlBuilser.toString();
+        return getList(s);
     }
 
     //

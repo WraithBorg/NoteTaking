@@ -2,7 +2,7 @@ package com.zxu.ui.record;
 
 import com.zxu.application.BaseView;
 import com.zxu.model.JC_Record;
-import com.zxu.model.JC_RecordSumWeek;
+import com.zxu.model.JC_RecordSum;
 
 import java.util.List;
 
@@ -11,12 +11,13 @@ public class ListRecordContract {
         void getRecords(String accountId, String period);
 
         void getRecordSumByWeek(String accountId, String period);
+        void getRecordSumByMonth(String accountId, String period);
     }
 
     interface View extends BaseView<ListRecordContract.Presenter> {
         void setRecords(List<JC_Record> records);
 
-        void setRecordSumByWeek(List<JC_RecordSumWeek> records);
+        void setRecordSumByWeekOrMonth(List<JC_RecordSum> records);
 
     }
 }
