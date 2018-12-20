@@ -10,13 +10,17 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.model.JC_Record;
 import com.zxu.model.JC_RecordSearchResult;
+import com.zxu.util.CostEnum;
+import com.zxu.util.UtilTools;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class SearchResult4RecordAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<JC_RecordSearchResult> resultList;
-
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public SearchResult4RecordAdapter(Context context, List<JC_RecordSearchResult> resultList) {
         this.context = context;
         this.resultList = resultList;
@@ -71,7 +75,7 @@ public class SearchResult4RecordAdapter extends BaseExpandableListAdapter {
             holder = (SumViewHolder) convertView.getTag();
         }
         JC_RecordSearchResult recordSum = resultList.get(groupPosition);
-        holder.tv_date.setText(recordSum.getDate().toString());
+        holder.tv_date.setText(format.format(recordSum.getDate())+"  "+UtilTools.getWeekDay(dateFormat.format(recordSum.getDate())));
 
         return convertView;
     }
@@ -94,7 +98,12 @@ public class SearchResult4RecordAdapter extends BaseExpandableListAdapter {
         JC_Record record = jc_recordSum.getRecords().get(childPosition);
         holder.tv_money.setText(record.getMoney());
         holder.tv_category.setText(record.getCategory());
-
+        //
+        if (CostEnum.SPEND.code().equals(record.getType())) {
+            holder.tv_money.setTextColor(context.getColor(R.color.app_green));
+        } else if (CostEnum.INCOME.code().equals(record.getType())) {
+            holder.tv_money.setTextColor(context.getColor(R.color.app_red));
+        }
         return convertView;
     }
 

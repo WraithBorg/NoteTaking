@@ -31,15 +31,6 @@
             android:textColor="@color/app_black"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/record_search_index_confirm_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="确定"
-            android:textColor="@color/app_black"
-            android:textSize="22sp" />
     </LinearLayout>
 
     <View
@@ -63,6 +54,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/record_search_sum_income_id"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center_vertical"
@@ -92,6 +84,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/record_search_sum_spend_id"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center_vertical"
@@ -121,6 +114,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/record_search_sum_balance_id"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center_vertical"

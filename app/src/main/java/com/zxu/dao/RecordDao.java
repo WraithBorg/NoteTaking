@@ -183,6 +183,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
 
         List<JC_RecordSearchResult> list = new ArrayList<>();
         list.add(result);
+
         return list;
     }
 }

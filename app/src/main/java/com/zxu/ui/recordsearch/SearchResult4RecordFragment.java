@@ -9,10 +9,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.model.JC_Record;
 import com.zxu.model.JC_RecordSearchResult;
+import com.zxu.util.CostEnum;
+import com.zxu.util.UtilTools;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SearchResult4RecordFragment extends DialogFragment {
@@ -48,12 +53,38 @@ public class SearchResult4RecordFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        //
+        /* 收支 汇总 */
+        BigDecimal inCome = BigDecimal.ZERO;
+        BigDecimal spend = BigDecimal.ZERO;
+        BigDecimal balance = BigDecimal.ZERO;
+        for (JC_RecordSearchResult res : resultList){
+            for (JC_Record record : res.getRecords()){
+                if (CostEnum.SPEND.code().equals(record.getType())) {
+                    spend = spend.add(new BigDecimal(record.getMoney()));
+                } else if (CostEnum.INCOME.code().equals(record.getType())) {
+                    inCome = inCome.add(new BigDecimal(record.getMoney()));
+                }
+            }
+        }
+        balance = inCome.subtract(spend);
+        // view
         View view = inflater.inflate(R.layout.record_search_result, null);
+
+        TextView tv_inCome = view.findViewById(R.id.record_search_sum_income_id);
+        TextView tv_spend = view.findViewById(R.id.record_search_sum_spend_id);
+        TextView tv_balance = view.findViewById(R.id.record_search_sum_balance_id);
+        // list
         ExpandableListView ev_list = view.findViewById(R.id.record_search_result_list_id);
         SearchResult4RecordAdapter adapter = new SearchResult4RecordAdapter(getActivity(), resultList);
         ev_list.setAdapter(adapter);
+        //
+        tv_inCome.setText(UtilTools.format(inCome));
+        tv_spend.setText(UtilTools.format(spend));
+        tv_balance.setText(UtilTools.format(balance));
         return view;
     }
+
     /*
      * */
 
