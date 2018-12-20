@@ -1,4 +1,4 @@
-package com.zxu.ui.record;
+package com.zxu.ui.recordsearch;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.zxu.R;
+import com.zxu.util.CodeConstant;
+import com.zxu.util.UtilTools;
 
-public class SearchRecordIndexFragment extends DialogFragment {
+public class SearchRecordSelectTimeFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +46,31 @@ public class SearchRecordIndexFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // view
-        View view = inflater.inflate(R.layout.record_search_index, null);
-        ImageView iv_back = view.findViewById(R.id.record_search_index_back_id);
-
-        // listener
-        // back
-        iv_back.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.record_search_index_time, null);
+        ListView lv_time = view.findViewById(R.id.record_search_index_time_list_id);
+        SearchRecordSelectTimeAdapter adapter = new SearchRecordSelectTimeAdapter(getActivity(),"",CodeConstant.SELTIMELIST);
+        lv_time.setAdapter(adapter);
+        lv_time.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String s = CodeConstant.SELTIMELIST.get(position);
                 dismiss();
+                onCloseListener.close(s);
 
             }
         });
         return view;
     }
+
+    //
+    public OnCloseListener onCloseListener;
+    interface  OnCloseListener{
+        void close(String str);
+    }
+
+    public void setOnCloseListener(OnCloseListener onCloseListener) {
+        this.onCloseListener = onCloseListener;
+    }
+
+    //
 }

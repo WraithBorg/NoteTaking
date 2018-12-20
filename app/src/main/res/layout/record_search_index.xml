@@ -57,21 +57,29 @@
             android:text="时间"
             android:textColor="@color/app_black"
             android:textSize="18sp"/>
-        <TextView
+        <LinearLayout
+            android:id="@+id/record_search_index_select_time_id"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:gravity="center_vertical|end"
-            tools:text="近七天"
-            android:textColor="@color/app_70"
-            android:textSize="18sp"/>
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@mipmap/nextstep"
-            android:rotation="0" />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/record_search_index_show_time_id"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:gravity="center_vertical|end"
+                tools:text="近七天"
+                android:textColor="@color/app_70"
+                android:textSize="18sp"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/nextstep"
+                android:rotation="0" />
+        </LinearLayout>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

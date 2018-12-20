@@ -16,6 +16,7 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
 import com.zxu.model.JC_RecordSum;
+import com.zxu.ui.recordsearch.SearchRecordIndexFragment;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
