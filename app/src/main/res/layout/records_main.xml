@@ -44,6 +44,7 @@
                 android:layout_weight="1" />
 
             <ImageView
+                android:id="@+id/report_today_main_search_id"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"

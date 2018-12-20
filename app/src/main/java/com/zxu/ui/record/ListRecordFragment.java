@@ -35,7 +35,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     private String mPeriod;
     // view
     private ExpandableListView lv_details, lv_dayDetails;
-    private ImageView iv_back;
+    private ImageView iv_back,iv_search;
     private TextView tv_topTime, tv_balance, tv_income, tv_spending;
 
     @Override
@@ -61,6 +61,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         tv_spending = view.findViewById(R.id.report_today_main_spending_id);//支出
         lv_details = view.findViewById(R.id.report_today_main_detail_list_id);//消费记录
         lv_dayDetails = view.findViewById(R.id.report_today_main_detail_list_day_id);//消费记录
+        iv_search = view.findViewById(R.id.report_today_main_search_id);//搜索
         // assignment
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         String nowTime = format.format(new Date());
@@ -110,6 +111,14 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
                     }
                 });
                 return false;
+            }
+        });
+        // jump to search index page
+        iv_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchRecordIndexFragment fragment = new SearchRecordIndexFragment();
+                fragment.show(getFragmentManager(), "TExt");
             }
         });
         return view;
