@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 import com.zxu.application.GaiaApplication;
+import com.zxu.util.CodeConstant;
 import com.zxu.util.Constant;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class AddRecordActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public static final int MOVABLE_COUNT = 3;
-    private String[] tabTitle = new String[]{"支出", "收入", "转账"};
+
     private List<String> tabs;
     private List<Fragment> fragments;
 
@@ -71,7 +72,7 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         }
         //
-        tabs = Arrays.asList(tabTitle);
+        tabs = Arrays.asList(CodeConstant.WATERTYPE);
         fragments = new ArrayList<>();
         String type;
         for (String title : tabs) {
@@ -146,7 +147,7 @@ public class AddRecordActivity extends AppCompatActivity {
      */
     private void initTabLayout() {
         //MODE_FIXED标签栏不可滑动，各个标签会平分屏幕的宽度
-        tabLayout.setTabMode(tabTitle.length <= MOVABLE_COUNT ? TabLayout.MODE_FIXED : TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabMode(CodeConstant.WATERTYPE.length <= MOVABLE_COUNT ? TabLayout.MODE_FIXED : TabLayout.MODE_SCROLLABLE);
         //指示条的颜色
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_blue_dark));
         tabLayout.setSelectedTabIndicatorHeight((int) getResources().getDimension(R.dimen.indicatorHeight));

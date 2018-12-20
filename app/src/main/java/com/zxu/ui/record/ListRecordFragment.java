@@ -16,7 +16,7 @@ import com.zxu.R;
 import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
 import com.zxu.model.JC_RecordSum;
-import com.zxu.ui.recordsearch.SearchRecordIndexFragment;
+import com.zxu.ui.recordsearch.ASearchRecordIndexFragment;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
@@ -118,7 +118,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         iv_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchRecordIndexFragment fragment = new SearchRecordIndexFragment();
+                ASearchRecordIndexFragment fragment = new ASearchRecordIndexFragment();
                 fragment.show(getFragmentManager(), "TExt");
             }
         });

@@ -13,9 +13,11 @@ import android.widget.ListView;
 
 import com.zxu.R;
 import com.zxu.util.CodeConstant;
-import com.zxu.util.UtilTools;
 
-public class SearchRecordSelectTimeFragment extends DialogFragment {
+import java.util.Arrays;
+import java.util.HashSet;
+
+public class SelectWaterType4SearchFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +48,16 @@ public class SearchRecordSelectTimeFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // view
-        View view = inflater.inflate(R.layout.record_search_index_time, null);
-        ListView lv_time = view.findViewById(R.id.record_search_index_time_list_id);
-        SearchRecordSelectTimeAdapter adapter = new SearchRecordSelectTimeAdapter(getActivity(),"",CodeConstant.SELTIMELIST);
+        View view = inflater.inflate(R.layout.record_search_index_watertype, null);
+        ListView lv_time = view.findViewById(R.id.record_search_index_watertype_list_id);
+        SelectWaterType4SearchAdapter adapter = new SelectWaterType4SearchAdapter(getActivity(),new HashSet<>(),Arrays.asList(CodeConstant.WATERTYPE));
         lv_time.setAdapter(adapter);
         lv_time.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String s = CodeConstant.SELTIMELIST.get(position);
+                String s = Arrays.asList(CodeConstant.WATERTYPE).get(position);
                 dismiss();
                 onCloseListener.close(s);
-
             }
         });
         return view;

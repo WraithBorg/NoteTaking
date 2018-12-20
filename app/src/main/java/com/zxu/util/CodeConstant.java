@@ -19,6 +19,6 @@ public class CodeConstant {
         add("近七天");
         add("近30天");
     }};
-
+    public static String[] WATERTYPE = new String[]{"支出", "收入", "转账"};
 
 }

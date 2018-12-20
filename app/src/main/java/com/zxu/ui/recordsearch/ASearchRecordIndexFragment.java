@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.zxu.R;
 
-public class SearchRecordIndexFragment extends DialogFragment {
+public class ASearchRecordIndexFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,8 @@ public class SearchRecordIndexFragment extends DialogFragment {
         ImageView iv_back = view.findViewById(R.id.record_search_index_back_id);
         LinearLayout ll_selTime = view.findViewById(R.id.record_search_index_select_time_id);
         TextView tv_showTime = view.findViewById(R.id.record_search_index_show_time_id);
+        LinearLayout ll_selWatertype = view.findViewById(R.id.record_search_index_select_watertype_id);
+        TextView tv_showWatertype = view.findViewById(R.id.record_search_index_show_watertype_id);
 
         // listener
         // back
@@ -63,9 +65,9 @@ public class SearchRecordIndexFragment extends DialogFragment {
         ll_selTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchRecordSelectTimeFragment fragment = new SearchRecordSelectTimeFragment();
+                SelectTime4SearchFragment fragment = new SelectTime4SearchFragment();
                 fragment.show(getFragmentManager(), "Test");
-                fragment.setOnCloseListener(new SearchRecordSelectTimeFragment.OnCloseListener() {
+                fragment.setOnCloseListener(new SelectTime4SearchFragment.OnCloseListener() {
                     @Override
                     public void close(String s) {
                         tv_showTime.setText(s);
@@ -73,6 +75,21 @@ public class SearchRecordIndexFragment extends DialogFragment {
                 });
             }
         });
+        // jump to select water type
+        ll_selWatertype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectWaterType4SearchFragment fragment = new SelectWaterType4SearchFragment();
+                fragment.show(getFragmentManager(), "1");
+                fragment.setOnCloseListener(new SelectWaterType4SearchFragment.OnCloseListener() {
+                    @Override
+                    public void close(String str) {
+                        tv_showWatertype.setText(str);
+                    }
+                });
+            }
+        });
+
         return view;
     }
 }

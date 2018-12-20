@@ -13,13 +13,13 @@ import com.zxu.util.CodeConstant;
 
 import java.util.List;
 
-public class SearchRecordSelectTimeAdapter extends BaseAdapter {
+public class SelectTime4SearchAdapter extends BaseAdapter {
 
     private List<String> timeList;
     private Context context;
     private String checked;
 
-    public SearchRecordSelectTimeAdapter(Context context, String checked, List<String> timeList) {
+    public SelectTime4SearchAdapter(Context context, String checked, List<String> timeList) {
         this.timeList = timeList;
         this.context = context;
         this.checked = checked;
