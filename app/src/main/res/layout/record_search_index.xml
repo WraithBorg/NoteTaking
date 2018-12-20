@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingTop="10dp">
@@ -25,30 +25,35 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="高级搜索"
             android:textColor="@color/app_black"
             android:textSize="24sp" />
+
         <TextView
+            android:id="@+id/record_search_index_confirm_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="确定"
             android:textColor="@color/app_black"
-            android:textSize="22sp"/>
+            android:textSize="22sp" />
     </LinearLayout>
+
     <View
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@color/app_divider_gray"/>
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,22 +61,25 @@
             android:gravity="center"
             android:text="时间"
             android:textColor="@color/app_black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <LinearLayout
             android:id="@+id/record_search_index_select_time_id"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
             <TextView
                 android:id="@+id/record_search_index_show_time_id"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
                 android:gravity="center_vertical|end"
-                tools:text="近七天"
                 android:textColor="@color/app_70"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                tools:text="近七天" />
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="30dp"
@@ -81,15 +89,18 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_divider_gray"/>
+        android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,22 +108,25 @@
             android:gravity="center"
             android:text="流水类型"
             android:textColor="@color/app_black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <LinearLayout
             android:id="@+id/record_search_index_select_watertype_id"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
             <TextView
                 android:id="@+id/record_search_index_show_watertype_id"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
                 android:gravity="center_vertical|end"
-                tools:text="支出"
                 android:textColor="@color/app_70"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                tools:text="支出" />
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="30dp"
@@ -122,15 +136,18 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_divider_gray"/>
+        android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -138,16 +155,18 @@
             android:gravity="center"
             android:text="账户类型"
             android:textColor="@color/app_black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
+            android:layout_weight="1"
             android:gravity="center_vertical|end"
-            tools:text="余额宝"
             android:textColor="@color/app_70"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            tools:text="余额宝" />
+
         <ImageView
             android:layout_width="35dp"
             android:layout_height="30dp"
@@ -155,15 +174,18 @@
             android:background="@mipmap/nextstep"
             android:rotation="0" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_divider_gray"/>
+        android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,48 +193,54 @@
             android:gravity="center"
             android:text="金额区间"
             android:textColor="@color/app_black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <EditText
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            tools:text="111"
-            android:textColor="@color/app_70"
             android:background="@drawable/bill_memo_shape"
-            android:textSize="18sp"/>
+            android:gravity="center"
+            android:textColor="@color/app_70"
+            android:textSize="18sp"
+            tools:text="111" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="一"
-            android:textColor="@color/app_black"
-            android:textSize="10sp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            />
+            android:text="一"
+            android:textColor="@color/app_black"
+            android:textSize="10sp" />
+
         <EditText
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
+            android:background="@drawable/bill_memo_shape"
             android:gravity="center"
-            tools:text="222"
             android:textColor="@color/app_70"
             android:textSize="18sp"
-            android:background="@drawable/bill_memo_shape"/>
+            tools:text="222" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_divider_gray"/>
+        android:background="@color/app_divider_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -220,21 +248,23 @@
             android:gravity="center"
             android:text="备注"
             android:textColor="@color/app_black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <EditText
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            tools:text="111"
-            android:textColor="@color/app_70"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_weight="1"
             android:background="@drawable/bill_memo_shape"
+            android:gravity="center"
+            android:textColor="@color/app_70"
             android:textSize="18sp"
-            android:layout_marginStart="@dimen/dp_10"/>
+            tools:text="111" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_divider_gray"/>
+        android:background="@color/app_divider_gray" />
 </LinearLayout>

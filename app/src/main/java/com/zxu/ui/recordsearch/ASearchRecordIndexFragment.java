@@ -13,8 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zxu.R;
+import com.zxu.model.JC_RecordSearchQuery;
+import com.zxu.model.JC_RecordSearchResult;
 
-public class ASearchRecordIndexFragment extends DialogFragment {
+import java.util.List;
+
+public class ASearchRecordIndexFragment extends DialogFragment implements SearchRecordContract.View {
+
+    private SearchRecordContract.Persenter mPresenter;
+    private List<JC_RecordSearchResult> mResultList;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +52,8 @@ public class ASearchRecordIndexFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        //
+        JC_RecordSearchQuery recordQuery = new JC_RecordSearchQuery();
         // view
         View view = inflater.inflate(R.layout.record_search_index, null);
         ImageView iv_back = view.findViewById(R.id.record_search_index_back_id);
@@ -51,6 +61,8 @@ public class ASearchRecordIndexFragment extends DialogFragment {
         TextView tv_showTime = view.findViewById(R.id.record_search_index_show_time_id);
         LinearLayout ll_selWatertype = view.findViewById(R.id.record_search_index_select_watertype_id);
         TextView tv_showWatertype = view.findViewById(R.id.record_search_index_show_watertype_id);
+        TextView tv_comfirm = view.findViewById(R.id.record_search_index_confirm_id);
+
 
         // listener
         // back
@@ -71,6 +83,7 @@ public class ASearchRecordIndexFragment extends DialogFragment {
                     @Override
                     public void close(String s) {
                         tv_showTime.setText(s);
+                        recordQuery.setPeroid(s);
                     }
                 });
             }
@@ -85,11 +98,32 @@ public class ASearchRecordIndexFragment extends DialogFragment {
                     @Override
                     public void close(String str) {
                         tv_showWatertype.setText(str);
+                        recordQuery.setWaterType(str);
                     }
                 });
             }
         });
-
+        //
+        tv_comfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getRecords(recordQuery);
+                System.out.println(mResultList.size());// TODO
+                SearchResult4RecordFragment fragment = new SearchResult4RecordFragment();
+                fragment.setResultList(mResultList);
+                fragment.show(getFragmentManager(), "test");
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void setRecords(List<JC_RecordSearchResult> result) {
+        this.mResultList = result;
+    }
+
+    @Override
+    public void setPresenter(SearchRecordContract.Persenter presenter) {
+        this.mPresenter = presenter;
     }
 }

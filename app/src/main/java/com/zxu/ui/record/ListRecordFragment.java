@@ -17,6 +17,7 @@ import com.zxu.application.GaiaApplication;
 import com.zxu.model.JC_Record;
 import com.zxu.model.JC_RecordSum;
 import com.zxu.ui.recordsearch.ASearchRecordIndexFragment;
+import com.zxu.ui.recordsearch.SearchRecordPresenter;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
@@ -36,7 +37,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     private String mPeriod;
     // view
     private ExpandableListView lv_details, lv_dayDetails;
-    private ImageView iv_back,iv_search;
+    private ImageView iv_back, iv_search;
     private TextView tv_topTime, tv_balance, tv_income, tv_spending;
 
     @Override
@@ -73,7 +74,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         } else if (CodeConstant.WEEK.equals(mPeriod)) {
             lv_details.setVisibility(View.VISIBLE);
             mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
-        }else if (CodeConstant.MONTH.equals(mPeriod)) {
+        } else if (CodeConstant.MONTH.equals(mPeriod)) {
             lv_details.setVisibility(View.VISIBLE);
             mPresenter.getRecordSumByMonth(mAccountId, mPeriod);
         }
@@ -119,6 +120,8 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
             @Override
             public void onClick(View v) {
                 ASearchRecordIndexFragment fragment = new ASearchRecordIndexFragment();
+                SearchRecordPresenter presenter = new SearchRecordPresenter((GaiaApplication) getActivity().getApplication(), fragment);
+                fragment.setPresenter(presenter);
                 fragment.show(getFragmentManager(), "TExt");
             }
         });

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/dp_10"
+    android:paddingTop="4dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="@dimen/dp_4">
+
+
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:background="@mipmap/rmb" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/search_result_category_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical|start"
+        android:maxWidth="150dp"
+        android:textColor="@color/app_black_color"
+        android:textSize="17sp"
+        tools:text="酒水" />
+
+    <TextView
+        android:id="@+id/search_result_money_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|start"
+        android:maxWidth="150dp"
+        android:textColor="@color/app_black_color"
+        android:textSize="17sp"
+        tools:text="0.123ssss4" />
+
+</LinearLayout>

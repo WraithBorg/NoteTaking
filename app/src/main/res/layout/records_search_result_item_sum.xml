@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/dp_10"
+    android:paddingTop="4dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="@dimen/dp_4">
+
+
+    <TextView
+        android:id="@+id/record_search_result_date_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|start"
+        android:textColor="@color/app_black"
+        android:textSize="22sp"
+        tools:text="2018年12月18日 星期一" />
+</LinearLayout>

@@ -4,6 +4,8 @@ import com.zxu.base.database.BaseDaoImpl;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_MonthPeriod;
 import com.zxu.model.JC_Record;
+import com.zxu.model.JC_RecordSearchQuery;
+import com.zxu.model.JC_RecordSearchResult;
 import com.zxu.model.JC_RecordSum;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
@@ -139,7 +141,7 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
         }
         List<JC_RecordSum> recordSumWeeks = new ArrayList<>();
         JC_RecordSum sumWeek;
-        for (JC_MonthPeriod period : monthPeriods){
+        for (JC_MonthPeriod period : monthPeriods) {
             sumWeek = new JC_RecordSum();
             sumWeek.setDayOrWeek(period.getWeek());
             sumWeek.setBottomTime(period.getPeriod());
@@ -164,5 +166,23 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
             }
         }
         return recordSumWeeks;
+    }
+
+    /**
+     * 获取查询结果
+     *
+     * @param recordQuery
+     * @return
+     */
+    public List<JC_RecordSearchResult> getSearchResult(JC_RecordSearchQuery recordQuery) {
+        JC_RecordSearchResult result = new JC_RecordSearchResult();
+        result.setRecords(super.getList());
+
+        result.setWeekDay("星期一");
+        result.setDate(new Date());
+
+        List<JC_RecordSearchResult> list = new ArrayList<>();
+        list.add(result);
+        return list;
     }
 }
