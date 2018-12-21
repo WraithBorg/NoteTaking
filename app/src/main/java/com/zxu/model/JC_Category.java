@@ -16,8 +16,8 @@ public class JC_Category {
     private String fatherId;
     @DatabaseField(columnName = "type", dataType = DataType.INTEGER)
     private int type;// 0 一级分类，1 二级分类
-    @DatabaseField(columnName = "species", dataType = DataType.STRING)
-    private String species;// 0 收入，1 支出
+    @DatabaseField(columnName = "waterType", dataType = DataType.STRING)
+    private String waterType;// 0 收入，1 支出
     @DatabaseField(columnName = "num", dataType = DataType.STRING)
     private String num;//序号
 
@@ -72,23 +72,23 @@ public class JC_Category {
         this.num = num;
     }
 
-    public String getSpecies() {
-        return species;
+    public String getWaterType() {
+        return waterType;
     }
 
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setWaterType(String waterType) {
+        this.waterType = waterType;
     }
 
     public JC_Category() {
     }
 
-    public JC_Category(String id, String name, String fatherId, int type,String species,String num, List<JC_Category> childs) {
+    public JC_Category(String id, String name, String fatherId, int type,String waterType,String num, List<JC_Category> childs) {
         this.id = id;
         this.name = name;
         this.fatherId = fatherId;
         this.type = type;
-        this.species = species;
+        this.waterType = waterType;
         this.num = num;
         this.childs = childs;
     }

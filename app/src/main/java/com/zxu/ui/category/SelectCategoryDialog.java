@@ -29,7 +29,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
     private ListView recLeft;
     private ListView recRight;
     // java
-    private String costType;
+    private String waterType;
     private SelectCategoryAdapterLeft leftAdapter;
     private SelectCategoryAdapterRight rightAdapter;
     //记录右侧当前可见的第一个item的position
@@ -66,7 +66,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
                     }
                 }, CodeConstant.DIALOGWAITTIME);
                 ListCategoryDialog dialog = new ListCategoryDialog();
-                dialog.setCostType(costType);
+                dialog.setWaterType(waterType);
                 CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
@@ -80,7 +80,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
             }
         });
         //
-        mPresenter.getCategorys(false,costType);
+        mPresenter.getCategorys(false,waterType);
         // left
         leftAdapter = new SelectCategoryAdapterLeft(categoryList, getActivity());
         recLeft.setAdapter(leftAdapter);
@@ -173,7 +173,7 @@ public class SelectCategoryDialog extends DialogFragment implements CategoryCont
      *
      */
     @Override
-    public void setCostType(String type) {
-        costType = type;
+    public void setWaterType(String waterType) {
+        this.waterType = waterType;
     }
 }

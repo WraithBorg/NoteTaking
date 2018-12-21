@@ -74,23 +74,8 @@ public class AddRecordActivity extends AppCompatActivity {
         //
         tabs = Arrays.asList(CodeConstant.WATERTYPE);
         fragments = new ArrayList<>();
-        String type;
         for (String title : tabs) {
-            switch (title) {
-                case "收入":
-                    type = "0";
-                    break;
-                case "支出":
-                    type = "1";
-                    break;
-                case "转账":
-                    type = "2";
-                    break;
-                default:
-                    type = "";
-                    break;
-            }
-            AddRecordFragment fragment = AddRecordFragment.newInstance(title, accountBookID, type);
+            AddRecordFragment fragment = AddRecordFragment.newInstance(title, accountBookID, title);
             RecordPresenter presenter = new RecordPresenter((GaiaApplication) getApplication(), fragment);
             fragment.setPresenter(presenter);
             fragments.add(fragment);

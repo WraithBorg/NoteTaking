@@ -24,7 +24,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
     private CategoryContract.Presenter mPresenter;
     private List<JC_Category> categoryList;
     // java
-    private String mSpecies;;// TODO
+    private String waterType;
     /**
      * dialog 创建
      *
@@ -47,7 +47,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
             @Override
             public void onClick(View v) {
                 AddCategoryBigDialog dialog = new AddCategoryBigDialog();
-                dialog.setmSpecies(mSpecies);
+                dialog.setWaterType(waterType);
                 AddCategoryBigPresenter presenter = new AddCategoryBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 dialog.show(getActivity().getFragmentManager(), "android");
@@ -73,7 +73,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
         });
 
         // list
-        mPresenter.getCategorys(true,mSpecies);
+        mPresenter.getCategorys(true,waterType);
         List<JC_Category> list = getCategoryList();
         ListCategoryAdapter listCategoryAdapter = new ListCategoryAdapter(getActivity(), list);// TODO getActivity() getApplication() getApplicationContext() 区别
         elv_category.setAdapter(listCategoryAdapter);
@@ -86,7 +86,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
                 if (category.getId().equals(CodeConstant.ADDONETYPE)){
 
                     AddCategoryBigDialog dialog = new AddCategoryBigDialog();
-                    dialog.setmSpecies(mSpecies);
+                    dialog.setWaterType(waterType);
                     AddCategoryBigPresenter presenter = new AddCategoryBigPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                     dialog.setPresenter(presenter);
                     dialog.show(getActivity().getFragmentManager(), "android");
@@ -113,7 +113,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
                     bundle.putSerializable("fatherId",fatherC.getId());
 
                     AddCategorySmallDialog dialog = new AddCategorySmallDialog();
-                    dialog.setmSpecies(mSpecies);
+                    dialog.setWaterType(waterType);
                     AddCategorySmallPresenter presenter = new AddCategorySmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
                     dialog.setPresenter(presenter);
                     dialog.setArguments(bundle);
@@ -170,7 +170,7 @@ public class ListCategoryDialog extends DialogFragment implements CategoryContra
     //
 
     @Override
-    public void setCostType(String type) {
-        this.mSpecies = type;
+    public void setWaterType(String type) {
+        this.waterType = type;
     }
 }

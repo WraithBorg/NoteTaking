@@ -20,7 +20,7 @@ import com.zxu.util.ZUID;
 
 public class AddCategorySmallDialog extends DialogFragment implements AddCategorySmallContract.View {
     private AddCategorySmallContract.Presenter mPresenter;
-    private String mSpecies;
+    private String waterType;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
                 }, CodeConstant.DIALOGWAITTIME);
                 // save data
                 ZUID zuid = new ZUID();
-                JC_Category category = new JC_Category(zuid.next(),et_name.getText().toString(),fatherId,1,mSpecies,zuid.next(),null);
+                JC_Category category = new JC_Category(zuid.next(),et_name.getText().toString(),fatherId,1,waterType,zuid.next(),null);
                 mPresenter.addSmallCategory(category);
             }
         });
@@ -90,7 +90,7 @@ public class AddCategorySmallDialog extends DialogFragment implements AddCategor
         mPresenter = presenter;
     }
 
-    public void setmSpecies(String mSpecies) {
-        this.mSpecies = mSpecies;
+    public void setWaterType(String mSpecies) {
+        this.waterType = mSpecies;
     }
 }

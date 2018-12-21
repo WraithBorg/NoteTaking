@@ -206,10 +206,10 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
         if (StringUtils.isNotEmpty(start) && StringUtils.isNotEmpty(end)) {
             where.and().between("workTime", start, end);
         }
-        if (StringUtils.isNotEmpty(recordQuery.getWaterType())) {
+        if (StringUtils.isNotEmpty(recordQuery.getWaterType()) && !recordQuery.getWaterType().equals("全选")) {
             where.and().eq("waterType", recordQuery.getWaterType());
         }
-        if (StringUtils.isNotEmpty(recordQuery.getAccountType())) {
+        if (StringUtils.isNotEmpty(recordQuery.getAccountType()) && !recordQuery.getAccountType().equals("全选")) {
             where.and().eq("account", recordQuery.getAccountType());
         }
         if (StringUtils.isNotEmpty(recordQuery.getMemo())) {

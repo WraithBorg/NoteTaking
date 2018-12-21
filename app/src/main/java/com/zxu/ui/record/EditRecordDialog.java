@@ -189,7 +189,7 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
             @Override
             public void onClick(View v) {
                 SelectCategoryDialog dialog = new SelectCategoryDialog();
-                dialog.setCostType(mRecord.getWaterType());
+                dialog.setWaterType(mRecord.getWaterType());
                 CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 // 监听选择类别事件

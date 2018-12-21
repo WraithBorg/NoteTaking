@@ -46,7 +46,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
     private ImageView tv_camera;
     //
     private String mAccountBookID;
-    private String mType;
+    private String waterType;
     // 日期控件
     private CustomDatePicker customDatePicker2;
     //
@@ -74,7 +74,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         AddRecordFragment fragment = new AddRecordFragment();
         fragment.setArguments(args);
         fragment.mAccountBookID = accountBookID;
-        fragment.mType = type;
+        fragment.waterType = type;
 
         return fragment;
     }
@@ -158,7 +158,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
             @Override
             public void onClick(View v) {
                 SelectCategoryDialog dialog = new SelectCategoryDialog();
-                dialog.setCostType(mType);
+                dialog.setWaterType(waterType);
                 CategoryPresenter presenter = new CategoryPresenter((GaiaApplication) getActivity().getApplication(), dialog);
                 dialog.setPresenter(presenter);
                 // 监听选择类别事件
@@ -256,7 +256,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         record.setWorkTime(timeText);
         record.setCategory(categoryText);
         record.setAccount(accountText);
-        record.setWaterType(mType);
+        record.setWaterType(waterType);
         record.setMemo(memoText);
         record.setBookId(mAccountBookID);
         if (!StringUtils.isEmpty(mImgPath)) {

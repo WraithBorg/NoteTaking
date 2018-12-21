@@ -26,7 +26,7 @@ import java.util.UUID;
 
 public class AddCategoryBigDialog extends DialogFragment implements AddCategoryBigContract.View {
     private AddCategoryBigContract.Presenter mPresenter;
-    private String mSpecies;
+    private String waterType;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -61,14 +61,14 @@ public class AddCategoryBigDialog extends DialogFragment implements AddCategoryB
                 // save data
                 ZUID zuid = new ZUID();
                 String cId = zuid.next();
-                JC_Category category = new JC_Category(cId,et_name.getText().toString(),"",0,mSpecies,zuid.next(),null);
+                JC_Category category = new JC_Category(cId,et_name.getText().toString(),"",0,waterType,zuid.next(),null);
                 mPresenter.addBigCategory(category);
                 // next dialog
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fatherId",cId);
 
                 AddCategorySmallDialog dialog = new AddCategorySmallDialog();
-                dialog.setmSpecies(mSpecies);
+                dialog.setWaterType(waterType);
                 AddCategorySmallPresenter presenter = new AddCategorySmallPresenter((GaiaApplication) getActivity().getApplication(),dialog);
                 dialog.setPresenter(presenter);
                 dialog.setArguments(bundle);
@@ -111,7 +111,7 @@ public class AddCategoryBigDialog extends DialogFragment implements AddCategoryB
         mPresenter = presenter;
     }
 
-    public void setmSpecies(String mSpecies) {
-        this.mSpecies = mSpecies;
+    public void setWaterType(String waterType) {
+        this.waterType = waterType;
     }
 }

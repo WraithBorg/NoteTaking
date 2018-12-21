@@ -1,7 +1,7 @@
 package com.zxu.util;
 
 public enum CostEnum {
-    INCOME("0"), SPEND("1"), TRANSFER("2");
+    INCOME("收入"), SPEND("支出"), TRANSFER("转账");
 
     private String mCode;
 

@@ -37,7 +37,7 @@ public class CategoryDao extends BaseDaoImpl<JC_Category> {
      */
     public List<JC_Category> getBSList(boolean fromAdd, String costType) {
 //        List<JC_Category> list = super.getList();
-        List<JC_Category> list = super.where().eq("species", costType).query();
+        List<JC_Category> list = super.where().eq("waterType", costType).query();
 
         Map<String, JC_Category> bigs = new HashMap<>();
         Map<String, List<JC_Category>> smalls = new HashMap<>();
