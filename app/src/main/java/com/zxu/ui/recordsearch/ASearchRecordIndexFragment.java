@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,12 +58,16 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
         // view
         View view = inflater.inflate(R.layout.record_search_index, null);
         ImageView iv_back = view.findViewById(R.id.record_search_index_back_id);
-        LinearLayout ll_selTime = view.findViewById(R.id.record_search_index_select_time_id);
-        TextView tv_showTime = view.findViewById(R.id.record_search_index_show_time_id);
-        LinearLayout ll_selWatertype = view.findViewById(R.id.record_search_index_select_watertype_id);
-        TextView tv_showWatertype = view.findViewById(R.id.record_search_index_show_watertype_id);
         TextView tv_comfirm = view.findViewById(R.id.record_search_index_confirm_id);
-
+        TextView tv_showTime = view.findViewById(R.id.record_search_index_show_time_id);
+        TextView tv_showWatertype = view.findViewById(R.id.record_search_index_show_watertype_id);
+        TextView tv_showAccounttype = view.findViewById(R.id.record_search_index_show_accounttype_id);
+        EditText et_minMoney = view.findViewById(R.id.record_search_index_select_minMoney_id);
+        EditText et_maxMoney = view.findViewById(R.id.record_search_index_select_maxMoney_id);
+        EditText et_memo = view.findViewById(R.id.record_search_index_select_memo_id);
+        LinearLayout ll_selTime = view.findViewById(R.id.record_search_index_select_time_id);
+        LinearLayout ll_selWatertype = view.findViewById(R.id.record_search_index_select_watertype_id);
+        LinearLayout ll_selAccounttype = view.findViewById(R.id.record_search_index_select_accounttype_id);
 
         // listener
         // back
@@ -103,12 +108,29 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
                 });
             }
         });
-        //
+        // select account type
+        ll_selAccounttype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectAccountType4SearchFragment fragment = new SelectAccountType4SearchFragment();
+                fragment.show(getFragmentManager(), "Text");
+                fragment.setOnCloseListener(new SelectAccountType4SearchFragment.OnCloseListener() {
+                    @Override
+                    public void close(String str) {
+                        tv_showAccounttype.setText(str);
+                        recordQuery.setAccountType(str);
+                    }
+                });
+            }
+        });
+        // confirm
         tv_comfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recordQuery.setMinMoney(et_minMoney.getText().toString());
+                recordQuery.setMaxMoney(et_maxMoney.getText().toString());
+                recordQuery.setMemo(et_memo.getText().toString());
                 mPresenter.getRecords(recordQuery);
-                System.out.println(mResultList.size());// TODO
                 SearchResult4RecordFragment fragment = new SearchResult4RecordFragment();
                 fragment.setResultList(mResultList);
                 fragment.show(getFragmentManager(), "test");

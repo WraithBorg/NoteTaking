@@ -25,6 +25,7 @@ import com.zxu.model.JC_Category;
 import com.zxu.model.JC_Record;
 import com.zxu.ui.category.CategoryPresenter;
 import com.zxu.ui.category.SelectCategoryDialog;
+import com.zxu.util.CodeConstant;
 import com.zxu.util.UtilTools;
 import com.zxu.widget.CustomDatePicker;
 
@@ -168,7 +169,7 @@ public class EditRecordDialog extends DialogFragment implements EditRecordContra
         tv_selAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AccountSelectDialog accountDialog = new AccountSelectDialog(getContext(), JC_Account.getAccounts(), tv_selAccount.getText().toString());
+                AccountSelectDialog accountDialog = new AccountSelectDialog(getContext(), CodeConstant.ACCOUNTTYPE, tv_selAccount.getText().toString());
                 accountDialog.create(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
