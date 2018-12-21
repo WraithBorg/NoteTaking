@@ -99,9 +99,9 @@ public class SearchResult4RecordAdapter extends BaseExpandableListAdapter {
         holder.tv_money.setText(record.getMoney());
         holder.tv_category.setText(record.getCategory());
         //
-        if (CostEnum.SPEND.code().equals(record.getType())) {
+        if (CostEnum.SPEND.code().equals(record.getWaterType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_green));
-        } else if (CostEnum.INCOME.code().equals(record.getType())) {
+        } else if (CostEnum.INCOME.code().equals(record.getWaterType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_red));
         }
         return convertView;

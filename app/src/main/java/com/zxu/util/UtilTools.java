@@ -59,6 +59,45 @@ public class UtilTools {
     }
 
     /**
+     * 获取昨天日期
+     * @param format
+     * @return
+     */
+    public static String getYesterday(SimpleDateFormat format) {
+        Date date=new Date();//取时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE,-1);//把日期往后增加一天.整数往后推,负数往前移动
+        date=calendar.getTime(); //这个时间就是日期往后推一天的结果
+        return format.format(date);
+    }
+    /**
+     * 获取明天日期
+     * @param format
+     * @return
+     */
+    public static String getTomorrow(SimpleDateFormat format) {
+        Date date=new Date();//取时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE,1);//把日期往后增加一天.整数往后推,负数往前移动
+        date=calendar.getTime(); //这个时间就是日期往后推一天的结果
+        return format.format(date);
+    }
+    /**
+     * 获取明天日期
+     * @param format
+     * @return
+     */
+    public static String getLastDay(SimpleDateFormat format,int lastDay) {
+        Date date=new Date();//取时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE,lastDay);//把日期往后增加一天.整数往后推,负数往前移动
+        date=calendar.getTime(); //这个时间就是日期往后推一天的结果
+        return format.format(date);
+    }
+    /**
      * dp转px
      *
      * @param context

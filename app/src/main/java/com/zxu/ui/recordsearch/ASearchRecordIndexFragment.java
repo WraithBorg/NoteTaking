@@ -16,13 +16,16 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.model.JC_RecordSearchQuery;
 import com.zxu.model.JC_RecordSearchResult;
+import com.zxu.util.UtilTools;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ASearchRecordIndexFragment extends DialogFragment implements SearchRecordContract.View {
-
+    private String accountBookId;
     private SearchRecordContract.Persenter mPresenter;
     private List<JC_RecordSearchResult> mResultList;
 
@@ -57,6 +60,7 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //
         JC_RecordSearchQuery recordQuery = new JC_RecordSearchQuery();
+        recordQuery.setAccountBookId(accountBookId);
         // view
         View view = inflater.inflate(R.layout.record_search_index, null);
         ImageView iv_back = view.findViewById(R.id.record_search_index_back_id);
@@ -135,10 +139,18 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
         tv_comfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //
                 recordQuery.setMinMoney(et_minMoney.getText().toString());
                 recordQuery.setMaxMoney(et_maxMoney.getText().toString());
                 recordQuery.setMemo(et_memo.getText().toString());
+                // validate
+                if (StringUtils.isEmpty(recordQuery.getPeroid())){
+                    UtilTools.showToast(getActivity(), "请选择时间", 1111);
+                    return;
+                }
+                // query
                 mPresenter.getRecords(recordQuery);
+                // jump
                 SearchResult4RecordFragment fragment = new SearchResult4RecordFragment();
                 fragment.setResultList(mResultList);
                 fragment.show(getFragmentManager(), "test");
@@ -155,5 +167,9 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
     @Override
     public void setPresenter(SearchRecordContract.Persenter presenter) {
         this.mPresenter = presenter;
+    }
+
+    public void setAccountBookId(String accountBookId) {
+        this.accountBookId = accountBookId;
     }
 }

@@ -60,9 +60,9 @@ public class SearchResult4RecordFragment extends DialogFragment {
         BigDecimal balance = BigDecimal.ZERO;
         for (JC_RecordSearchResult res : resultList){
             for (JC_Record record : res.getRecords()){
-                if (CostEnum.SPEND.code().equals(record.getType())) {
+                if (CostEnum.SPEND.code().equals(record.getWaterType())) {
                     spend = spend.add(new BigDecimal(record.getMoney()));
-                } else if (CostEnum.INCOME.code().equals(record.getType())) {
+                } else if (CostEnum.INCOME.code().equals(record.getWaterType())) {
                     inCome = inCome.add(new BigDecimal(record.getMoney()));
                 }
             }

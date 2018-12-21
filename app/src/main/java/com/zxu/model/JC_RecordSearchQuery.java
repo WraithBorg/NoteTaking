@@ -1,6 +1,7 @@
 package com.zxu.model;
 
 public class JC_RecordSearchQuery {
+    private String accountBookId;
     private String userId;
     private String peroid;
     private String beginTime;
@@ -82,5 +83,13 @@ public class JC_RecordSearchQuery {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getAccountBookId() {
+        return accountBookId;
+    }
+
+    public void setAccountBookId(String accountBookId) {
+        this.accountBookId = accountBookId;
     }
 }

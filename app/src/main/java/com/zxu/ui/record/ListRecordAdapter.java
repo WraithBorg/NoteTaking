@@ -119,9 +119,9 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
             holder.tv_weekDay.setText(UtilTools.getWeekDay(record.getWorkTime()));
         }
         // prefect
-        if (CostEnum.SPEND.code().equals(record.getType())) {
+        if (CostEnum.SPEND.code().equals(record.getWaterType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_red));
-        } else if (CostEnum.INCOME.code().equals(record.getType())) {
+        } else if (CostEnum.INCOME.code().equals(record.getWaterType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_green));
         } else {
             holder.tv_money.setTextColor(context.getColor(R.color.app_black));

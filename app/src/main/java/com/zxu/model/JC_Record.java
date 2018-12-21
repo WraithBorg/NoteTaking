@@ -11,8 +11,8 @@ import com.zxu.annotation.DatabaseTable;
 public class JC_Record {
     @DatabaseField(columnName = "id", id = true, dataType = DataType.STRING)
     private String id;
-    @DatabaseField(columnName = "type", dataType = DataType.STRING)
-    private String type;// 收入:0,支出:1，转账:2
+    @DatabaseField(columnName = "waterType", dataType = DataType.STRING)
+    private String waterType;// 流水类型 收入:0,支出:1，转账:2
     @DatabaseField(columnName = "category", dataType = DataType.STRING)
     private String category;// 类别：零食，早餐
     @DatabaseField(columnName = "money", dataType = DataType.STRING)
@@ -41,12 +41,12 @@ public class JC_Record {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getWaterType() {
+        return waterType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setWaterType(String waterType) {
+        this.waterType = waterType;
     }
 
     public String getCategory() {

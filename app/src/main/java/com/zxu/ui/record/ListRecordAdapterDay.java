@@ -87,9 +87,9 @@ public class ListRecordAdapterDay extends BaseExpandableListAdapter implements E
         holder.tv_money.setText(record.getMoney());
         holder.tv_time.setText(record.getWorkTime());
         // prefect
-        if (CostEnum.SPEND.code().equals(record.getType())) {
+        if (CostEnum.SPEND.code().equals(record.getWaterType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_red));
-        } else if (CostEnum.INCOME.code().equals(record.getType())) {
+        } else if (CostEnum.INCOME.code().equals(record.getWaterType())) {
             holder.tv_money.setTextColor(context.getColor(R.color.app_green));
         } else {
             holder.tv_money.setTextColor(context.getColor(R.color.app_black));

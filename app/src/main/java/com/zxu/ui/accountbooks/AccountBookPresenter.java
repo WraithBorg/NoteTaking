@@ -73,9 +73,9 @@ public class AccountBookPresenter implements AccountBookContract.Presenter {
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
         for (JC_Record record : recordList) {
-            if (CostEnum.INCOME.code().equals(record.getType())) {
+            if (CostEnum.INCOME.code().equals(record.getWaterType())) {
                 inCome = inCome.add(new BigDecimal(record.getMoney()));
-            } else if (CostEnum.SPEND.code().equals(record.getType())) {
+            } else if (CostEnum.SPEND.code().equals(record.getWaterType())) {
                 spending = spending.add(new BigDecimal(record.getMoney()));
             }
         }

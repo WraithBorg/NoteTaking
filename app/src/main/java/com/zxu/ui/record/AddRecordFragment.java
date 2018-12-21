@@ -256,7 +256,7 @@ public class AddRecordFragment extends Fragment implements AddRecordContract.Vie
         record.setWorkTime(timeText);
         record.setCategory(categoryText);
         record.setAccount(accountText);
-        record.setType(mType);
+        record.setWaterType(mType);
         record.setMemo(memoText);
         record.setBookId(mAccountBookID);
         if (!StringUtils.isEmpty(mImgPath)) {

@@ -1,6 +1,7 @@
 package com.zxu.dao;
 
 import com.zxu.base.database.BaseDaoImpl;
+import com.zxu.base.database.ZWhere;
 import com.zxu.helpers.ResultHelper;
 import com.zxu.model.JC_MonthPeriod;
 import com.zxu.model.JC_Record;
@@ -10,6 +11,8 @@ import com.zxu.model.JC_RecordSum;
 import com.zxu.util.CodeConstant;
 import com.zxu.util.CostEnum;
 import com.zxu.util.UtilTools;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -103,9 +106,9 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
             BigDecimal inCome = BigDecimal.ZERO, spend = BigDecimal.ZERO;//每天汇总
             for (int j = 0; j < records.size(); j++) {
                 JC_Record record = records.get(j);
-                if (CostEnum.SPEND.code().equals(record.getType())) {
+                if (CostEnum.SPEND.code().equals(record.getWaterType())) {
                     spend = spend.add(new BigDecimal(record.getMoney()));
-                } else if (CostEnum.INCOME.code().equals(record.getType())) {
+                } else if (CostEnum.INCOME.code().equals(record.getWaterType())) {
                     inCome = inCome.add(new BigDecimal(record.getMoney()));
                 }
             }
@@ -150,9 +153,9 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
                     .between("workTime", period.getStart() + " 00:00", period.getEnd() + " 23:59").query();
             for (int j = 0; j < records.size(); j++) {
                 JC_Record record = records.get(j);
-                if (CostEnum.SPEND.code().equals(record.getType())) {
+                if (CostEnum.SPEND.code().equals(record.getWaterType())) {
                     spend = spend.add(new BigDecimal(record.getMoney()));
-                } else if (CostEnum.INCOME.code().equals(record.getType())) {
+                } else if (CostEnum.INCOME.code().equals(record.getWaterType())) {
                     inCome = inCome.add(new BigDecimal(record.getMoney()));
                 }
             }
@@ -175,8 +178,50 @@ public class RecordDao extends BaseDaoImpl<JC_Record> {
      * @return
      */
     public List<JC_RecordSearchResult> getSearchResult(JC_RecordSearchQuery recordQuery) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        //
+        String accountBookId = recordQuery.getAccountBookId();
+        String start, end;
+        String peroid = recordQuery.getPeroid();
+        String today = format.format(new Date());
+        if (peroid.equals("今天")) {
+            start = today + " 00:00";
+            end = today + " 23:59";
+        } else if (peroid.equals("昨天")) {
+            String lastDay = UtilTools.getLastDay(format, -1);
+            start = lastDay+ " 00:00";
+            end = lastDay + " 23:59";
+        } else if (peroid.equals("近七天")) {
+            start = UtilTools.getLastDay(format, -7)+ " 00:00";
+            end = today + " 23:59";
+        } else if (peroid.equals("近30天")) {
+            start = UtilTools.getLastDay(format, -30)+ " 00:00";
+            end = today + " 23:59";
+        } else {
+            start = today + " 00:00";
+            end = today + " 23:59";
+        }
+
+        ZWhere<JC_Record> where = super.where().eq("bookId", accountBookId);
+        if (StringUtils.isNotEmpty(start) && StringUtils.isNotEmpty(end)) {
+            where.and().between("workTime", start, end);
+        }
+        if (StringUtils.isNotEmpty(recordQuery.getWaterType())) {
+            where.and().eq("waterType", recordQuery.getWaterType());
+        }
+        if (StringUtils.isNotEmpty(recordQuery.getAccountType())) {
+            where.and().eq("account", recordQuery.getAccountType());
+        }
+        if (StringUtils.isNotEmpty(recordQuery.getMemo())) {
+            where.and().eq("memo", recordQuery.getMemo());
+        }
+        if (StringUtils.isNotEmpty(recordQuery.getMinMoney()) && StringUtils.isNotEmpty(recordQuery.getMaxMoney())) {
+            where.and().between("money", recordQuery.getMinMoney(), recordQuery.getMaxMoney());// TODO 字符比较 2>11
+        }
+        List<JC_Record> records = where.query();
+
         JC_RecordSearchResult result = new JC_RecordSearchResult();
-        result.setRecords(super.getList());
+        result.setRecords(records);
 
         result.setWeekDay("星期一");
         result.setDate(new Date());

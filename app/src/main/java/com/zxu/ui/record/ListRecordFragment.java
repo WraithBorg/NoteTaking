@@ -33,8 +33,8 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     private List<JC_Record> recordList;
     private List<JC_RecordSum> recordSums4WeekOrMonth;
     // param
-    private String mAccountId;
-    private String mPeriod;
+    private String mAccountBookId;//账本
+    private String mPeriod;// 区间：月周日
     // view
     private ExpandableListView lv_details, lv_dayDetails;
     private ImageView iv_back, iv_search;
@@ -70,13 +70,13 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         //
         if (CodeConstant.DAY.equals(mPeriod)) {
             lv_dayDetails.setVisibility(View.VISIBLE);
-            mPresenter.getRecords(mAccountId, mPeriod);//自动刷新list
+            mPresenter.getRecords(mAccountBookId, mPeriod);//自动刷新list
         } else if (CodeConstant.WEEK.equals(mPeriod)) {
             lv_details.setVisibility(View.VISIBLE);
-            mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
+            mPresenter.getRecordSumByWeek(mAccountBookId, mPeriod);
         } else if (CodeConstant.MONTH.equals(mPeriod)) {
             lv_details.setVisibility(View.VISIBLE);
-            mPresenter.getRecordSumByMonth(mAccountId, mPeriod);
+            mPresenter.getRecordSumByMonth(mAccountBookId, mPeriod);
         }
         tv_topTime.setText(nowTime);
         // init widgets
@@ -104,11 +104,11 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
                     @Override
                     public void onDismiss() {
                         if (CodeConstant.DAY.equals(mPeriod)) {
-                            mPresenter.getRecords(mAccountId, mPeriod);
+                            mPresenter.getRecords(mAccountBookId, mPeriod);
                         } else if (CodeConstant.WEEK.equals(mPeriod)) {
-                            mPresenter.getRecordSumByWeek(mAccountId, mPeriod);
+                            mPresenter.getRecordSumByWeek(mAccountBookId, mPeriod);
                         } else if (CodeConstant.MONTH.equals(mPeriod)) {
-                            mPresenter.getRecordSumByMonth(mAccountId, mPeriod);
+                            mPresenter.getRecordSumByMonth(mAccountBookId, mPeriod);
                         }
                     }
                 });
@@ -120,6 +120,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
             @Override
             public void onClick(View v) {
                 ASearchRecordIndexFragment fragment = new ASearchRecordIndexFragment();
+                fragment.setAccountBookId(mAccountBookId);
                 SearchRecordPresenter presenter = new SearchRecordPresenter((GaiaApplication) getActivity().getApplication(), fragment);
                 fragment.setPresenter(presenter);
                 fragment.show(getFragmentManager(), "TExt");
@@ -139,9 +140,9 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;
         for (JC_Record record : recordList) {
-            if (CostEnum.INCOME.code().equals(record.getType())) {
+            if (CostEnum.INCOME.code().equals(record.getWaterType())) {
                 inCome = inCome.add(new BigDecimal(record.getMoney()));
-            } else if (CostEnum.SPEND.code().equals(record.getType())) {
+            } else if (CostEnum.SPEND.code().equals(record.getWaterType())) {
                 spending = spending.add(new BigDecimal(record.getMoney()));
             }
         }
@@ -208,7 +209,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
 
     // init param
     public void setAccountId(String accountId) {
-        this.mAccountId = accountId;
+        this.mAccountBookId = accountId;
     }
 
     public void setPeriod(String period) {
