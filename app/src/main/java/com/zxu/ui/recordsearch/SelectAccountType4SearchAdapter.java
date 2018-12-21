@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zxu.R;
 import com.zxu.model.JC_Account;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +25,9 @@ public class SelectAccountType4SearchAdapter extends BaseAdapter {
         this.accountTypeList = timeList;
         this.context = context;
         this.checked = checked;
+        if (this.checked == null) {
+            this.checked = new HashSet<>();
+        }
     }
 
     @Override
@@ -57,9 +61,11 @@ public class SelectAccountType4SearchAdapter extends BaseAdapter {
         //
         String name = accountTypeList.get(position).getName();
         holder.tv_time.setText(name);
-        if (checked.contains(name)) {
+        if (checked.contains("全选")) {
             holder.rb_checked.setBackgroundResource(R.mipmap.radio_selected);
-        }else {
+        } else if (checked.contains(name)) {
+            holder.rb_checked.setBackgroundResource(R.mipmap.radio_selected);
+        } else {
             holder.rb_checked.setBackgroundResource(R.mipmap.radio_unselect);
         }
         return convertView;

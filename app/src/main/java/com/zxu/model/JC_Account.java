@@ -20,4 +20,11 @@ public class JC_Account {
     public void setName(String name) {
         this.name = name;
     }
+
+    public JC_Account(String name) {
+        this.name = name;
+    }
+
+    public JC_Account() {
+    }
 }

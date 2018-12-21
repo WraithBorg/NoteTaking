@@ -17,7 +17,9 @@ import com.zxu.R;
 import com.zxu.model.JC_RecordSearchQuery;
 import com.zxu.model.JC_RecordSearchResult;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ASearchRecordIndexFragment extends DialogFragment implements SearchRecordContract.View {
 
@@ -97,7 +99,10 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
         ll_selWatertype.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Set<String> checked = new HashSet<>();
+                checked.add(recordQuery.getWaterType());
                 SelectWaterType4SearchFragment fragment = new SelectWaterType4SearchFragment();
+                fragment.setChecked(checked);
                 fragment.show(getFragmentManager(), "1");
                 fragment.setOnCloseListener(new SelectWaterType4SearchFragment.OnCloseListener() {
                     @Override
@@ -112,7 +117,10 @@ public class ASearchRecordIndexFragment extends DialogFragment implements Search
         ll_selAccounttype.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Set<String> checked = new HashSet<>();
+                checked.add(recordQuery.getAccountType());
                 SelectAccountType4SearchFragment fragment = new SelectAccountType4SearchFragment();
+                fragment.setChecked(checked);
                 fragment.show(getFragmentManager(), "Text");
                 fragment.setOnCloseListener(new SelectAccountType4SearchFragment.OnCloseListener() {
                     @Override

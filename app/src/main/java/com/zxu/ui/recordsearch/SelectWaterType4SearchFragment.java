@@ -14,10 +14,15 @@ import android.widget.ListView;
 import com.zxu.R;
 import com.zxu.util.CodeConstant;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class SelectWaterType4SearchFragment extends DialogFragment {
+    private Set<String> checked;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +55,16 @@ public class SelectWaterType4SearchFragment extends DialogFragment {
         // view
         View view = inflater.inflate(R.layout.record_search_index_watertype, null);
         ListView lv_time = view.findViewById(R.id.record_search_index_watertype_list_id);
-        SelectWaterType4SearchAdapter adapter = new SelectWaterType4SearchAdapter(getActivity(),new HashSet<>(),Arrays.asList(CodeConstant.WATERTYPE));
+
+        List<String> waterTypeList = new ArrayList<>();
+        waterTypeList.add("全选");
+        waterTypeList.addAll(Arrays.asList(CodeConstant.WATERTYPE));
+        SelectWaterType4SearchAdapter adapter = new SelectWaterType4SearchAdapter(getActivity(),checked, waterTypeList);
         lv_time.setAdapter(adapter);
         lv_time.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String s = Arrays.asList(CodeConstant.WATERTYPE).get(position);
+                String s = waterTypeList.get(position);
                 dismiss();
                 onCloseListener.close(s);
             }
@@ -74,4 +83,8 @@ public class SelectWaterType4SearchFragment extends DialogFragment {
     }
 
     //
+
+    public void setChecked(Set<String> checked) {
+        this.checked = checked;
+    }
 }
