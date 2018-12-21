@@ -140,7 +140,7 @@
         android:visibility="gone" />
 
     <ExpandableListView
-        android:id="@+id/report_today_main_detail_list_id"
+        android:id="@+id/report_today_main_detail_list_month_week_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

@@ -131,7 +131,7 @@ public class ListRecordAdapter extends BaseExpandableListAdapter implements Expa
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 
     private final class ViewHolder {

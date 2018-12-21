@@ -36,7 +36,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     private String mAccountBookId;//账本
     private String mPeriod;// 区间：月周日
     // view
-    private ExpandableListView lv_details, lv_dayDetails;
+    private ExpandableListView lv_mWeekdetails, lv_dayDetails;
     private ImageView iv_back, iv_search;
     private TextView tv_topTime, tv_balance, tv_income, tv_spending;
 
@@ -61,8 +61,8 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
         tv_balance = view.findViewById(R.id.report_today_main_balance_id);//结余
         tv_income = view.findViewById(R.id.report_today_main_income_id);//收入
         tv_spending = view.findViewById(R.id.report_today_main_spending_id);//支出
-        lv_details = view.findViewById(R.id.report_today_main_detail_list_id);//消费记录
-        lv_dayDetails = view.findViewById(R.id.report_today_main_detail_list_day_id);//消费记录
+        lv_mWeekdetails = view.findViewById(R.id.report_today_main_detail_list_month_week_id);//消费记录
+        lv_dayDetails = view.findViewById(R.id.report_today_main_detail_list_day_id);//每天消费记录
         iv_search = view.findViewById(R.id.report_today_main_search_id);//搜索
         // assignment
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
@@ -72,10 +72,10 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
             lv_dayDetails.setVisibility(View.VISIBLE);
             mPresenter.getRecords(mAccountBookId, mPeriod);//自动刷新list
         } else if (CodeConstant.WEEK.equals(mPeriod)) {
-            lv_details.setVisibility(View.VISIBLE);
+            lv_mWeekdetails.setVisibility(View.VISIBLE);
             mPresenter.getRecordSumByWeek(mAccountBookId, mPeriod);
         } else if (CodeConstant.MONTH.equals(mPeriod)) {
-            lv_details.setVisibility(View.VISIBLE);
+            lv_mWeekdetails.setVisibility(View.VISIBLE);
             mPresenter.getRecordSumByMonth(mAccountBookId, mPeriod);
         }
         tv_topTime.setText(nowTime);
@@ -86,9 +86,34 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
                 dismiss();
             }
         });
-        // jump to edit page
-        lv_details.setGroupIndicator(null);
-        //
+        // 每周每月记录点击时间 jump to edit page
+        lv_mWeekdetails.setGroupIndicator(null);
+        lv_mWeekdetails.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                JC_Record record = recordSums4WeekOrMonth.get(groupPosition).getRecords().get(childPosition);
+                EditRecordDialog dialog = new EditRecordDialog();
+                dialog.setRecord(record);
+                RecordPresenter presenter = new RecordPresenter((GaiaApplication) (getActivity().getApplication()), dialog);
+                dialog.setPresenter(presenter);
+                dialog.show(getFragmentManager(), "Test");
+
+                dialog.setDialogListener(new EditRecordDialog.DialogListener() {
+                    @Override
+                    public void onDismiss() {
+                        if (CodeConstant.DAY.equals(mPeriod)) {
+                            mPresenter.getRecords(mAccountBookId, mPeriod);
+                        } else if (CodeConstant.WEEK.equals(mPeriod)) {
+                            mPresenter.getRecordSumByWeek(mAccountBookId, mPeriod);
+                        } else if (CodeConstant.MONTH.equals(mPeriod)) {
+                            mPresenter.getRecordSumByMonth(mAccountBookId, mPeriod);
+                        }
+                    }
+                });
+                return false;
+            }
+        });
+        // 每天消费记录点击事件
         lv_dayDetails.setGroupIndicator(null);
         lv_dayDetails.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -130,7 +155,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     }
 
     /**
-     * 局部刷新
+     * 查询每天的记录
      */
     private void refreshAdapter4Day() {
         //
@@ -159,7 +184,7 @@ public class ListRecordFragment extends DialogFragment implements ListRecordCont
     private void refreshAdapter4Week() {
         //
         ListRecordAdapter adapter = new ListRecordAdapter(recordSums4WeekOrMonth, getActivity().getApplication());
-        lv_details.setAdapter(adapter);
+        lv_mWeekdetails.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         // calculate
         BigDecimal inCome = BigDecimal.ZERO, spending = BigDecimal.ZERO, balance;

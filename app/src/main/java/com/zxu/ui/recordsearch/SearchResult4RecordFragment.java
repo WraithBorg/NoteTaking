@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zxu.R;
@@ -74,14 +75,23 @@ public class SearchResult4RecordFragment extends DialogFragment {
         TextView tv_inCome = view.findViewById(R.id.record_search_sum_income_id);
         TextView tv_spend = view.findViewById(R.id.record_search_sum_spend_id);
         TextView tv_balance = view.findViewById(R.id.record_search_sum_balance_id);
+        ImageView iv_back = view.findViewById(R.id.record_search_index_back_id);
         // list
         ExpandableListView ev_list = view.findViewById(R.id.record_search_result_list_id);
         SearchResult4RecordAdapter adapter = new SearchResult4RecordAdapter(getActivity(), resultList);
         ev_list.setAdapter(adapter);
-        //
+        // sum
         tv_inCome.setText(UtilTools.format(inCome));
         tv_spend.setText(UtilTools.format(spend));
         tv_balance.setText(UtilTools.format(balance));
+        // return
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+        //
         return view;
     }
 
